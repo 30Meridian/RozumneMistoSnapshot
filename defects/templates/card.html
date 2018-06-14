@@ -1,0 +1,743 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}
+
+{% for i in issue.getTree %}
+    {% if i.firstIssue %}
+        Дефекти ЖКГ. Заявка № {{i.id }}. {{ i.title }}.
+     {% endif %}
+{% endfor %}
+
+{% endblock %}
+{% block content %}
+
+    <section class="content-header">
+
+{% for i in issue.getTree %}
+    {% if i.firstIssue %}
+      <h1>Заявка № {{i.id }}. Статус - {{i.statusNameFirst}}</h1>
+     {% endif %}
+{% endfor %}
+
+
+
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+        <li><a href="../defects/list">Список дефектів</a></li>
+        <li class="active">Картка дефекту</li>
+      </ol>
+
+
+
+</section>
+
+
+                  <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+<script type="text/javascript">
+//thumbs for uploading pictures
+function cardThumb(input,container){
+	if (input.files && input.files[0]) {
+		$.each(input.files,function(k,file){
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				var pic_frame = document.createElement("div");
+				pic_frame.style["display"]="inline-block";
+				pic_frame.classList.add("imageHolder","img-thumbnail");
+				var title = document.createElement("div");
+				title.innerHTML=file.name;
+				title.classList.add("text-success","adidedImgTitle");
+				var xFrame = document.createElement("div");
+				xFrame.innerHTML="X";
+				xFrame.classList.add("btn","btn-danger","btnX");
+				xFrame.onclick=function(e){
+					e.target.parentNode.remove();
+				}
+				xFrame.style["display"]="inline";
+				xFrame.style["vertical-align"]="top";
+				xFrame.style["cursor"]="pointer";
+				var pic = new Image();
+				pic.src=e.target.result; 
+				pic.classList.add("img-responsive","adidedImg");							
+				var picture_file = document.createElement("input");
+				picture_file.type="hidden";
+				picture_file.name="attachements["+file.name+"]";
+				picture_file.value=e.target.result;
+				pic_frame.appendChild(pic);
+				pic_frame.appendChild(xFrame);
+				pic_frame.appendChild(picture_file);
+				container.appendChild(pic_frame);
+				var files = document.createElement("input");
+ 				files.type="hidden";
+  				files.value=file.name;
+  				files.name="files[]";
+  				pic_frame.appendChild(files);
+				input.value="";
+			}
+
+			reader.readAsDataURL(file);
+		});
+	}
+}
+</script>
+
+{% for i in issue.getTree %}
+    {% if i.firstIssue %}
+
+
+           <div class="box">
+                <div class="box-header with-border">
+                  <div class="box-title">{{i.title}}</div>
+                    <div class="pull-right">
+
+                        <a href="../defects/{{ i.id }}/print" target="_blank"><i class="fa fa-print" style="font-size: 24px"></i></a> </div>
+                    </div>
+           <div class="box-body">
+
+            <div class="col-md-6">
+
+				<div class="cardOwner"><strong>Додав:</strong> <a href="/profile/{{issue.owner_ref.id }}" target="_blank">{{issue.owner_ref.first_name}} {{issue.owner_ref.last_name}}</a></div>
+                <strong>Додана: </strong>{{i.created|date:"d.m.Y H:i"}}
+                <div class="cardAddress"><strong>Адреса: </strong>
+				<a href="https://www.google.com.ua/maps/@{{issue.map_lat|slice:"10"}},{{issue.map_lon|slice:"10"}},16z" target="_blank">{{i.address}}</a>
+                </div>
+    <div class="cardDescr"><strong>Опис заявки:</strong><br/> {{i.description}}</div><br/>
+                <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f23dc3c4265dc08"></script>
+           <strong>Розкажіть про заявку у соціальних мережах:</strong> <div class="addthis_sharing_toolbox"></div>
+
+
+                </div>
+
+                <div class="col-md-6">
+				<div class="cardMap">
+				<a href="https://www.google.com.ua/maps/@{{issue.map_lat|slice:"10"}},{{issue.map_lon|slice:"10"}},16z" target="_blank"><img style="max-width: 100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{issue.map_lat}},{{issue.map_lon}}&amp;zoom=18&amp;size=450x250&amp;markers=color:red|{{issue.map_lat}},{{issue.map_lon}}&amp;sensor=false"></a>	</div>
+                </div></div></div>
+
+            <div class="box">
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Зображення:</h3>
+                </div>
+                <div class="box-body">
+              {% for file in i.issuefiles_set.all %}
+                    {% if file.document_ref.type_name == "image" %}
+
+                        <div class="col-md-2">
+                        <div class="defbox">
+                            <a href="/media/defects/{{file.document_ref.file_name}}" data-lightbox="card_image" target="_blank">
+                                <img class="cardImgItem" src="/media/defects/medium.{{file.document_ref.file_name}}"></a>
+                        </div>
+                            </div>
+
+                    {% endif %}
+
+		{% endfor %}
+                </div>
+        </div>
+
+        <ul class="timeline">
+    {% else %}
+
+    {% if i.status == 1 %} {# Відправлено на виконання #}
+    <!-- timeline time label -->
+
+    <li class="time-label">
+
+        <span class="bg-yellow">
+            <div class="pull-right"><i style="font-size: 50px; margin-right:15px " class="fa fa-clock-o"></i></div>
+            <span class="label label-gray">{{i.title}}</span> - {{i.description}} ({{i.owner_ref.first_name}} {{i.owner_ref.last_name}}. {{ i.owner_ref.work_for.all.0.name}})<br />
+        <span class="label label-gray"> Статус:</span> "{{i.statusName}}" | {{i.created|date:"d.m.Y H:i" }}
+
+        </span>
+    </li>
+
+    {% elif i.status == 2%}{# Виконано підрядником #}
+    <li class="time-label">
+
+        <span class="bg-green">
+            <div class="pull-right"><i style="font-size: 50px; margin-right:15px " class="fa fa-check"></i></div>
+            <span class="label label-gray">{{i.title}}</span> - {{i.description}} ({{i.owner_ref.first_name}} {{i.owner_ref.last_name}}. {{ i.owner_ref.work_for.all.0.name}})<br />
+        <span class="label label-gray"> Статус:</span> "{{i.statusName}}" | {{i.created|date:"d.m.Y H:i" }}
+
+        </span>
+    </li>
+
+    {% elif i.status == 3%}{# Відхилено модератором #}
+    <li class="time-label">
+
+        <span class="bg-red">
+           <div class="pull-right"><i style="font-size: 50px; margin-right:15px " class="fa fa-close"></i></div>
+            <span class="label label-gray">{{i.title}}</span> - {{i.description}} ({{i.owner_ref.first_name}} {{i.owner_ref.last_name}}. {{ i.owner_ref.work_for.all.0.name}})<br />
+        <span class="label label-gray"> Статус:</span> "{{i.statusName}}" | {{i.created|date:"d.m.Y H:i" }}
+
+        </span>
+    </li>
+      {% elif i.status == 4%}{# Прийнята до виконання #}
+    <li class="time-label">
+
+        <span class="bg-aqua">
+           <div class="pull-right"><i style="font-size: 50px; margin-right:15px " class="fa fa-cogs"></i></div>
+            <span class="label label-gray">{{i.title}}</span> - {{i.description}} ({{i.owner_ref.first_name}} {{i.owner_ref.last_name}}. {{ i.owner_ref.work_for.all.0.name}})<br />
+        <span class="label label-gray"> Статус:</span> "{{i.statusName}}" | {{i.created|date:"d.m.Y H:i" }}
+
+        </span>
+    </li>
+
+
+
+     {% elif i.status == 5%}{# Запланована#}
+    <li class="time-label">
+
+        <span class="bg-gray">
+           <div class="pull-right"><i style="font-size: 50px; margin-right:15px " class="fa fa-calendar "></i></div>
+            <span class="label label-gray">{{i.title}}</span> - {{i.description}} ({{i.owner_ref.first_name}} {{i.owner_ref.last_name}}. {{ i.owner_ref.work_for.all.0.name}})<br />
+        <span class="label label-gray"> Статус:</span> "{{i.statusName}}" | {{i.created|date:"d.m.Y H:i" }}
+
+        </span>
+    </li>
+
+        {% else%}{# Арбітраж і все інше #}
+    <li class="time-label">
+
+        <span class="bg-blue">
+           <div class="pull-right"><i style="font-size: 50px; margin-right:15px " class="fa fa-cog"></i></div>
+            <span class="label label-gray">{{i.title}}</span> - {{i.description}} ({{i.owner_ref.first_name}} {{i.owner_ref.last_name}}. {{ i.owner_ref.work_for.all.0.name}})<br />
+        <span class="label label-gray"> Статус:</span> "{{i.statusName}}" | {{i.created|date:"d.m.Y H:i" }}
+
+        </span>
+    </li>
+
+     {% endif %}
+
+			{% endif %}
+
+    <!-- /.timeline-label -->
+
+    <!-- timeline item -->
+{% if i.hasComments %}
+
+    {% for comment in i.comments_set.all %}
+        {% if comment.block != 1 %}
+           {% if i.status == 1 %}
+
+            <li>
+                <!-- timeline icon -->
+                <i class="fa  fa-comment bg-yellow"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i> {{comment.created|date:"d.m.Y H:i" }} {% if allowed %}<a href="../defects/{{ comment.id }}/{{ defect_id}}/blockcomment" class="btn btn-default btn-xs">Блокувати</a>{% endif %}</span>
+
+                    <h3 class="timeline-header"><strong>{{comment.owner_ref}}</strong></h3>
+
+                    <div class="timeline-body">
+                        {{comment.body}} <br />
+                        {% if comment.commentattachements_set.count %}
+                   <br/>
+                        {% for file in comment.commentattachements_set.all %}
+                            {% if file.document_ref.type_name == "image" %}
+                                <a href="{{ MEDIA_URL }}/defects/comments/{{file.document_ref.file_name}}" data-lightbox="comments" ><img class="cardImgItem" src="/media/defects/comments/thumbnail.{{file.document_ref.file_name}}"></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}<br />
+                    </div>
+
+
+                </div>
+            </li>
+
+        {% elif i.status == 2 %}
+
+            <li>
+                <!-- timeline icon -->
+                <i class="fa  fa-comment bg-green"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i> {{comment.created|date:"d.m.Y H:i" }} {% if allowed %} <a href="../defects/{{ comment.id }}/{{ defect_id }}/blockcomment" class="btn btn-default btn-xs">Блокувати</a>{% endif %}</span>
+
+                    <h3 class="timeline-header"><strong>{{comment.owner_ref}}</strong></h3>
+
+                    <div class="timeline-body">
+                        {{comment.body}} <br />
+                        {% if comment.commentattachements_set.count %}
+                    <br/>Зображення:<br/><br/>
+                        {% for file in comment.commentattachements_set.all %}
+                            {% if file.document_ref.type_name == "image" %}
+                                <a href="{{ MEDIA_URL }}/defects/comments/{{file.document_ref.file_name}}" data-lightbox="comments"><img class="cardImgItem" src="/media/defects/comments/thumbnail.{{file.document_ref.file_name}}"></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}<br />
+                    </div>
+
+
+                </div>
+            </li>
+        {% elif i.status == 3 %}
+
+            <li>
+                <!-- timeline icon -->
+                <i class="fa  fa-comment bg-red"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i> {{comment.created|date:"d.m.Y H:i" }} {% if allowed %}<a href="../defects/{{ comment.id }}/{{ defect_id }}/blockcomment" class="btn btn-default btn-xs">Блокувати</a>{% endif %}</span>
+
+                    <h3 class="timeline-header"><strong>{{comment.owner_ref}}</strong></h3>
+
+                    <div class="timeline-body">
+                        {{comment.body}} <br />
+                        {% if comment.commentattachements_set.count %}
+                    <br/>Зображення:<br/><br/>
+                        {% for file in comment.commentattachements_set.all %}
+                            {% if file.document_ref.type_name == "image" %}
+                                <a href="{{ MEDIA_URL }}/defects/comments/{{file.document_ref.file_name}}" data-lightbox="comments"><img class="cardImgItem" src="/media/defects/comments/thumbnail.{{file.document_ref.file_name}}"></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}<br />
+                    </div>
+
+                </div>
+            </li>
+
+
+                    {% elif i.status == 4 %}
+
+            <li>
+                <!-- timeline icon -->
+                <i class="fa  fa-comment bg-aqua"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i> {{comment.created|date:"d.m.Y H:i" }} {% if allowed %}<a href="../defects/{{ comment.id }}/{{ defect_id }}/blockcomment" class="btn btn-default btn-xs">Блокувати</a>{% endif %}</span>
+
+                    <h3 class="timeline-header"><strong>{{comment.owner_ref}}</strong></h3>
+
+                    <div class="timeline-body">
+                        {{comment.body}} <br />
+                        {% if comment.commentattachements_set.count %}
+                    <br/>Зображення:<br/><br/>
+                        {% for file in comment.commentattachements_set.all %}
+                            {% if file.document_ref.type_name == "image" %}
+                                <a href="{{ MEDIA_URL }}/defects/comments/{{file.document_ref.file_name}}" data-lightbox="comments"><img class="cardImgItem" src="/media/defects/comments/thumbnail.{{file.document_ref.file_name}}"></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}<br />
+                    </div>
+
+                </div>
+            </li>
+
+
+
+                    {% elif i.status == 5 %}
+
+            <li>
+                <!-- timeline icon -->
+                <i class="fa  fa-comment bg-gray"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i> {{comment.created|date:"d.m.Y H:i" }} {% if allowed %}<a href="../defects/{{ comment.id }}/{{ defect_id }}/blockcomment" class="btn btn-default btn-xs">Блокувати</a>{% endif %}</span>
+
+                    <h3 class="timeline-header"><strong>{{comment.owner_ref}}</strong></h3>
+
+                    <div class="timeline-body">
+                        {{comment.body}} <br />
+                        {% if comment.commentattachements_set.count %}
+                    <br/>Зображення:<br/><br/>
+                        {% for file in comment.commentattachements_set.all %}
+                            {% if file.document_ref.type_name == "image" %}
+                                <a href="{{ MEDIA_URL }}/defects/comments/{{file.document_ref.file_name}}" data-lightbox="comments"><img class="cardImgItem" src="/media/defects/comments/thumbnail.{{file.document_ref.file_name}}"></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}<br />
+                    </div>
+
+                </div>
+            </li>
+
+
+
+
+
+        {% else %}
+
+            <li>
+                <!-- timeline icon -->
+                <i class="fa  fa-comment bg-blue"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i> {{comment.created|date:"d.m.Y H:i" }}{% if allowed %} <a href="../defects/{{ comment.id }}/{{ defect_id}}/blockcomment" class="btn btn-default btn-xs">Блокувати</a>{% endif %}</span>
+
+                    <h3 class="timeline-header"><strong>{{comment.owner_ref}}</strong></h3>
+
+                    <div class="timeline-body">
+                        {{comment.body}} <br />
+                        {% if comment.commentattachements_set.count %}
+                    <br/>Зображення:<br/><br/>
+                        {% for file in comment.commentattachements_set.all %}
+                            {% if file.document_ref.type_name == "image" %}
+                                <a href="{{ MEDIA_URL }}/defects/comments/{{file.document_ref.file_name}}" data-lightbox="comments"><img class="cardImgItem" src="/media/defects/comments/thumbnail.{{file.document_ref.file_name}}"></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}<br />
+                    </div>
+
+
+                </div>
+            </li>
+        {% endif %}
+    <!-- END timeline item -->
+{% endif %}
+	{% endfor %}
+     {% endif %}
+    {% endfor %}
+</ul>
+
+               {%  if issue.last_issue.status != 0 and issue.last_issue.status != 2 and issue.last_issue.status != 3 %}
+{% if issue.town_ref in request.user.towns.all %}
+<div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Додати комментар до останнього статусу:</h3>
+                </div>
+                <div class="box-body">
+
+
+<form name="addComment" action="../defects/{{ issue.id }}/addComment" method="POST" id="defcomments">
+	{% csrf_token %}
+    <div class="form-group">
+
+
+	  <textarea name="body" class="form-control input-lg" cols="40" id="id_text" maxlength="1000" name="text"
+                placeholder="Ваш текст повідомлення не більше 1000 символів" rows="5"></textarea><br>
+     </div>
+   <div class="form-group" style="margin-top: -20px">
+
+	<div id="thumbHolder2"></div>
+       <br/>
+	<input type="file" data-buttonText="Виберіть зображення або декілька" class="filestyle" data-badge="false" data-buttonBefore="true" accept="image/*" multiple onchange="cardThumb(this,thumbHolder2)">
+
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary " value="Додати комментар"  onclick="this.value='Зачекайте, будь ласка ..';this.disabled='disabled'; this.form.submit();" >
+    </div>
+
+</form>
+
+                </div>
+         </div>
+
+{% endif %}
+{% endif %}
+
+{# --------------------------------------------------------------------------- #}
+{# БЛОК ДЛЯ МОДЕРАТОРА и АДМИНОВ #}
+{# --------------------------------------------------------------------------- #}
+
+ {% if allowed %}
+     {%  if issue.last_issue.status != 2 and issue.last_issue.status != 3 %}
+
+        <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Інструменти модератора:</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+
+ {# Назначить #}
+    {%  if issue.last_issue.status == 0 %}
+
+            <div class="col-md-3">
+            <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_setsubcontractor" class="btn btn-block btn-primary btn-sm"><i class="fa fa-lock"></i> Призначити відповідальну організацію</button></a>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_setsubcontractor">
+
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Призначте відповідального за усунення дефекту:</h4>
+                      </div>
+                        <form class="reason" action="../defects/{{ issue.id }}/setSubcontractor" method="POST">
+
+                          <div class="modal-body">
+                                {% csrf_token %}
+                                Призначити підрядну організацію: <select class ="form-control" name="subc">
+                                {% for subc in issue.town_ref.subcontractors_set.all %}
+                                    <option value="{{ subc.id }}">{{ subc.name }}</option>
+                                {% endfor %}
+                                </select><br />
+                          </div>
+                          <div class="modal-footer">
+
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                               <input type="submit" class="btn  btn-primary" value="Призначити" onclick="this.value='Зачекайте, будь ласка ..';this.disabled='disabled'; this.form.submit();">
+
+                          </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            </div>
+
+{%   endif %}
+  {# Відхилити #}
+            {%  if issue.last_issue.status != 1 and issue.last_issue.status != 2 and issue.last_issue.status != 3 and issue.last_issue.status != 4 and issue.last_issue.status != 5%}
+    <div class="col-md-3">
+        <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_disapprove" class="btn btn-block btn-danger btn-sm"><i class="fa fa-lock"></i> Відхилити</button></a>
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_disapprove">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Відхилення дефекту:</h4>
+                      </div>
+                        <form  id="reason" action="../defects/{{ issue.id }}/disapprove" method="POST">
+
+                          <div class="modal-body">
+                                {% csrf_token %}
+                           <textarea class="form-control input-lg" cols="40"  maxlength="3000" name="description" placeholder="Опишіть причину зміни статусу (напр. порушення)" rows="10"></textarea>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                               <input type="submit" class="btn btn-danger" value="Відхилити"  onclick="this.value='Зачекайте, будь ласка...';this.disabled='disabled'; this.form.submit();">
+                          </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+    </div>
+{%   endif %}
+            {%  if issue.last_issue.status != 5 and issue.last_issue.status != 3 and issue.last_issue.status != 2%}
+    {# Запланувати #}
+    <div class="col-md-3">
+        <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_hold" class="btn btn-block btn-warning btn-sm"><i class="fa fa-lock"></i> Запланувати роботи</button></a>
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_hold">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Запланувати/Утримати дефект:</h4>
+                      </div>
+                        <form class="reason" action="../defects/{{ issue.id }}/hold" method="POST">
+                          <div class="modal-body">
+                                {% csrf_token %}
+                           <textarea class="form-control input-lg" cols="40"  maxlength="3000" name="description" placeholder="Виконання яких робіт і на коли заплановано" rows="10"></textarea>
+                          </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                               <input type="submit" class="btn btn-warning" value="Запланувати роботи" onclick="this.value='Зачекайте, будь ласка...';this.disabled='disabled'; this.form.submit();">
+                          </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+    </div>
+{%   endif %}
+{%  if issue.last_issue.status == 0 or issue.last_issue.status == 1 or issue.last_issue.status == 4 or issue.last_issue.status == 5%}
+{# ЗАЯВКА ВИКОНАНА #}
+     <div class="col-md-3">
+        <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_setfix" class="btn btn-block btn-success btn-sm">Заявка виконана</button></a>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_setfix">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Змінити статус дефекту на "Виконаний":</h4>
+                      </div>
+                        <div class="modal-body">
+                        <form class="reason" action="../defects/{{ issue.id }}/setFixModer" method="POST">
+                            {% csrf_token %}
+
+
+                            <textarea name="description" class="form-control" placeholder="Шановні громадяни, роботи по заявці було виконано."></textarea>
+
+                                <div class="modal-footer">
+                               <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                               <input type="submit" class="btn btn-success" value="Виконано"  onclick="this.value='Зачекайте, будь ласка...';this.disabled='disabled'; this.form.submit();">
+
+
+
+                                </div>
+                        </form>
+                        </div>
+                   </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+    {%   endif %}
+
+
+
+
+            <!-- /.box-body -->
+
+    </div>
+</div>
+{% endif %}
+{% endif %}
+
+{# --------------------------------------------------------------------------- #}
+{# БЛОК ДЛЯ ПОДРЯДЧИКА #}
+{# --------------------------------------------------------------------------- #}
+
+
+{% if issue.last_issue.assigned_to in request.user.work_for.all %}
+{# Если статус "открыто", то показываем подрядчику, чей это статус и модератору #}
+    {% if issue.last_issue.status == 1 or issue.last_issue.status == 5 or issue.last_issue.status == 4%}
+<div class="box box-warning">
+    <div class="box-header with-border">
+       <h3 class="box-title">Інструменти представника підрядної організації:</h3>
+    </div>
+            <!-- /.box-header -->
+    <div class="box-body">
+
+
+{# ПРИЙНЯТО У РОБОТУ#}
+        {% if issue.last_issue.status == 1%}
+        <div class="col-md-3">
+            <a href="../defects/{{ issue.id }}/padding" class="btn btn-block btn-primary btn-sm">Прийняти у роботу</a>
+        </div>
+        {% endif %}
+
+{# ЗАЯВКА ВИКОНАНА #}
+
+     <div class="col-md-3">
+        <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_setfix" class="btn btn-block btn-success btn-sm">Заявка виконана</button></a>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_setfix">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Змінити статус дефекту на "Виконаний":</h4>
+                      </div>
+                        <div class="modal-body">
+                        <form class="reason" action="../defects/{{ issue.id }}/setFix" method="POST">
+                            {% csrf_token %}
+
+
+                            <label>Які роботи були проведенні та який результат виконаних робіт:</label>
+                            <textarea name="description" class="form-control"></textarea>
+
+
+                                <div class="modal-footer">
+                               <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                               <input type="submit" class="btn btn-success" value="Виконано"  onclick="this.value='Зачекайте, будь ласка...';this.disabled='disabled'; this.form.submit();">
+                                </div>
+                        </form>
+                        </div>
+                   </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+
+
+
+{# ЗАЯВКА УТРИМАНА (ЗАПЛАНОВАНА) #}
+{% if issue.last_issue.status != 5 %}
+         <div class="col-md-3">
+        <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_hold_podr" class="btn btn-block btn-warning btn-sm">Запланувати роботи</button></a>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_hold_podr">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Змінити статус дефекту на "Заплановано":</h4>
+                      </div>
+                        <div class="modal-body">
+                        <form class="reason" action="../defects/{{ issue.id }}/hold" method="POST">
+                            {% csrf_token %}
+
+
+                            <label>Які роботи будуть проведені і коли:</label>
+                            <textarea name="description" class="form-control"></textarea>
+
+
+                                <div class="modal-footer">
+                               <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                               <input type="submit" class="btn btn-цфктштп" value="Заплановано" onclick="this.value='Зачекайте, будь ласка...';this.disabled='disabled'; this.form.submit();">
+                                </div>
+                        </form>
+                        </div>
+                   </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+    {% endif %}
+
+{# ВІДМОВИТИСЬ ВІД ПРИЗНАЧЕННЯ МОДЕРАТОРА#}
+    {% if issue.last_issue.status == 1 %}
+ <div class="col-md-3">
+        <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_unsubscribe" class="btn btn-block btn-danger btn-sm"> Відмовитись від призначення</button></a>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_unsubscribe">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Чому ви відмовляєтесь від призначення модератором?</h4>
+                      </div>
+                        <div class="modal-body">
+                        <form  class="reason" action="../defects/{{ issue.id }}/unsubscribe" method="POST">
+                            {% csrf_token %}
+
+                            <textarea name="description" class="form-control" ></textarea>
+
+                                <div class="modal-footer">
+                               <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                               <input type="submit" class="btn btn-danger" value="Відмовитись"  onclick="this.value='Зачекайте, будь ласка...';this.disabled='disabled'; this.form.submit();">
+                                </div>
+                        </form>
+                        </div>
+                   </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+{% endif %}
+    </div>
+</div>
+	{% endif %}
+{% endif %}
+{% if issue.last_issue.assigned_to in request.user.work_for.all or allowed and issue.last_issue.status == 2 %}
+
+      <div class="col-md-3">
+        <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_setfix" class="btn btn-block btn-success btn-sm">Перевідкрити заявку</button></a>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_setfix">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Зміна статусу заявки на "Перевідкрита":</h4>
+                      </div>
+                        <div class="modal-body">
+                        <form class="reason" action="../defects/{{ issue.id }}/reopen" method="POST">
+                            {% csrf_token %}
+
+                            <label>Чому Ви збираєтесь відкрити заявку знову:</label>
+                            <textarea name="description" class="form-control"></textarea>
+
+
+                                <div class="modal-footer">
+                               <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                               <input type="submit" class="btn btn-success" value="Перевідкрити"  onclick="this.value='Зачекайте, будь ласка...';this.disabled='disabled'; this.form.submit();">
+                                </div>
+                        </form>
+                        </div>
+                   </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+
+{% endif %}
+ </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+
+
+{% endblock %}

@@ -1,0 +1,622 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ <link rel="shortcut icon" href="{% static 'eng/img/favicon.ico'%}" type="image/x-icon">
+    <title>NGO ROZUMNE MISTO - It's just the beginning</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'eng/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'eng/css/agency.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'eng/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top"><image src="{% static 'eng/img/logo.png' %}"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+					  <li>
+                        <a class="page-scroll" href="#about">About Us</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Activities</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Projects</a>
+                    </li>
+                  
+                    <li>
+                        <a class="page-scroll" href="#team">Our Team</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contacts</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">NGO Rozumne Misto</div>
+                <div class="intro-heading">it's just the beginning!</div>
+                <a href="#portfolio" class="page-scroll btn btn-xl">Our projects</a>
+            </div>
+        </div>
+    </header>
+	
+	<!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">About Us</h2>
+                    <h3 class="section-subheading text-muted">Who we are and what we do.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+
+
+				<p>NGO The main purpose of the NGO Rozumne Misto is comprehensive promotion of democratic processes.
+</p>
+				<p>In particular, it includes: <br />
+- e-democracy processes with engaging  citizens, local authorities, business and volunteers; <br />
+- creating and distributing best practices with engaging experts, mentors and scientific authorities;<br />
+- e-services for citizens and business.
+</p> 
+				<p>We are open for cooperation with state and local authorities, trade unions, voluntary, veterans, youth and other public and charitable organizations working in Ukraine and abroad.</p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Activities</h2>
+                    <h3 class="section-subheading text-muted">Our organization covering the several directions.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <img src="{% static 'eng/img/service/it.png' %}">
+                    </span>
+                    <h4 class="service-heading">E-government</h4>
+                    <p class="text-muted">The development of e-government in Ukraine for communities to awaken society. City residents can monitor the activities of government and take part in the life of the city. Municipalities hear the community and make informed decisions.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <img src="{% static 'eng/img/service/eservices.png' %}">
+                    </span>
+                    <h4 class="service-heading">E-services</h4>
+                    <p class="text-muted">Creating a convenient service to provide local services in electronic form on the principle of a single window with a powerful backend and electronic documents.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <img src="{% static 'eng/img/service/eworkflow.png' %}">
+                    </span>
+                    <h4 class="service-heading">E-workflow</h4>
+                    <p class="text-muted">Automating business processes of local governments including electronic services. Providing tools and designers to create e-business processes.</p>
+                </div>
+            </div>
+			<div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <img src="{% static 'eng/img/service/budget.png' %}">
+                    </span>
+                    <h4 class="service-heading">Open budget</h4>
+                    <p class="text-muted">Information about income and budget spending of the community. Visualization helps residents to understand the budget and analytics tools provides instrument of strategic planning for the municipality.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <img src="{% static 'eng/img/service/osbb.png' %}">
+                    </span>
+                    <h4 class="service-heading">Condominiums</h4>
+                    <p class="text-muted">Service development condominiums, publicity process management decisions. Automation of condominium's accounting and distribution of best practices.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                       <img src="{% static 'eng/img/service/training.png' %}">
+                    </span>
+                    <h4 class="service-heading">Training and consulting</h4>
+                    <p class="text-muted">Trainings for deputies, officials and activists on issues of cooperation between them and implementing e-democracy in their communities. Consulting on the use of e-democracy tools to the needs of residents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Our projects</h2>
+                    <h3 class="section-subheading text-muted">A few our recent projects.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                   
+                       
+                        <img src="{% static 'eng/img/portfolio/weunion.png' %}" class="img-responsive" alt="">
+                   
+                    <div class="portfolio-caption">
+                        <h4><a href="http://rozumnemisto.org" target="_blank">Project "Rozumne misto"</a></h4>
+                        <p class="text-muted">Internet e-government platform</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    
+                        <img src="{% static 'eng/img/portfolio/sirot.png' %}" class="img-responsive" alt="">
+                    
+                    <div class="portfolio-caption">
+                       <a href="http://rozumneosbb.org" target="_blank"> <h4>Project "Rozumne OSBB"</h4></a>
+                        <p class="text-muted">Platform for condominium residents</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    
+                        <img src="{% static 'eng/img/portfolio/list.png' %}" class="img-responsive" alt="">
+                    
+                    <div class="portfolio-caption">
+                        <h4>E-medecine</h4>
+                        <p class="text-muted">The electronic cabinet of patient</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    
+
+
+    <div class="features_sec64">
+        <div class="container">
+            <div class="row team-row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Our incredible team</h2>
+                    <h3 class="section-subheading text-muted">Great people with high competence.</h3>
+                </div>
+            </div>
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/zhenya-min.jpg" alt="">
+                <h5><strong>Yevheniia Poremchuk</strong></h5>Head of board
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Yevheniia Poremchuk</strong></h5>
+                <p>Head of board</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/jenya.poremchuk"><i class="fa fa-facebook"></i></a>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/slava1-min.jpg" alt="">
+                <h5><strong>Svyatoslav Zhluktenko</strong></h5>Deputy head ot Board
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Svyatoslav Zhluktenko</strong></h5>
+                <p>Deputy head ot Board</p>
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/yura1-min.jpg" alt="">
+                <h5><strong>Yuriy Oliynik</strong></h5>Manager
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Yuriy Oliynik</strong></h5>
+                <p>Manager</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/oliyura"><i class="fa fa-facebook"></i></a>
+                </div>
+                <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth last">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/volodya-min.jpg" alt="">
+                <h5><strong>Volodymyr Kashporov</strong></h5>Development manager
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Volodymyr Kashporov</strong></h5>
+                <p>Development manager</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/vladimir.kashporov"><i class="fa fa-facebook"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="clearfix margin_top10"></div>
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/yevgen1-min.jpg" alt="">
+                <h5><strong>Yevhen Poremchuk</strong></h5> Chief programmer
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Yevhen Poremchuk</strong></h5>
+                <p>Chief programmer</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/e.poremchuk"><i class="fa fa-facebook"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/venya1-min.jpg" alt="">
+                <h5><strong>Veniamin Zinevych</strong></h5> Programmer
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Veniamin Zinevych</strong></h5>
+                <p>Programmer</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/profile.php?id=100013953572724"><i class="fa fa-facebook"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/dima1-min.jpg" alt="">
+                <h5><strong>Dmytro Kasianchyk</strong></h5> Programmer
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Dmytro Kasianchyk</strong></h5>
+                <p>Programmer</p>
+                <div class="fsoci">
+
+
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth last">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/vika1-min.jpg" alt="">
+                <h5><strong>Victoriya Jovtun</strong></h5> Tester
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Victoriya Jovtun</strong></h5>
+                <p>Tester</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/profile.php?id=100009156064836"><i class="fa fa-facebook"></i></a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix margin_top10"></div>
+
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/nadya1-min.jpg" alt="">
+                <h5><strong>Nadiia Iazvinska</strong></h5> Marketer
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Nadiia Iazvinska</strong></h5>
+                <p>Marketer</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/nadiia.iazvinska"><i class="fa fa-facebook"></i></a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/new1-min.jpg" alt="">
+                <h5><strong>Evgeniy Gnitetskyi</strong></h5> Marketer
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Evgeniy Gnitetskyi</strong></h5>
+                <p>Marketer</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/profile.php?id=100007893154084"><i class="fa fa-facebook"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/andrey1-min.jpg" alt="">
+                <h5><strong>Andriy Kompaniets</strong></h5>Frontend developer
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Andriy Kompaniets</strong></h5>
+                <p>Frontend developer</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/andrey.kompaniets.587"><i class="fa fa-facebook"></i></a>
+                </div>
+                <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+          <div class="one_fourth last">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/alla.jpg" alt="">
+                <h5><strong>Alla Pohonets</strong></h5> Regional Manager
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Alla Pohonets</strong></h5>
+                <p>Regional Manager</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/profile.php?id=100003246775211"><i class="fa fa-facebook"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+<div class="clearfix margin_top10"></div>
+            <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/new-min.jpg" alt="">
+                <h5><strong>Sergiy Ponomaryov</strong></h5>Manager
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Sergiy Ponomaryov</strong></h5>
+                <p>Manager</p>
+                <div class="fsoci">
+
+                </div>
+                <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+
+            <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/vasya-min.jpg" alt="">
+                <h5><strong>Vasyl Zacheshyhryva</strong></h5>Programmer
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Vasyl Zacheshyhryva</strong></h5>
+                <p>Programmer</p>
+                <div class="fsoci">
+
+                </div>
+                <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+
+            <div class="one_fourth">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/slava-min.jpg" alt="">
+                <h5><strong>Vyacheslav Kochergin</strong></h5>Tester
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Vyacheslav Kochergin</strong></h5>
+                <p>Tester</p>
+                <div class="fsoci">
+                    <a href="https://www.facebook.com/namesakeakzet?fref=pb&amp;hc_location=profile_browser"><i class="fa fa-facebook"></i></a>
+                </div>
+                <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+              </div>
+            </div>
+          </div>
+          <!-- end section -->
+
+            <div class="one_fourth last">
+            <div class="flips1">
+              <div class="flips1_front flipscont1">
+                <img src="/static/new-version/images/crew/dasha1-min.jpg" alt="">
+                <h5><strong>Dasha Tkach</strong></h5>Assistant manager
+              </div>
+              <div class="flips1_back flipscont1">
+                <h5 class="white"><strong>Dasha Tkach</strong></h5>
+                <p>Assistant manager</p>
+                <div class="fsoci">
+                  <a href="https://www.facebook.com/armen.tsaturyan.10"><i class="fa fa-facebook"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Clients Aside -->
+    <aside class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="{% static 'eng/img/logos/igov.jpg' %}" class="img-responsive img-centered" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="{% static 'eng/img/logos/django.jpg' %}" class="img-responsive img-centered" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="{% static 'eng/img/logos/python.jpg' %}" class="img-responsive img-centered" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img src="{% static 'eng/img/logos/creative-market.jpg' %}" class="img-responsive img-centered" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Contacts</h2>
+                    <h3 class="section-subheading text-muted">office@rozumnemisto.org, Office 305, 10Y Starokyivska Street, Kyiv, 04116, Ukraine</h3>
+                </div>
+            </div>
+<!--             <div class="row">
+                <div class="col-lg-12">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Name*" id="name" required data-validation-required-message="Enter your name.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="E-mail *" id="email" required data-validation-required-message="Enter your email address.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Subject*" id="phone" required data-validation-required-message="Enter the subject of your message.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Messege*" id="message" required data-validation-required-message="Enter your message."></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-xl">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; NGO Rozumne Misto 2015-2017</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="https://www.facebook.com/rozumnemisto.org"><i class="fa fa-facebook"></i></a>
+                        </li>
+						
+                        
+                        
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <!-- jQuery -->
+    <script src="{% static 'eng/js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'eng/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="{% static 'eng/js/classie.js' %}"></script>
+    <script src="{% static 'eng/js/cbpAnimatedHeader.js' %}"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="{% static 'eng/js/jqBootstrapValidation.js' %}"></script>
+    <script src="{% static 'eng/js/contact_me.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'eng/js/agency.js' %}"></script>
+
+</body>
+
+</html>

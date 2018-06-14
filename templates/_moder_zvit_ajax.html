@@ -1,0 +1,70 @@
+
+<br/>
+
+
+
+                <div class="col-md-6">
+
+<div class="box box-success">
+            <div class="box-body">
+                <div class="box-header with-border"><h3 class="box-title">Дані за період: з {{ start }} по {{ end }}</h3></div>
+<br/>
+            <div class="section-to-print">
+                <ul>
+                    <li>Зареєструвалось користувачів: <strong>{{ stat.users }}</strong></li>
+                  {% if 'petitions' in stat %}  <li>Додано петицій: <strong>{{ stat.petitions.add }}</strong></li>{% endif %}
+                  {% if 'defects' in stat %}<li>Додано дефектів ЖКГ: <strong>{{ stat.defects.add }}</strong></li>{% endif %}
+                  {% if 'news' in stat %}  <li>Опубліковано новин: <strong>{{ stat.news }}</strong><br/>{% endif %}
+                    </li>
+                </ul>
+
+</div>
+          </div>
+              </div>
+
+    </div>
+    <div class="col-md-6">
+
+        <div class="box box-success">
+            <div class="box-body">
+                <div class="box-header with-border"><h3 class="box-title">Cтатистика на сьогодні</h3></div>
+<br/>
+            <div class="section-to-print">
+                <ul>
+                {% if 'defects' in stat %}
+                    <li>Дефекти:</li>
+                        <ul>
+                            <li>Відкрито: <strong>{{ stat.defects.defects_open }}</strong> </li>
+                            <li>Взято: <strong>{{ stat.defects.defects_get }}</strong> </li>
+                            <li>Виконано: <strong>{{ stat.defects.defects_done }}</strong> </li>
+                            <li>Заплановано: <strong>{{ stat.defects.defects_planning }}</strong> </li>
+
+                        </ul>
+                    {% endif %}
+
+                    {% if 'petitions' in stat %}
+
+                            <li>Петиції:</li>
+                        <ul>
+                            <li>На модерації: <strong>{{ stat.petitions.1 }}</strong> </li>
+                            <li>Триває збір підписів: <strong>{{ stat.petitions.2 }}</strong> </li>
+                            <li>На перевірці підписів: <strong>{{ stat.petitions.8 }}</strong> </li>
+                            <li>На розгляді: <strong>{{ stat.petitions.6 }}</strong> </li>
+                            <li>Розглянуті: <strong>{{ stat.petitions.4 }}</strong> </li>
+                            <li>Архівні: <strong>{{ stat.petitions.5 }}</strong> </li>
+
+                        </ul>
+
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+
+</div>
+</div>
+          </div>
+              </div>
+
+
+                </div>

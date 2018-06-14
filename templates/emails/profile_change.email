@@ -1,0 +1,4 @@
+Була подана заявка від користувача під ID <a href="http://www.rozumnemisto.org/profile/{{ name }}">{{ name }}</a> на зміну даних його профіля, а саме:
+{{ text }}
+Причина:
+{{ reason }}

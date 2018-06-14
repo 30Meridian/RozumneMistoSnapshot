@@ -1,0 +1,137 @@
+{% load static %}
+
+<fieldset class="module aligned {{ fieldset.classes }}">
+    {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+    {% if fieldset.description %}
+        <div class="description">{{ fieldset.description|safe }}</div>
+    {% endif %}
+    {% for line in fieldset %}
+        <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+            {% if line.fields|length_is:'1' %}{{ line.errors }}{% endif %}
+            {% for field in line %}
+                {% ifequal field.field.name 'map_lon' %}
+                     <div style="margin-left: 100px;width: 90%">
+                        <h4>Натисніть на мапі або введіть назву міста (та область за необхідності), щоб обрати координати:</h4>
+
+                         <br/>
+                            <div class="townForm-map" id="map" style="width:80%;height:400px; display: inline-block"></div>
+
+                         <br/>
+                        <div>
+                             <input  class="search" style="width:200px;" >
+                             <button  type="button" class="button-search">Знайти</button>
+                            <div class="info-about-town" style="display: inline-block"></div>
+                        </div>
+                     </div>
+                    <br/>
+                {% endifequal %}
+                <div{% if not line.fields|length_is:'1' %} class="field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %} class="checkbox-row"{% endif %}>
+                    {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
+                    {% if field.is_checkbox %}
+                        {{ field.field }}{{ field.label_tag }}
+                    {% else %}
+                        {{ field.label_tag }}
+                        {% if field.is_readonly %}
+                            <p>{{ field.contents }}</p>
+                        {% else %}
+                            {{ field.field }}
+                        {% endif %}
+                    {% endif %}
+                    {% if field.field.help_text %}
+                        <p class="help">{{ field.field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+                {% ifequal field.field.name 'koatuu' %}
+                    <button id="edrpou_count" type="button" class="button-search">Кількість кодів ЕДРПОУ</button>
+                    <p style="font-size: 10px !important;color: #999; margin-left: -30px">Ця кнопка призначена для перевірки, чи є коди ЕДРПОУ для заданого КОАТУУ.</p>
+                    <div class="info-about-koatuu" ></div>
+                {% endifequal %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+</fieldset>
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&amp;callback=initMap"></script>
+<script type="text/javascript" src="{% static 'plugins/jQuery/jQuery-2.1.4.min.js'%}"></script>
+
+<script type="text/javascript">
+    var map;
+    function initMap(lon, lat, zoom) {
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: new google.maps.LatLng(lon || {{gmap.lon}},lat || {{gmap.lat}}),
+                zoom: zoom || {{gmap.zoom }},
+                disableDoubleClickZoom: true
+            });
+            var defectMarker = new google.maps.Marker({
+                map: map,
+                visible: false,
+                draggable:true,
+
+            });
+            google.maps.event.addListener(map, 'click', function(data) {
+                defectMarker.setVisible(true);
+                defectMarker.setPosition(data['latLng']);
+                updateAddress(defectMarker);
+            });
+            google.maps.event.addListener(defectMarker, 'dragend', function(data) {
+                updateAddress(defectMarker);
+            });
+    }
+    function updateAddress(marker){
+        $.get("https://maps.googleapis.com/maps/api/geocode/json?&key={{api_key}}&latlng="+marker.position.lat()+","+marker.position.lng()+"&language=uk&sensor=true",function(data){
+            var myAddress = [];
+            for (i = 0; i < data.results.length; i++) {
+              myAddress[i] = data.results[i].formatted_address;
+            }
+
+            if(data.status=="OK"&&data.results.length>0){
+                townForm.map_lon.value=marker.position.lat();
+                townForm.map_lat.value=marker.position.lng();
+                townForm.zoom.value=map.getZoom();
+            }
+        });
+    }
+
+</script>
+<script>
+    $('.button-search').click(function () {
+
+        var val = $(this).prev().val();
+        $.get("https://maps.googleapis.com/maps/api/geocode/json?address=+"+val+"&key={{api_key}}"+"&language=uk&sensor=true",function(data){
+           if(data.status=="OK"&&data.results.length>0) {
+               townForm.map_lon.value = data.results[0].geometry.location.lat;
+               townForm.map_lat.value = data.results[0].geometry.location.lng;
+               townForm.zoom.value = 12;
+
+               initMap(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng, 12);
+
+               $('.info-about-town').html("<h4>Результат: "+data.results[0].formatted_address+"</h4>")
+           }
+        });
+    });
+</script>
+
+<script>
+
+        $("#edrpou_count").click( function() {
+            $('.info-about-koatuu').html('<br/><h4>Зачекайте проводиться пошук.</h4>');
+            var koatuu = $('#id_koatuu').val();
+             $.ajax({
+                 url: '{% url 'edrpou_count' %}',
+                 type: 'POST',
+                 data: {
+                     "koatuu": koatuu
+                 },
+                 success: function (data) {
+                     $('.info-about-koatuu').html('<br/><h4> Результат:'+data+'</h4>');
+                 }
+
+             });
+
+        });
+
+</script>
+

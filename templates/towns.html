@@ -1,0 +1,81 @@
+
+{% extends 'base.html'|pjax:request %}
+{% load static %}
+{% block title %}Вибір міста. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+
+              <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+    <div class="col-md-12">
+    <div class="text-center">
+        <img src="{% static 'img/progress_reg_2.png' %}"style="max-width: 100%"/>
+        </div>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Виберіть населений пункт зі списку:</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th></th>
+                  <th>Населений пункт</th>
+                  <th>Тип</th>
+                  <th>Територіальна громада</th>
+                </tr>
+                {% for town in towns %}
+                <tr>
+                <td class="vert-align"><i class="fa fa-map-marker"></i></td>
+                  <td>  <div class="ct">  <a href="/choosetown/{{ town.id }}"> {{ town.name }}</a></div></td>
+                  <td>{{ town.town_type.title }}</td>
+                  <td>
+                      {% if town.towngromada_set.first.title %}
+                        <a href="/gromadasvillges/{{town.towngromada_set.first.id}}">{{ town.towngromada_set.first.title}}</a>
+                      {% else %}
+                        <div class="text-muted"> Відсутня приналежність до громади</div>
+                      {% endif %}
+
+                  </td>
+
+
+
+                    <!--<td>
+                      {# if town.townsgromadasspr_set.all.0.gromada_ref.title #}
+                        {#  town.townsgromadasspr_set.all.0.gromada_ref.title #}
+                      {# else #}
+                        <div class="text-muted"> Відсутня принадлежність до громади</div>
+                      {#   endif #}
+
+                  </td>-->
+
+                </tr>
+                {% endfor %}
+              </tbody>
+             </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+
+
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,94 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-body"><br/>
+                <div class="col-md-12 text-center">
+
+                    <h1><i class="fa fa-user"></i><br/> Вхід на портал "Розумне місто"</h1>
+                    <br/><br/>
+                </div>
+
+                {#                {% get_providers as socialaccount_providers %}#}
+                {#                {% if socialaccount_providers %}#}
+                {#                    <p>{% blocktrans with site.name as site_name %}Please sign in with one#}
+                {#                        of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>#}
+                {#                        for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>#}
+                {#                    <div class="socialaccount_ballot">#}
+                {#                        <ul class="socialaccount_providers">#}
+                {#                            {% include "socialaccount/snippets/provider_list.html" with process="login" %}#}
+                {#                        </ul>#}
+                {#                        <div class="login-or">{% trans 'or' %}</div>#}
+                {#                    </div>#}
+                {#                    {% include "socialaccount/snippets/login_extra.html" %}#}
+                {#                {% else %}#}
+                {#                {% endif %}#}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box box-solid">
+ <div class="box-header with-border"><h3 class="box-title">Вхід через електронну пошту (<a href="{% url 'account_signup' %}">не зареєстровані?</a>):</h3></div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+                                <form class="login" method="POST" action="{% url 'account_login' %}" id="loginform">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    {% if redirect_field_value %}
+                                        <input type="hidden" name="{{ redirect_field_name }}"
+                                               value="{{ redirect_field_value }}"/>
+                                    {% endif %}
+
+                                    <button class="btn  btn-success btn-lg" type="submit"><i
+                                            class="fa fa-power-off"></i> {% trans "Sign In" %}</button>
+                                 <a class="btn  btn-default btn-lg"
+                                       href="{% url 'account_signup' %}"><i class="fa fa-user-plus"></i> Зареєструватись</a>
+                                    <a class="btn  btn-default btn-lg"
+                                       href="{% url 'account_reset_password' %}"><i class="fa fa-meh-o"></i> {% trans "Forgot Password?" %}</a>
+
+
+                                </form>
+
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-md-6">
+                        <div class="box box-solid">
+                            <div class="box-header with-border"><h3 class="box-title">Вхід або реєстрація через соціальні мережі:</h3></div>
+                            <div class="box-body clearfix">
+                                <blockquote class="pull-right">Для входу або реєстрації за допомогою соціальної мережі, натисніть на кнопку однієї з них: <br/><br/>
+                                    {% load socialaccount %}
+                                    <a href="{% provider_login_url "facebook" method="oauth2" %}"
+                                       class="btn btn-default btn-block btn-bitbucket">
+                                        <i class="fa fa-facebook" aria-hidden="true"> Facebook</i></a>
+                                    <a href="{% provider_login_url "google" method="oauth2" %}"
+                                       class="btn btn-default btn-block btn-google">
+                                        <i class="fa fa-google" aria-hidden="true"> Google</i></a>
+                                    <br/>
+                                    <small>*ми свідомо не використовуємо соц. мережі країни-агрессора</small>
+
+                                </blockquote>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- ./col -->
+                </div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </section><!-- /.content -->
+{% endblock %}

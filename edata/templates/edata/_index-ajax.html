@@ -1,0 +1,501 @@
+<br/>
+ <div class="text-center"><h2>{{ daterange }}</h2>{% if summa %}<h4>загальна сума витрат за період - <strong>{{ summa }} грн.</strong></h4>{% endif %}</div>
+<br/>
+
+<div class="box">
+
+            <div class="box-body">
+
+            <table id="spadding" class="table table-bordered table-striped">
+                <thead>
+                <tr role="row" >
+                    <th style="width: 100px; text-align: center" data-toggle="modal" data-target="#receipt">Сума та № </th>
+                    <th style="width: 80px; text-align: center">Дата</th>
+                    <th style="width: 200px;text-align: center">Платник</th>
+                    <th style="width: 200px;text-align: center">Отримувач платежу</th>
+                    <th style="width: 300px;text-align: center">Призначення платежу</th>
+                </tr>
+                </thead>
+                <tbody>
+{% for transaction in data %}
+                <tr>
+                  <td style="text-align: center; cursor: pointer;"
+                      role="row" data-toggle="modal" data-target="#transactionModal"
+                    data-transaction-trans_id="{{ transaction.trans_id }}"
+                    data-transaction-trans_date="{{ transaction.trans_date|date:"d-m-Y"}} р."
+                    data-transaction-recipt_bank="{{ transaction.recipt_bank }}"
+                    data-transaction-recipt_name="{{ transaction.recipt_name }}"
+                    data-transaction-amount="{{ transaction.amount }}"
+                    data-transaction-payment_details="{{ transaction.payment_details }}"
+                    data-transaction-payer_bank="{{ transaction.payer_bank }}"
+                    data-transaction-payer_edrpou="{{ transaction.payer_edrpou }}"
+                    data-transaction-recipt_edrpou="{{ transaction.recipt_edrpou }}"
+                    data-transaction-payer_name="{{ transaction.payer_name }}"
+                    data-transaction-recipt_mfo="{{ transaction.recipt_mfo }}"
+                    data-transaction-payer_mfo="{{ transaction.payer_mfo }}">
+                      <strong>{{ transaction.amount}} грн.</strong><br/><small><i class="fa fa-file-text-o text-green"></i> (№{{ transaction.trans_id }})</small>
+                  </td>
+
+                <td style="text-align: center">{{ transaction.trans_date|date:"d-m-Y"}}р.</td>
+                  <td> <a href="../edata/payer/{{transaction.payer_edrpou}}">{{transaction.payer_name}}</a></td>
+                  <td ><a  href="../edata/recipient/{% if transaction.recipt_edrpou in "xxxxxxxxxxxxxxx" %}{{transaction.recipt_name}}{% else %}{{transaction.recipt_edrpou}}{% endif %}">{{ transaction.recipt_name}}</a></td>
+
+                    <td><i class="fa fa-calendar"></i> {{ transaction.payment_details}}</td>
+
+
+                </tr>
+{% endfor %}
+                </tbody>
+
+              </table></div></div>
+
+
+</div>
+</div>
+{% if data %}
+    {% if fop_rating %}
+            <div class="box" >
+            <div class="box-header with-border">
+              <h3 class="box-title">ТОП отримувачів платежів по ФОП (гривень)</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+
+
+              <div class="chart">
+                <canvas id="barChart" style="height: 400px; width: 510px;" ></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    {% endif %}
+
+    {% if uric_rating %}
+  <div class="box" >
+            <div class="box-header with-border">
+              <h3 class="box-title">TOП отримувачів платежів по юридичним особам (гривень)</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="barChartUric" style="height: 600px; width: 510px;" ></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+  </div>
+        {% endif %}
+
+
+
+
+ <!-- Modal -->
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="tenderModalLabel">Інформація по платежу</h4>
+      </div>
+      <div class="modal-body">
+
+
+
+
+<div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+              <li class="active"><a href="#tab_3-1" data-toggle="tab">Загальна інформація</a></li>
+
+
+
+              <li class="pull-left header"><i class="fa fa-barcode"></i> <span id="transaction-trans_id"></span></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_3-1">
+
+                <p>
+
+
+<div class="section-to-print">
+
+          <table class="table">
+
+              <tr>
+                  <td><b>Дата платежу:</b></td>
+                  <td id="transaction-trans_date"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Сума транзакції:</b></td>
+                  <td id="transaction-amount"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Призначення платежу:</b></td>
+                  <td id="transaction-payment_details"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Платник:</b></td>
+                  <td id="transaction-payer_name"></td>
+              </tr>
+
+              <tr>
+                  <td><b>ЄРДПОУ отримувача:</b></td>
+                  <td id="transaction-recipt_edrpou"></td>
+              </tr>
+
+              <tr>
+                  <td><b>МФО банку платника:</b></td>
+                  <td id="transaction-recipt_mfo"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Банк платника:</b></td>
+                  <td id="transaction-payer_bank"></td>
+              </tr>
+
+              <tr>
+                  <td><b>ЄРДПОУ платника:</b></td>
+                  <td id="transaction-payer_edrpou"></td>
+              </tr>
+
+
+              <tr>
+                  <td><b>Отримувач платежу:</b></td>
+                  <td id="transaction-recipt_name"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Банк отримувача:</b></td>
+                  <td id="transaction-recipt_bank"></td>
+              </tr>
+
+              <tr>
+                  <td><b>МФО банку отримувача:</b></td>
+                  <td id="transaction-payer_mfo"></td>
+              </tr>
+
+
+          </table>
+</div>
+
+                </p>
+              </div>
+              <!-- /.tab-pane -->
+
+              <!-- /.tab-pane -->
+
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" onclick="printPage()"><i class="fa fa-print"></i> Друк</button>
+ <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endif %}
+
+ <script>
+  $(function () {
+
+
+    //Datemask dd/mm/yyyy
+    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Datemask2 mm/dd/yyyy
+    $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Money Euro
+    $("[data-mask]").inputmask();
+
+    //Date range picker
+    $('#reservation').daterangepicker();
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'DD/MM/YYYY h:mm A'});
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+        {
+        "autoApply": true,
+        "locale": {
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Застосувати",
+        "cancelLabel": "Відмінити",
+        "fromLabel": "З",
+        "toLabel": "по",
+        "customRangeLabel": "Інший діапазон",
+        "daysOfWeek": [
+            "Нд",
+            "Пн",
+            "Вт",
+            "Ср",
+            "Чт",
+            "Пт",
+            "Сб"
+        ],
+        "monthNames": [
+            "Січень",
+            "Лютий",
+            "Березень",
+            "Квітень",
+            "Травень",
+            "Червень",
+            "Липень",
+            "Серпень",
+            "Вересень",
+            "Жовтень",
+            "Листопад",
+            "Грудень"
+        ],
+        "firstDay": 1
+    },
+          ranges: {
+            'За сьогодні': [moment(), moment()],
+            'За вчора': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'За 7 днів': [moment().subtract(6, 'days'), moment()],
+            'За 30 днів': [moment().subtract(29, 'days'), moment()],
+            'За цей місяць': [moment().startOf('month'), moment().endOf('month')],
+            'За минулий місяць': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment()
+        },
+        function (start, end) {
+
+          $('#daterange-btn').html('<i class="fa fa-calendar"></i> '+start.format('YYYY-MM-DD')+'/'+end.format('YYYY-MM-DD')+' <i class="fa fa-caret-down"></i>')
+          $('input#date_from').val(start.format('DD-MM-YYYY'));
+          $('input#date_to').val(end.format('DD-MM-YYYY'));
+
+        }
+    );
+
+  });
+  </script>
+{% if data %}
+     {% if fop_rating %}
+    <script>
+     //-------------
+    //- BAR CHART -
+    //-------------
+
+     var areaChartData = {
+      labels: [
+              {% for payer in fop_rating %}
+                '{{ payer.recipt_name|safe  }}',
+              {% endfor %}
+
+      ],
+      datasets: [
+
+        {
+          label: "Сума",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "rgba(60,141,188,0.8)",
+          pointColor: "#00A65A",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [
+              {% for payer in fop_rating %}
+              {{ payer.total|floatformat:"2"|safe }},
+              {% endfor %}
+                  ]
+        }
+
+      ]
+    };
+
+    var barChartCanvas = $("#barChart").get(0).getContext("2d");
+    var barChart = new Chart(barChartCanvas);
+    var barChartData = areaChartData;
+    var barChartOptions = {
+      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+      scaleBeginAtZero: true,
+      //Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines: true,
+      //String - Colour of the grid lines
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      //Number - Width of the grid lines
+      scaleGridLineWidth: 1,
+      //Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      //Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines: true,
+      //Boolean - If there is a stroke on each bar
+      barShowStroke: true,
+      //Number - Pixel width of the bar stroke
+      barStrokeWidth: 2,
+      //Number - Spacing between each of the X value sets
+      barValueSpacing: 5,
+      //Number - Spacing between data sets within X values
+      barDatasetSpacing: 1,
+      //String - A legend template
+
+      responsive: true,
+      maintainAspectRatio: true
+    };
+
+    barChartOptions.datasetFill = false;
+    var bChartF = barChart.Bar(barChartData, barChartOptions);
+
+
+
+     $("#barChart").click(
+                        function(evt){
+                            var activePoints = bChartF.getBarsAtEvent(evt);
+
+                            window.location = "http://{{ request.get_host }}/{{ townslug }}/edata/recipient/"+activePoints[0].label;
+                            $("body").css("cursor", "wait");
+                        }
+                    );
+
+     var originalShowTooltip = bChartF.showTooltip;
+     bChartF.showTooltip = function (activeElements) {
+        $("#barChart").css("cursor", activeElements.length ? "pointer" : "default");
+        originalShowTooltip.apply(this, arguments);
+    }
+
+
+
+    </script>
+          {% endif %}
+     {% if uric_rating %}
+     <script>
+
+     //-------------
+    //- BAR CHART -
+    //-------------
+     var areaChartDataUric = {
+      labels: [
+              {% for payer in uric_rating %}
+                '{{ payer.recipt_name|safe  }}',
+              {% endfor %}
+
+      ],
+      datasets: [
+
+        {
+          label: "Сума",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "rgba(60,141,188,0.8)",
+          pointColor: "#3b8bba",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [
+              {% for payer in uric_rating %}
+              {{ payer.total|floatformat:"2"|safe }},
+              {% endfor %}
+                  ]
+        }
+
+      ]
+    };
+    var barChartCanvasUric = $("#barChartUric").get(0).getContext("2d");
+    var barChartUric = new Chart(barChartCanvasUric);
+    var barChartDataUric = areaChartDataUric;
+    var barChartOptionsUric = {
+      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+      scaleBeginAtZero: true,
+      //Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines: true,
+      //String - Colour of the grid lines
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      //Number - Width of the grid lines
+      scaleGridLineWidth: 1,
+      //Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      //Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines: true,
+      //Boolean - If there is a stroke on each bar
+      barShowStroke: true,
+      //Number - Pixel width of the bar stroke
+      barStrokeWidth: 2,
+      //Number - Spacing between each of the X value sets
+      barValueSpacing: 5,
+      //Number - Spacing between data sets within X values
+      barDatasetSpacing: 1,
+      //String - A legend template
+
+      responsive: true,
+      maintainAspectRatio: true
+    };
+
+    barChartOptionsUric.datasetFill = false;
+    var bChart = barChartUric.Bar(barChartDataUric, barChartOptionsUric);
+
+
+     {% for rating in uric_rating %}
+        bChart.datasets[0].bars[{{ forloop.counter0 }}].filter = {{  rating.recipt_edrpou}};
+     {% endfor %}
+
+
+     $("#barChartUric").click(
+                        function(evt){
+                            var activePoints = bChart.getBarsAtEvent(evt);
+                            window.location = "http://{{ request.get_host }}/{{ townslug }}/edata/recipient/"+activePoints[0].filter;
+                            $("body").css("cursor", "wait");
+                        }
+                    );
+
+     var originalShowTooltip = bChart.showTooltip;
+     bChart.showTooltip = function (activeElements) {
+        $("#barChartUric").css("cursor", activeElements.length ? "pointer" : "default");
+        originalShowTooltip.apply(this, arguments);
+    }
+
+
+
+
+
+     </script>
+
+
+     {% endif %}
+
+        <script>
+   $('#transactionModal').on('show.bs.modal', function (event) {
+            var target = $(event.relatedTarget),
+                    startDate = new Date(target.data('transaction-trans_date'));
+
+       $('#transaction-trans_id').html(target.data('transaction-trans_id'));
+       $('#transaction-recipt_bank').html(target.data('transaction-recipt_bank'));
+       $('#transaction-recipt_name').html(target.data('transaction-recipt_name'));
+       $('#transaction-amount').html(target.data('transaction-amount'));
+       $('#transaction-payment_details').html(target.data('transaction-payment_details'));
+       $('#transaction-payer_bank').html(target.data('transaction-payer_bank'));
+       $('#transaction-payer_edrpou').html(target.data('transaction-payer_edrpou'));
+       $('#transaction-recipt_edrpou').html(target.data('transaction-recipt_edrpou'));
+       $('#transaction-payer_name').html(target.data('transaction-payer_name'));
+       $('#transaction-recipt_mfo').html(target.data('transaction-recipt_mfo'));
+       $('#transaction-payer_mfo').html(target.data('transaction-payer_mfo'));
+       $('#transaction-trans_date').html(target.data('transaction-trans_date'));
+        });
+
+      </script>
+{% endif %}
+
+ <script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" src="/static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+      <script type="text/javascript">$("#spadding").DataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Ukrainian.json"
+            }
+        });
+
+      </script>

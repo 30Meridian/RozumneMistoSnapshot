@@ -1,0 +1,79 @@
+{% extends 'base.html'|pjax:request %}>
+{% load static%}
+{% block title %} Додати новину. Інформаційна система "Розумне місто".{% endblock %}
+
+
+{% block content %}
+
+<section class="content-header">
+      <h1>
+    Додати новину
+
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+        <li><a href="/news/">Новини</a></li>
+        <li class="active">Додати новину</li>
+      </ol>
+</section>
+
+
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+<div class="col-md-12">
+
+<form action="/croudfunding/add" method="post" enctype="multipart/form-data" id="crowdfindingform">
+{% csrf_token %}
+
+<div class="form-group">
+	  {{ form.title.errors }}
+        Назва проекту:
+	  {{ form.title }}
+</div>
+
+
+    <div class="form-group">
+      {{ form.description.errors }}
+       Докладний опис проекту (можна вставляти фото і відео):<br />
+	  {{ form.description }}
+     </div>
+
+    <div class="form-group">
+      {{ form.text.errors }}
+       Основний текст новини:<br />
+	  {{ form.text }}<br />
+    </div>
+
+    <div class="form-group">
+      {{ form.mainimg.errors }}
+	  {{ form.mainimg }}
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-3">
+
+    <input type="submit" class="btn btn-block btn-primary btn-lg text-center" value="Зберегти">
+
+    </div>
+</div>
+ </form>
+
+</div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+{% endblock %}
+
+    {% block footerjs %}
+        <script src="{% static 'ckeditor/ckeditor-init.js'%}"></script>
+        <script src="{% static 'ckeditor/ckeditor/ckeditor.js'%}"></script>
+    {% endblock footerjs %}

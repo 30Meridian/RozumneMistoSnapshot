@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}Розумні дороги. Список карток аварій. Інформаційна система "Розумне місто".{% endblock %}
+{% load staticfiles %}
+
+
+{% block content %}
+<!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+                <div class="box-body">
+                      <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+
+                <li class=""><a href="#tab_2-2" data-toggle="tab" aria-expanded="false">Як це працює</a></li>
+              <li class="active"><a href="#tab_1-1" data-toggle="tab" aria-expanded="true">Ідея інструменту</a></li>
+
+              <li class="pull-left header"><i class="fa  fa-road"></i> Розумні дороги </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1-1">
+                <p>У Данії кількість дтп в містах було зменшено практично до нуля. Вони подивилися статистику дорожньо-транспортних пригод, з'ясували в яких місцях аварії відбуваються часто і модернізували ці місця.
+Мы допоможемо нашому місту стати більш безпечним. Приєднуйтесь до нашої групи у ФБ!
+                   {% if is_allowed %}<a href="add" class="btn btn-sm btn-success pull-right"><i class="fa fa-plus-square"></i> Додати аварійну зону</a>{% endif %}
+</p>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2-2">
+<p>
+    На карті позначені місця частих ДТП на основі даних поліції. Робоча група проекту пропонує спосіб модернізації даного місця. Модернізація повинна привести до зменшення кількості ДТП. Модернізацію здійснює міська дорожня служба після прийняття рішення місцевої радою або приватні компанії за кошти донорів.
+</p>
+              </div>
+              <!-- /.tab-pane -->
+
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+
+
+<div id="map" style="width: 970px; height: 400px;"></div>
+
+
+  <script>
+      function initMap() {
+          //var uluru = {lat: {{ town.map_lon }}, lng: {{ town.map_lat}}};
+          var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: {{ town.zoom }},
+              center: {lat: {{ town.map_lon }}, lng: {{ town.map_lat}}}
+          });
+          setMarkers(map);
+      }
+
+
+      function setMarkers(map) {
+        var infowindow = new google.maps.InfoWindow({
+          maxWidth: 1900
+        });
+
+      var pinOpen = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|dd4b39");
+      var pinGet = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|3c8dbc");
+      var pinDone = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00a65a");
+
+
+
+        {% for issue in list %}
+
+                var marker{{ issue.id }} = new google.maps.Marker({
+                  position: {lat: {{issue.lat}}, lng: {{issue.lon}}},
+                  map: map,
+                    {% if issue.status_ref.id == 1%}
+                        icon: pinOpen,
+                    {% elif issue.status_ref.id == 3 %}
+                        icon: pinDone,
+                    {% elif issue.status_ref.id == 2 %}
+                        icon: pinGet,
+                    {% endif %}
+
+                  title: '{{ issue.title }}'
+                });
+
+                   var infowindow{{ issue.id }} = new google.maps.InfoWindow({
+                    content: "{{ issue.title }}"+
+                             "<br/><a href='{{ issue.id }}'><div class='pull-right'>перейти до зони</div></a>",
+
+                });
+
+                google.maps.event.addListener(marker{{ issue.id }}, 'click', function() {
+                  infowindow{{ issue.id }}.open(map,marker{{ issue.id }});
+                });
+
+
+          {%endfor%}
+      }
+
+    </script>
+                        <br/>
+                     <div class="box">
+
+                <div class="box-body">
+<table class="table table-bordered">
+    <thead>
+        <th>Зонування по скупченням аварій</th>
+        <th>Орієнтовна сума витрат на модернізацію аварійної зони</th>
+        <th>Статус аварійної зони</th>
+    </thead>
+    <tbody>
+    {% for issue in list %}
+    <tr>
+     <td><a href="{{ issue.id }}">{{ issue.title }}</a> </td>
+     <td>{% if issue.cost %}{{ issue.cost }}{% else %}Не визначено{%endif  %}</td>
+     <td>{% if issue.status_ref.id == 1 %}<span class="badge bg-red">Аварійна зона не змінена</span>{% elif issue.status_ref.id == 3 %}<span class="badge bg-green">Аварійна зона змінена</span>{% else %}<span class="badge bg-light-blue">В процесі</span>{% endif %}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+                </div>
+              </div>
+              </div><!-- /.box-body -->
+
+        </section><!-- /.content -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap">
+    </script>
+{% endblock %}

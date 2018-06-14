@@ -1,0 +1,8 @@
+  Вас вітає команда проекту "Розумне місто"!<br/><br/>
+  По петиції <strong><a href="http://www.rozumnemisto.org/{{townslug}}/petitions/{{petition_id}}">"{{title}}"</a></strong> змінено статус на "{{status}}"<br/><br/>
+{{resolution}}<br/>
+<strong>Статуси змінюються <a href="http://www.rozumnemisto.org/{{townslug}}/moderators/">регіональними модераторами</a> вашого міста.</strong><br/><br/>
+
+
+З повагою,<br/>
+  команда проекту <a href='www.rozumnemisto.org'>"Розумне місто"</a><br/>

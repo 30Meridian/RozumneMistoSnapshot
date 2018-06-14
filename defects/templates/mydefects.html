@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Ваші заявки на усунення дефектів ЖКГ. Інформаційна система "Розумне місто".{% endblock %}
+{% block content %}
+ <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+      <div class="box">
+        <div class="box-header with-border"><h3 class="box-title">Заявки на усунення дефектів ЖКГ:</h3></div>
+                <div class="box-body">
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th  style="width: 65px">Ілюстрація</th>
+                      <th style="width: 115px">Номер заявки</th>
+                      <th>Суть заявки</th>
+                      <th style="width: 115px">Статус</th>
+                    </tr>
+
+{% for issue in issues.object_list %}
+
+                <tr>
+                    <td class="vert-align">
+                        {% if issue.issuefiles_set.all.0.document_ref.type_name == "image" %}
+					 <a href="../defects/{{ issue.id  }}" id="defectitem"><img src="/media/defects/thumbnail.{{issue.issuefiles_set.all.0.document_ref.file_name}}"  alt="Зображення дефекту" width="100px" /></a>
+                        {% else %}
+                            <a href="../defects/{{ issue.id  }}" id="defectitem"><img src="{{ MEDIA_URL }}/defects/empty.gif" width="80px"></a>
+
+					    {% endif %}
+                    </td>
+
+                  <td class="vert-align">
+                  <a href="../defects/{{ issue.id  }}" id="defectitem">№{{ issue.id }}</a><br/>
+
+                  </td>
+                  <td class="valign">
+                   <b><a href="../defects/{{ issue.id  }}" id="defectitem">{{issue.title|truncatewords:30}}</a></b><br/>
+    	            <i class="fa fa-map-marker"></i>
+					<a href="../defects/{{ issue.id  }}" id="defectitem">{{issue.address}}</a>
+                  </td>
+                  <td class="vert-align">
+                      <a href="../defects/{{ issue.id  }}" id="defectitem">
+                        {% if issue.last_issue.status == 1 %}
+                        <span class="badge bg-yellow">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 2 %}
+                        <span class="badge bg-green">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 4 %}
+                        <span class="badge bg-aqua">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 5 %}
+                        <span class="badge bg-gray">{{issue.last_issue.statusName}}</span>
+                        {% else%}
+                        <span class="badge bg-gray">{{issue.last_issue.statusName}}</span>
+                        {% endif %}
+                    </a>
+                  </td>
+
+                </tr>
+            {% endfor %}
+              </tbody></table>
+            </div>
+
+      {% if issues.object_list.count >= 10 %}
+    <div class="col-md-12">
+<div class="center-block">   {{ issues.render }}</div>
+    </div>
+{% endif %}
+</div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'first_page.html' %}
+{% load static %}
+
+{% block content %}
+
+{#    <div class="wrap">#}
+{#    <div class="inner">#}
+{#    <section class="contacts section-block">#}
+{#        <div class="container">#}
+{#           <div class="row">#}
+{#               <h2 class="form-head">Зв'яжіться з нами</h2>#}
+{#             <div class="col-md-6">#}
+{##}
+{#                <div class="contacts-form">#}
+{#                    <form method="post" action="{% url 'first_page:contacts' %}">#}
+{#                        {% csrf_token %}#}
+{#                        <p>#}
+{#                            <label for="">Введіть своє ім'я:</label>#}
+{#                            {{ form.name }}#}
+{#                            <input class="form-control input-lg" type="text" placeholder="Ваше ім'я">#}
+{#                        </p>#}
+{#                        <p>#}
+{#                            <label for="">Введіть свою адресу своєї електронної пошти:</label>#}
+{#                            {{ form.email }}#}
+{#                            <input class="form-control input-lg" type="email" placeholder="E-mail адреса">#}
+{#                        </p>#}
+{#                        <p>#}
+{#                            <label for="">Введіть свій телефон:</label>#}
+{#                            {{ form.phone }}#}
+{#                            <input class="form-control input-lg" type="text" placeholder="Ваш телефон">#}
+{#                        </p>#}
+{#                        <p>#}
+{#                            <label for="">Введіть ваше повідомлення:</label>#}
+{#                            {{ form.text }}#}
+{#                            <textarea name="" id="" cols="30" rows="10"></textarea>#}
+{#                        </p>#}
+{#                        <p>#}
+{#                            <input type="submit" class="btn btn-success" value="Відправити">#}
+{#                        </p>#}
+{#                    </form>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#            <div class="col-md-6">#}
+{#                <ul class="contacts-list">#}
+{#                    <li>#}
+{#                        <img src="../static/img/svg/location.svg" alt="">#}
+{#                        <span>04116, м.Київ,  вул. Старокиївська 10И, офіс 305</span>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <img src="../static/img/svg/phone1.svg" alt="">#}
+{#                        <a href="tel:+38(098) 600-11-59">+38(098) 600-11-59</a>#}
+{#                        <span>(підключено Telegram)</span>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <img src="../static/img/svg/mail1.svg" alt="">#}
+{#                        <a href="mailto:office@rozumnemisto.org">office@rozumnemisto.org</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <img src="../static/img/svg/skype.svg" alt="">#}
+{#                        <span>rozumnemisto.org</span>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <img src="../static/img/svg/facebook1.svg" alt="">#}
+{#                        <a href="https://www.facebook.com/rozumnemisto.org/?fref=ts">rozumnemisto.org</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <img src="../static/img/svg/site.svg" alt="">#}
+{#                        <span>змінюємо країну RAZOM: <a href="www.razomforukraine.org">www.razomforukraine.org</a></span>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#           </div>#}
+{#            <div class="row">#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{#    </div>#}
+{#</div>#}
+<div class="clearfix"></div>
+
+<div class="content_fullwidth less">
+
+
+
+<div class="clearfix marb10"></div>
+
+<div class="container contact-page">
+
+      <div class="two_third">
+
+
+        <div class="cforms">
+
+        <form action="" method="post" id="sky-form" class="sky-form">
+          <header>Зв'яжіться з нами</header>
+          <fieldset>
+            <div class="row">
+              {% csrf_token %}
+              <section class="col col-6">
+                <label class="label">Введіть своє ім'я:</label>
+                <label class="input"> <i class="icon-append icon-user"></i>
+                    {{ form.name }}
+                </label>
+              </section>
+              <section class="col col-6">
+                <label class="label">Введіть свою адресу своєї електронної пошти:</label>
+                <label class="input"> <i class="icon-append icon-envelope-alt"></i>
+                  {{ form.email }}
+                </label>
+              </section>
+            </div>
+            <section>
+              <label class="label">Введіть свій телефон:</label>
+              <label class="input"> <i class="icon-append icon-tag"></i>
+                {{ form.phone }}
+              </label>
+            </section>
+            <section>
+              <label class="label">Введіть ваше повідомлення:</label>
+              <label class="textarea"> <i class="icon-append icon-comment"></i>
+                {{ form.text }}
+              </label>
+            </section>
+            <section>
+<!--               <label class="checkbox">
+                <input type="checkbox" name="copy" id="copy">
+                <i></i>Send a copy to my e-mail address</label> -->
+            </section>
+            <section>
+              <input type="submit" class="button" value="Відправити">
+            </section>
+          </fieldset>
+          <div class="message"> <i class="icon-ok"></i>
+            <p>Ваше повідомлення успішно відправлено!</p>
+          </div>
+        </form>
+
+        </div>
+
+      </div><!-- end section -->
+
+      <div class="one_third last">
+
+        <div class="address_info two">
+
+          <h4 class="light">Контактні дані</h4>
+          <ul>
+            <li>
+              <span></span>+38(044) 539-44-22<br />
+              <span></span>E-mail: <a href="mailto:office@rozumnemisto.org">office@rozumnemisto.org</a><br />
+              </li>
+          </ul>
+
+        </div><!-- end section -->
+
+
+	  </div>
+
+
+</div>
+</div><!-- end content area -->
+
+
+
+<div class="clearfix margin_top10"></div>
+{% endblock %}
+{% block footerjs %}
+{% endblock footerjs %}
+
+
+
+
+

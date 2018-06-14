@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Видалення опитування-"{{poll.question|truncatechars:25}}". Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+      <section class="content">
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+{#                {% if allowed %}#}
+
+                <form action="" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <h2 align="center">Видалення опитування!</h2>
+                    <h4>Ви впевнені, що хочете видалити опитування: "{{ object }}"?</h4>
+                    <input class="btn btn-danger" type="submit" value="Так, видалити." />
+
+                </form>
+
+                <a href="../{{ object.id }}" style="display: inline;">
+                    <button class="btn btn-success">Hi, не видаляти.</button>
+                </a>
+{#                {% endif %}#}
+
+            </div>
+          </div>
+      </section>
+{% endblock content %}

@@ -1,0 +1,24 @@
+Останні події<br/>
+{% for val in value %}
+    {% if val.type == 1 %}
+        <p>{{val.date}}</p>
+        <hr/>
+    {% elif val.type == 2 %}
+        <p><strong><a href="http://www.rozumnemisto.org/{{val.town_slug}}" target="_blank">{{val.town_name}}</a></strong>
+        <strong><a href="http://www.rozumnemisto.org/{{val.town_slug}}/{{val.module_link}}" target="_blank">{{val.module_name}}</a></strong>
+        </p>
+        {% if val.status %}
+            <p>{{val.status}}</p>
+        {% endif %}
+        <p><strong><a href="http://www.rozumnemisto.org/{{val.town_slug}}/{{val.module_link}}{{val.id}}" target="_blank">{{val.header}}</a></strong></p>
+
+        {% autoescape off %}
+            <p>{{val.content}}</p>
+        {% endautoescape %}
+        <br/>
+    {% endif %}
+ {% endfor %}
+ <hr/>
+ З повагою,<br/>
+ команда проекту <a href="http://www.rozumnemisto.org" target="_blank">"Розумне місто"</a><br/>
+ <a href="http://www.rozumnemisto.org/digest/unsubscribe/{{unsubscribe}}" target="_blank">Відписатись від розсилання</a>

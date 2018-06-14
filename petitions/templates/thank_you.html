@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title %}Петиція на модерації. Інформаційна система "Розумне місто".{% endblock %}
+{% block head_top %}<meta http-equiv="refresh" content="4;url=http://rozumnemisto.org/petitions/">{% endblock %}
+{% block content %}
+ <section class="content">
+     <!-- Default box -->
+          <div class="box">
+                <div class="box-body">
+                    <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Дякуємо! Вашу петицію успішно додано і вона знаходиться а на модерації</h4>
+                    Після розгляду модератором міста Ви отримаєте лист-підтвердження. Дякуюємо Вам!
+                </div>
+          </div><!-- /.box-body -->
+          </div><!-- /.box -->
+ </section><!-- /.content -->
+
+{% endblock %}

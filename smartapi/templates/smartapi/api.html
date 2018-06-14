@@ -1,0 +1,824 @@
+{% extends 'base.html' %}
+ {% load staticfiles %}
+{% block title %}API до порталу "Розумне місто". Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+<div class="text-center">
+    <h2><i class="fa fa-cogs" style="color: #00a65a"></i> </h2>
+    <h2>API порталу "Розумне місто"</h2>
+
+</div>
+
+
+  <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+                <li class=""><a href="#tab_1-2" data-toggle="tab" aria-expanded="false">Як тестувати?</a></li>
+              <li class=""><a href="#tab_2-2" data-toggle="tab" aria-expanded="false">Довідники</a></li>
+              <li class="active"><a href="#tab_3-2" data-toggle="tab" aria-expanded="true">Мапа API</a></li>
+            </ul>
+
+            <div class="tab-content">
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2-2">
+
+               <div class="box">
+            <div class="box-body">
+
+
+                <h2 class="text-center">Міста</h2>
+
+
+                  <table class="table-bordered table-hover">
+                      <tbody>
+                        <tr>
+                          <th>ID</th>
+                          <th>Назва</th>
+                        </tr>
+                        {% for town in towns %}
+                            <tr>
+                                <td>{{ town.id }}</td>
+                                <td>{{ town.name }}</td>
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                  </table>
+
+
+
+                <h2 class="text-center">Регіони</h2>
+
+
+                  <table class="table-bordered table-hover">
+                      <tbody>
+                        <tr>
+                          <th>ID</th>
+                          <th>Назва</th>
+                        </tr>
+                        {% for region in regions %}
+                            <tr>
+                                <td>{{ region.id }}</td>
+                                <td>{{ region.name }}</td>
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                  </table>
+                   </div>
+              </div>
+
+
+
+              </div>
+
+                       <div class="tab-pane" id="tab_1-2">
+                <h2>Для тестування рекомендуємо розширення для Chrome - <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en" target="_blank"> POSTMAN</a></h2>. <br/>
+Можна використовувати або form-data або plain json. Приклад заповнення полів з form-data:   <br/>
+                           <img src="{%  static 'img/postman.jpg' %}" style="max-width: 100%;">
+
+
+            </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane active" id="tab_3-2">
+
+ {% if apikey %}
+
+                <strong>Ваш ключ API: </strong> <code>{{ apikey }}</code>
+    {% else %}
+           <strong>Ваш ключ API: </strong> Для генерації власного ключа потрібно <a href="/account/">зареєструватись</a></small>
+{% endif %}<br/>
+<strong>URL:</strong> <code>http://www.rozumnemisto.org/api/</code><br/>
+<strong>Тип запиту:</strong> <code>POST</code><br/><br/><br/>
+<ul>
+    <li><a href="#getTowns">Вибірка усіх міст <i class="fa  fa-arrow-right"></i></a>  getFullLocation() </li>
+    <li><a href="#getTownsByReg">Вибірка міст по регіону <i class="fa  fa-arrow-right"></i></a>  getTownsByReg() </li>
+    <li><a href="#getTownByID">Вибірка міста по його ID <i class="fa  fa-arrow-right"></i></a>  getTownTyId() </li>
+    <li><a href="#getUserById">Вибірка користувача по його ID <i class="fa  fa-arrow-right"></i></a>  getUserById() </li>
+    <li><a href="#getUserByEmail">Вибірка користувача по його Email <i class="fa  fa-arrow-right"></i></a>  getUserByEmail() </li>
+    <li><a href="#getLastPetitions">Вибірка останніх N петицій  <i class="fa  fa-arrow-right"></i></a>  getLastPetitions() </li>
+    <li><a href="#getLastDefects">Вибірка останніх N заявок на усунення дефектів ЖКГ  <i class="fa  fa-arrow-right"></i></a>  getLastIssues() </li>
+    <li><a href="#getLastNews">Вибірка останніх N новин  <i class="fa  fa-arrow-right"></i></a>  getLastNews() </li>
+    <li><a href="#getLastPolls">Вибірка останніх N опитування  <i class="fa  fa-arrow-right"></i></a>  getLastPolls() </li>
+</ul>
+
+<br/>
+                 <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getTowns">Вибірка усіх міст</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>gettowns</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                    <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу -> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Відповідь: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+<script src="https://gist.github.com/poremchuk/9182cb1ea86892c73d37.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+
+
+    <!-------------------------- ---------------gettownsbyreg ------------------------------------------------------------->
+
+                         <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getTownsByReg">Вибірка міст по ID регіону</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>gettownsbyreg</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                  <tr>
+                  <td>Код регіону</td>
+                  <td><code>regid</code></td>
+                  <td>для прикладу-> <code>17</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу-> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Приклад відповіді: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+<script src="https://gist.github.com/poremchuk/59fa9ae1156b1664293f.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+
+
+
+
+
+
+
+<!-------------------------- ---------------gettownbyid ------------------------------------------------------------->
+
+                         <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getTownByID">Вибірка міста по ID</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>gettownbyid</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                  <tr>
+                  <td>Команда API</td>
+                  <td><code>townid</code></td>
+                  <td>для прикладу(int)-> <code>1</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу -> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Приклад відповіді: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+<script src="https://gist.github.com/poremchuk/a8ae4a13a80511455e10.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+
+
+  <!-------------------------- ---------------gettownbyid ------------------------------------------------------------->
+
+                         <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getUserById">Вибірка користувача по ID</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>getuserbyid</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                  <tr>
+                  <td>ID користувача</td>
+                  <td><code>uid</code></td>
+                  <td>для прикладу(int)-> <code>14</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу -> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Приклад відповіді: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+<script src="https://gist.github.com/poremchuk/50389c9f35317a8f3aec.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+
+
+
+  <!-------------------------- ---------------gettownbyemail ------------------------------------------------------------->
+
+                         <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getUserByEmail">Вибірка користувача по Email</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>getuserbyid</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                  <tr>
+                  <td>ID користувача</td>
+                  <td><code>email</code></td>
+                  <td>для прикладу(int)-> <code>poremchuk@gmail.cam</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу -> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Приклад відповіді: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+<script src="https://gist.github.com/poremchuk/72f56f87ec0b1acd295a.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+  <!-------------------------- ---------------getlastpetitions ------------------------------------------------------------->
+
+                         <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getLastPetitions">Вибірка останніх відкритих петицій</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>getlastpetitions</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                  <tr>
+                  <td>ID міста</td>
+                  <td><code>townid</code></td>
+                  <td>для прикладу(int)-> <code>1</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Кількість петицій (по замовчуванню: 5)</td>
+                  <td><code>count</code></td>
+                  <td>для прикладу(int)-> <code>3</code></td>
+                  <td><span class="badge bg-success">Не обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Cтатус петицій (окрім 1,3 та 7, по замовчуванню: 2)</td>
+                  <td><code>statusid</code></td>
+                  <td>для прикладу(int)-> <code>2</code></td>
+                  <td><span class="badge bg-success">Не обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу -> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Приклад відповіді: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+<script src="https://gist.github.com/poremchuk/59541bfc26a353cada86.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+
+
+  <!-------------------------- ---------------getlatsdefects ------------------------------------------------------------->
+
+                         <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getLastDefects">Вибірка останніх доданих заявок на усунення дефектів ЖКГ</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>getlastpetitions</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                  <tr>
+                  <td>ID міста</td>
+                  <td><code>townid</code></td>
+                  <td>для прикладу(int)-> <code>1</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Кількість заявок (по замовчуванню: 5)</td>
+                  <td><code>count</code></td>
+                  <td>для прикладу(int)-> <code>3</code></td>
+                  <td><span class="badge bg-success">Не обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу -> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Приклад відповіді: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <script src="https://gist.github.com/poremchuk/60ade5679874d5ae29a6.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+  <!-------------------------- ---------------getlatsnews ------------------------------------------------------------->
+
+           <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getLastNews">Вибірка останніх новин</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>getlastpetitions</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                  <tr>
+                  <td>ID міста</td>
+                  <td><code>townid</code></td>
+                  <td>для прикладу(int)-> <code>1</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Кількість новин (по замовчуванню: 5)</td>
+                  <td><code>count</code></td>
+                  <td>для прикладу(int)-> <code>3</code></td>
+                  <td><span class="badge bg-success">Не обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу -> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Приклад відповіді: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <script src="https://gist.github.com/poremchuk/1901e732bd331fbf2a18.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+  <!-------------------------- ---------------getlatspolls ------------------------------------------------------------->
+
+           <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title"><a name="getLastPolls">Вибірка останніх опитуваннь</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Параметри: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tbody><tr>
+                  <th></th>
+                  <th>Параметр</th>
+                  <th>Значення</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                <tr>
+                  <td>Команда API</td>
+                  <td><code>command</code></td>
+                  <td><code>getlastpolls</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                  <tr>
+                  <td>ID міста</td>
+                  <td><code>townid</code></td>
+                  <td>для прикладу(int)-> <code>1</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Кількість опитуваннь (по замовчуванню: 5)</td>
+                  <td><code>count</code></td>
+                  <td>для прикладу(int)-> <code>3</code></td>
+                  <td><span class="badge bg-success">Не обов'язковий</span></td>
+                </tr>
+                <tr>
+                  <td>Ваш API-ключ</td>
+                  <td><code>apikey</code></td>
+                  <td><code>{% if apikey %}{{ apikey }}{% else %} для прикладу -> cas7643bac79a7w65c7bot7tsx7ra34865w7{% endif %}</code></td>
+                  <td><span class="badge bg-red">Обов'язковий</span></td>
+                </tr>
+
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+
+                    <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Приклад відповіді: </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <script src="https://gist.github.com/poremchuk/324885df9759d8f4f433.js"></script>
+
+                             </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
+
+                      </div><!-- /.box-body -->
+
+                    </div><!-- /.box -->
+
+
+
+              </div>
+              <!-- /.tab-pane -->
+
+            </div>
+
+            <!-- /.tab-content -->
+          </div>
+          <!-- nav-tabs-custom -->
+
+
+
+
+        </section><!-- /.content -->
+
+{% endblock %}

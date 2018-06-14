@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Звіт для модератора за період. Інформаційна система "Розумне місто". {% endblock %}
+
+
+{% block head_top %}
+    <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css'%}">
+      <!-- daterange picker -->
+  <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker-bs3.css'%}">
+{% endblock %}
+{% block content %}
+    <section class="content-header">
+      <h1>Статистичний звіт</h1>
+
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+        <li><a href="/moderator/">Панель модератора</a></li>
+        <li class="active">Звіт за період</li>
+      </ol>
+    </section>
+            <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+            <div class="box-body">
+<div class="box-header with-border">
+              <h3 class="box-title"> <div class="input-group">
+
+                                              <button type="button" class="btn btn-default" id="daterange-btn">
+                                                <i class="fa fa-calendar"></i> Виберіть період звіту
+                                                <i class="fa fa-caret-down"></i>
+                                              </button>
+                                    </div></h3>
+    <div class="pull-right"><a href="#" onclick="printPage()"><i class="fa fa-print" style="font-size: 24px"></i></a> </div>
+
+
+              </div>
+
+<div id="choose_a_range"><h3 class="text-center"><i class="fa fa-file-text-o"></i></h3><h3 class="text-center">Виберіть часовий діапазон за який Ви бажаєте сформувати звіт  </h3></div>
+
+
+<div id="zvit_context">
+
+
+<div id="pinner" class="text-center" style="display: none"><i class="fa fa-refresh fa-spin" style="font-size: 65px; color: #00733e"></i>
+    </br> Зачекайте, будь ласка. Іде завантаження даних...</div>
+
+</div>
+
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+{% endblock %}
+
+
+  {% block footerjs %}
+
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="{% static 'plugins/daterangepicker/daterangepicker.js'%}"></script>
+      <!-- InputMask -->
+<script src="{% static 'plugins/input-mask/jquery.inputmask.js'%}"></script>
+<script src="{% static 'plugins/input-mask/jquery.inputmask.date.extensions.js'%}"></script>
+<script src="{% static 'plugins/input-mask/jquery.inputmask.extensions.js'%}"></script>
+
+      <script>
+  $(function () {
+
+
+    //Datemask dd/mm/yyyy
+    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Datemask2 mm/dd/yyyy
+    $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Money Euro
+    $("[data-mask]").inputmask();
+
+    //Date range picker
+    $('#reservation').daterangepicker();
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'DD/MM/YYYY h:mm A'});
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+        {
+              "autoApply": true,
+        "locale": {
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Застосувати",
+        "cancelLabel": "Відмінити",
+        "fromLabel": "З",
+        "toLabel": "по",
+        "customRangeLabel": "Інший діапазон",
+        "daysOfWeek": [
+            "Нд",
+            "Пн",
+            "Вт",
+            "Ср",
+            "Чт",
+            "Пт",
+            "Сб"
+        ],
+        "monthNames": [
+            "Січень",
+            "Лютий",
+            "Березень",
+            "Квітень",
+            "Травень",
+            "Червень",
+            "Липень",
+            "Серпень",
+            "Вересень",
+            "Жовтень",
+            "Листопад",
+            "Грудень"
+        ],
+        "firstDay": 1
+    },
+          ranges: {
+            'За сьогодні': [moment(), moment()],
+            'За вчора': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'За 7 днів': [moment().subtract(6, 'days'), moment()],
+            'За 30 днів': [moment().subtract(29, 'days'), moment()],
+            'За цей місяць': [moment().startOf('month'), moment().endOf('month')],
+            'За минулий місяць': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment()
+        },
+        function (start, end) {
+
+
+             $.ajax({
+                type: "POST",
+                url: "/moderator/zvit",
+                data: {'csrfmiddlewaretoken': '{{ csrf_token }}', 'start': start.format('YYYY-MM-DD'), 'end': end.format('YYYY-MM-DD')},
+                    beforeSend: function(){
+                    $('#choose_a_range').hide();
+                    $('#pinner').show();
+                    },
+                    complete: function(){
+                        $('#pinner').hide();
+                        $('#daterange-btn').html('<i class="fa fa-calendar"></i> '+start.format('YYYY-MM-DD')+' до '+end.format('YYYY-MM-DD')+' <i class="fa fa-caret-down"></i>')
+                    },
+                    success : function(datasuccess) {
+                        $('#zvit_context').html(datasuccess);
+                }
+             });
+
+
+
+            console.log(start.format('M-D-YYYY'));
+
+        }
+    );
+
+
+
+  });
+</script>
+
+    {% endblock footerjs %}
+
+

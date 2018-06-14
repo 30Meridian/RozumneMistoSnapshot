@@ -1,0 +1,22 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}Вибір області та міста.  Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+<div id="crumbs">
+	<ul>
+		<li><a href="#1">Виберіть область</a></li>
+		<li><a href="#2">Вибір міста</a></li>
+
+	</ul>
+</div>
+
+
+    {% block chooser_title %}
+        <h2>Виберіть будь ласка область</h2>
+    {% endblock %}
+
+
+
+
+
+{% endblock %}

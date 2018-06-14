@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Запропонувати новину. Інформаційна система "Розумне місто".
+{% endblock title %}
+
+{% block content %}
+    <div class="content">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h4>Запропонувати новину для вашого міста</h4>
+                </div>
+                <div class="box-body">
+                    <div class="col-md-4">
+                        <p>
+                            Текст і матеріали передані через форму будуть надіслані модераторам вашого міста на розгляд.
+                            <br/>
+                            Як матеріали можна використати файли у форматах: .pdf, .doc, .docx, .odt, .rtf,
+                            .jpg, .jpeg, .png, .tif, .tiff<br/>
+                            Можна завантажити відразу декілька файлів. <br/>
+                            Загальний розмір файлів не має перевищувати 10МБ.
+                        </p>
+                    </div>
+                    <div class="col-md-8">
+                        <form id="form_upload" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="form-group">
+                                    {{ field.label_tag }}<br/>
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <label class="alert-danger">{{ error }}</label>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                            <input class="btn btn-block btn-success btn-fill" type="submit"
+                                   value="Відправити на розгляд">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

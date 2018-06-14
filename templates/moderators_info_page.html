@@ -1,0 +1,22 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}Mодератори вибраного населеного пункту. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+{% autoescape off %}{{ moders }}{% endautoescape %}
+
+
+      </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+    
+{% endblock %}

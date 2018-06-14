@@ -1,0 +1,92 @@
+{% extends 'first_page.html' %}
+
+{% block content %}
+<div class="wrap stat">
+        <section class="statistic section-block">
+        <div class="container stat-container">
+            <div class="row">
+                    <div class="col-md-12 com-sm-12 col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Результат роботи сервісу "Розумне місто" за <strong><span
+                                        id="countdays"></span></strong> днів роботи</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body no-padding">
+                                <table class="table table-condensed table-results">
+                                    <tbody>
+                                    <tr>
+                                        <td>Населених пунктів у системі</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.towns }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Зареєстрованих користувачів у системі</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.users }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Задіяних модулів системи (інструментів)</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.modules }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Додано новин</td>
+                                        <td style="width: 40px"><span class="badge bg-green">{{ statistic.news }}</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Додано заявок на усунення дефектів ЖКГ</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.issues }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Додатно петицій</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.petitions }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Віддано голосів за петиції</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.petitions_voices }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Створено опитуваннь (e-референдумів)</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.polls }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Віддано голосів за опитування</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.polls_votes }}</span></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </section>
+</div>
+
+    <script>
+        //Set the two dates
+        var millennium = new Date(2016, 01, 19) //Month is 0-11 in JavaScript
+        today = new Date()
+        //Get 1 day in milliseconds
+        var one_day = 1000 * 60 * 60 * 24
+
+        //Calculate difference btw the two dates, and convert to days
+        var diffDays = Math.ceil((today.getTime() - millennium.getTime()) / (one_day))
+
+        $("#countdays").text(diffDays)
+
+    </script>
+{% endblock %}
+
+{% block footerjs %}
+{% endblock footerjs %}

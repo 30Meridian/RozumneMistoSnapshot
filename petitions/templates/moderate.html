@@ -1,0 +1,122 @@
+{% extends 'base.html'%}
+
+{% block title %}Петиції. Інформаційна система "Розумне місто".{% endblock %}
+{% load staticfiles %}
+
+{% block content %}
+
+ <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+    <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">На модерації та на перевірці голосів</a></li>
+              <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Приховані</a></li>
+            <!--  <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Допомога</a></li>
+
+              <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>-->
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                <b>Пам'ятка по модерації доданих петицій та тих які набрали потрібну кількість голосів:</b>
+
+                <p><code>"На модерації"</code> - петиція не показується нікому окрім модераторів та адміністраторів
+                    проекту. Вам потрібно
+                    перевірити текст петиції на відповідність правилам і прийняти рішення: Опублікувати, Відхилити, Приховати, перемістити у Розглянуті.
+                </p>
+              <p>
+                  <code>"На перевірці голосів"</code> - петиція не показується нікому окрім модераторів і адміністраторів. Петиція набрала необхідну кількість голосів
+                  і чекає візуальної перевірки голосів. Після перевірки виставте статус "Відправити на розгляд" або
+                  "Повернути на збір підписів".
+              </p>
+
+                {% if petitions_moder %}
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th style="max-width: 125px;min-width: 80px;">Статус</th>
+                      <th style="max-width: 115px;min-width: 80px;">Номер</th>
+                      <th>Суть звернення</th>
+
+
+                    </tr>
+
+                    {% for petition_moder in petitions_moder %}
+
+                <tr>
+
+
+                <td class="vert-align">{{ petition_moder.status.title }}</td>
+                <td class="vert-align"><a href="../petitions/{{ petition_moder.id }}" class="title-petition_moder">01/{{ petition_moder.id }}-ЕП</a></td>
+                <td class="valign"><a href="../petitions/{{ petition_moder.id }}" class="title-petition_moder">{{ petition_moder.title|truncatewords:25 }}</a></td>
+
+
+                </tr>
+            {% endfor %}
+              </tbody></table>
+              
+              {% else %}
+                На жаль, для Вашого міста відкритих петицій поки що немає
+              {% endif %}
+              
+              
+              
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2">
+               <code>Приховані петиції</code> - це петиції, що не можуть бути показані користувачам порталу через нецензурний чи образливий контент.<br/><br/>
+
+              {% if petitions_hidden %}
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th style="width: 125px">Статус</th>
+                      <th style="width: 115px">Номер</th>
+                      <th>Суть звернення</th>
+
+
+                    </tr>
+
+                    {% for petition_hidden in petitions_hidden %}
+
+                <tr>
+
+
+                <td class="vert-align">{{ petition_hidden.status.title }}</td>
+
+                <td class="vert-align"><a href="../petitions/{{ petition_hidden.id }}" class="title-petition_hidden">01/{{ petition_hidden.id }}-ЕП</a></td>
+                <td class="valign"><a href="../petitions/{{ petition_hidden.id }}" class="title-petition_hidden">{{ petition_hidden.title|truncatewords:25 }}</a></td>
+
+
+                </tr>
+            {% endfor %}
+              </tbody></table>
+
+              {% else %}
+                Нажаль для Вашого міста відкритих петицій поки що немає
+              {% endif %}
+
+
+              </div>
+              <!-- /.tab-pane -->
+
+              <!-- /.tab-pane -->
+            </div>
+
+
+            <!-- /.tab-content -->
+          </div>
+
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+
+{% endblock %}
+

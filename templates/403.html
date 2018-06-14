@@ -1,0 +1,23 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}Доступ заборонено!{% endblock %}
+
+{% block content %}
+      <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+                <h1>Помилка 403</h1>
+
+                <h3>Доступ заборонено. {{ exception }}</h3>
+                    <h3>Поверніться на <a href="/">головну сторінку</a></h3>
+
+            </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+{% endblock %}

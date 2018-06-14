@@ -1,0 +1,85 @@
+{% extends 'base.html' %}>
+{% load static%}
+{% block title %} Додати новину. Інформаційна система "Розумне місто".{% endblock %}
+
+
+
+
+{% block content %}
+
+<section class="content-header">
+      <h1>
+    Додати новину
+
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+        <li><a href="../news/">Новини</a></li>
+        <li class="active">Додати новину</li>
+      </ol>
+</section>
+
+
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+<div class="col-md-12">
+
+<form action="../news/add" method="post" enctype="multipart/form-data" id="newsform">
+{% csrf_token %}
+
+<div class="form-group">
+	  {{ form.title.errors }}
+        Заголовок новини:
+	  {{ form.title }}
+</div>
+
+
+    <div class="form-group">
+      {{ form.shortdesc.errors }}
+       Короткий текст новини для списку новин:<br />
+	  {{ form.shortdesc }}
+     </div>
+
+    <div class="form-group">
+      {{ form.text.errors }}
+       Основний текст новини:<br />
+	  {{ form.text }}<br />
+    </div>
+
+    <div class="form-group">
+        {% if form.mainimg.errors %}
+            <ul>
+                <li style = "color: darkred"> <strong> Це поле обов'язкове  </strong> </li>
+            </ul>
+        {% endif %}
+	  {{ form.mainimg }}
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-3">
+
+    <input type="submit" class="btn btn-block btn-primary btn-lg text-center" value="Зберегти">
+
+    </div>
+</div>
+ </form>
+
+</div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+{% endblock %}
+
+    {% block footerjs %}
+        <script src="{% static 'ckeditor/ckeditor-init.js'%}"></script>
+        <script src="{% static 'ckeditor/ckeditor/ckeditor.js'%}"></script>
+    {% endblock footerjs %}

@@ -1,0 +1,27 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}Підтвердіть свою email-адресу! Інформаційна система "Розумне місто" {% endblock %}
+{% block head_top %}<meta http-equiv="refresh" content="3;url=http://rozumnemisto.org/">{% endblock %}
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+<div class="alert alert-warning alert-dismissible">
+
+                <h2><i class="icon fa fa-warning"></i> Підтвердіть свою імейл-адресу! </h2>
+                Вам потрібно перейти у свою поштову скриньку і натиснути на посилання у листі, який ми Вам надіслали. <br/>
+                Користувачі з непідтвердженими email-адресами не можуть приймати участь в голосуванні, або додавати матеріал.<br/>
+                (<a href="/">повернутись на головну</a> )
+
+              </div>
+
+            </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+{% endblock %}

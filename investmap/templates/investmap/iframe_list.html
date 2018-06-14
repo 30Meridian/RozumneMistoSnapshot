@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+{% load cache %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Інвестиційні об'єкт. Система "Розумне місто".</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta property="og:image" content="http://rozumnemisto.org/static/img/logo_fb.jpg" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/ico" />
+    <link rel="stylesheet" href="{% static 'css/lightbox.css'%}">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+
+    <script type="text/javascript" src="{% static 'plugins/jQuery/jQuery-2.1.4.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.pjax.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/livesearch.js'%}"></script>
+</head>
+<body>
+<div id="pjax-container">
+    <div class="content">
+    <div class="box">
+        <div class="box-body">
+            <div class="box">
+                <div class="box-header text-center">
+                    <h2>Інвестиційна мапа - {{ town.name }}</h2>
+                </div>
+                <div class="box-body">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs pull-right">
+                            <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">
+                                Відправити ваш проект на розгляд</a></li>
+                            <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Логістика</a></li>
+                            <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Керівництво міста</a>
+                            </li>
+                            <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Про місто</a></li>
+                            {% if allow %}
+                                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Статистика</a>
+                                </li>
+                            {% endif %}
+                            <li class="active" id="map_tab"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Мапа</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                            {% if allow %}
+                            <a class="btn btn-success btn-fill" href="{% url 'investmap:create' town.slug %}"
+                               style="margin-bottom: 5px;">
+                                Створити новий проект</a>
+                            {% endif %}
+
+                            <div class="box">
+                                <div class="box-header">
+                                    Статистика:
+                                    <table id="subscr" class="table table-condensed table-bordered">
+                                        <tbody>
+                                        {% for stat in stats_list %}
+                                            <tr>
+                                                <td>{{ stat.title }}</td>
+                                                <td class="text-center">{{ stat.param }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                             <div class="row">
+                                <div class="col-md-12" id="checkboxes">
+                                    <div class="col-md-4">
+                                        <input type="checkbox" checked id="fa">
+                                        <label for="fa">Земельні ділянки</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" checked id="fb">
+                                        <label for="fb">Нерухомість</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" checked id="cp">
+                                        <label for="cp">Інвестиційні проекти</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="map" style="width: 100%; height: 400px;">
+
+                            </div>
+                            <div id="projects_table" class="col-md-12" style="height: 0px; overflow: hidden;">
+                                <br/>
+                                <a style="float: right; margin-bottom: 3px; width: 200px;"
+                                   href="{% url 'investmap:export_to_exel' town.slug %}"
+                                   class="btn btn-success btn-fill btn-sm " id="export">
+                                <i class="fa fa-file-excel-o"></i> Експорт</a>
+                                <table class="table table-bordered table-striped" >
+                                    <thead>
+                                        <tr>
+                                            <th>Назва об'єкту</th>
+                                            <th>Адреса</th>
+                                            <th>Ціна</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Назва об'єкту</th>
+                                            <th>Адреса</th>
+                                            <th>Ціна</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        {% if allow %}
+                        <div class="tab-pane" id="tab_2">
+                            <div class="box">
+                                <div class="box-header">
+                                    <table id="subscr" class="table table-condensed table-bordered">
+                                        <tbody>
+                                        {% for stat in stats_list %}
+                                            <tr>
+                                                <td>{{ stat.title }}</td>
+                                                <td class="text-center">{{ stat.param }}</td>
+                                                    <td class="vert-align"><a
+                                                            href="{% url 'investmap:delete_stats' town.slug stat.id %}">
+                                                        <i class="fa fa-times-circle text-red"></i></a>
+                                                    </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <div class="text-right">
+                                        <button class="btn btn-middle btn-success" data-toggle="modal"
+                                                data-target="#addModal">
+                                            <i class="fa fa-plus-circle"></i> Додати новий параметр
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="tab-pane" id="tab_3">
+                            <div class="box">
+                                {% if allow %}
+                                    <div class="box-header with-border">
+                                        <a class="btn btn-success btn-fill"
+                                           href="{% url 'investmap:edit_description' town.slug 'about' %}">
+                                            <i class="fa fa fa-cog"></i> Редагувати сторінку</a>
+                                    </div>
+                                {% endif %}
+                                <div class="box-body">
+                                    {% autoescape off %}
+                                        {% if 'about' in tabs %}
+                                            {{ tabs.about.description }}
+                                        {% endif %}
+                                    {% endautoescape %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_4">
+                            <div class="box">
+                                {% if allow %}
+                                    <div class="box-header with-border">
+                                        <a class="btn btn-success btn-fill"
+                                           href="{% url 'investmap:edit_description' town.slug 'head' %}">
+                                            <i class="fa fa fa-cog"></i> Редагувати сторінку</a>
+                                    </div>
+                                {% endif %}
+                                <div class="box-body">
+                                    {% autoescape off %}
+                                        {% if 'head' in tabs %}
+                                            {{ tabs.head.description }}
+                                        {% endif %}
+                                    {% endautoescape %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_5">
+                            <div class="box">
+                                {% if allow %}
+                                    <div class="box-header with-border">
+                                        <a class="btn btn-success btn-fill"
+                                           href="{% url 'investmap:edit_description' town.slug 'logistics' %}">
+                                            <i class="fa fa fa-cog"></i> Редагувати сторінку</a>
+                                    </div>
+                                {% endif %}
+                                <div class="box-body">
+                                    {% autoescape off %}
+                                        {% if 'logistics' in tabs %}
+                                            {{ tabs.logistics.description }}
+                                        {% endif %}
+                                    {% endautoescape %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_6">
+                            <div class="box">
+                                <div class="box-header with-border">
+                                    <h4>Запропонувати інвестиційний проект</h4>
+                                </div>
+                                <div class="box-body">
+                                    <div class="col-md-4">
+                                        <p>
+                                            Текст і матеріали передані через форму будуть надіслані модераторам вашого міста на розгляд.
+                                            <br/>
+                                            Модератори можуть зв'язатися з вами через наданий телефон або пошту, прив'язану до профілю
+                                            <br/>
+                                            Як матеріали можна використати файли у форматах: .pdf, .doc, .docx, .odt, .rtf,
+                                            .jpg, .jpeg, .png, .tif, .tiff<br/>
+                                            Можна завантажити відразу декілька файлів. <br/>
+                                            Загальний розмір файлів не має перевищувати 10МБ.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        {% if not request.user.is_authenticated %}
+                                            <div class="box-body">
+                                                <div class="col-md-12">
+                                                    <br/>
+                                                    <p>Дана можливість доступна лише авторизованим користувачам.</p>
+                                                    <p><a href="{% url 'account_signup' %}">Створіть новий</a> або
+                                                       <a href="{% url 'account_login' %}">зайдіть у існуючий</a> профіль.</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        <form id="form_upload" enctype="multipart/form-data" method="post">
+                                            {% csrf_token %}
+                                            {% for field in form %}
+                                                <div class="form-group">
+                                                    {{ field.label_tag }}<br/>
+                                                    {{ field }}
+                                                    {% for error in field.errors %}
+                                                        <label class="alert-danger">{{ error }}</label>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endfor %}
+                                            {% if request.user.is_authenticated %}
+                                            <input class="btn btn-block btn-success btn-fill" type="submit"
+                                                   value="Відправити на розгляд">
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрити"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="tenderModalLabel">Додати статистику</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form id="ssAdd" action="{% url 'investmap:add_stats' town.slug %}" method="post">
+                        {% csrf_token %}
+
+                        {% for field in add_form %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field.errors }}
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success"><i class="fa  fa-plus-circle"></i> Додати
+                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i
+                                    class="fa  fa-times-circle-o"></i> Закрити
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript" src="{% static 'js/main.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/lightbox.js'%}"></script>
+<script type="text/javascript" src="{% static 'plugins/fastclick/fastclick.min.js'%}"></script>
+<script type="text/javascript">
+    var map;
+    var infoWindow;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: new google.maps.LatLng({{gmap.lon}}, {{gmap.lat}}),
+            zoom: {{ gmap.zoom }},
+            disableDoubleClickZoom: true
+        });
+
+        infoWindow = new google.maps.InfoWindow;
+    }
+
+    $(function () {
+        var checkboxes = $('#checkboxes').find('input[type=checkbox]');
+        var table_div = $('#projects_table');
+        var table_body = table_div.find('tbody');
+
+        var marker = null;
+        var markers = [];
+
+        checkboxes.click(ajax_call);
+
+        $('#map_tab').click(function (e) {
+            setTimeout(function () {
+                google.maps.event.trigger(map, 'resize');
+            }, 1000);
+        });
+
+        $(document).ready(function (e) {
+            var url = document.location.toString();
+            if (url.match('#')) {
+                $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+            }
+            ajax_call(e);
+        });
+
+
+        function ajax_call(e) {
+            $.ajax({
+                url: '/{{ town.slug }}/investmap/ajax',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    'filter': JSON.stringify(getAttrs())
+                },
+                success: function (data) {
+                    table_body.empty();
+                    markers.forEach(function (value) {
+                        value.setMap(null);
+                    });
+
+                    if (data.length > 0) {
+                        table_div.removeAttr('style');
+                    } else {
+                        table_div.css({'height': '0px', 'overflow': 'hidden'});
+                    }
+
+                    data.forEach(function (value) {
+                        table_body.append(
+                            $('<tr>').append(
+                                $('<td>').append(
+                                    $('<a>').prop('href', value['href'])
+                                        .prop('target', '_blank')
+                                        .text(value['name'])
+                                )
+                            ).append(
+                                $('<td>').text(value['address'])
+                            ).append(
+                                $('<td>').text(value['price'])
+                            )
+                        );
+
+                        if (value['type'] == 0) {
+                            marker = new google.maps.Marker({
+                                position: value['path'],
+                                map: map,
+                                title: value['name']
+                            });
+
+                        } else {
+                            marker = new google.maps.Polygon({
+                                paths: value['path'],
+                                title: value['name'],
+                                map: map
+                            });
+
+                        }
+
+                        marker.addListener('click', infoCard);
+
+                        markers.push(marker);
+
+                        function infoCard(e) {
+                            var content = $('<div>').append(
+                                $('<p>').text('Назва: ' + value['name'])
+                            ).append(
+                                $('<p>').text('Категорія: ' + value['category'])
+                            ).append(
+                                $('<p>').text('Адреса: ' + value['address'])
+                            ).append(
+                                $('<p>').text('Ціна: ' + value['price'])
+                            ).append(
+                                $('<a>').prop('href', value['href'])
+                                    .text('Сторінка проекту')
+                            );
+
+                            infoWindow.setContent(content.html());
+                            infoWindow.setPosition(e.latLng);
+
+                            infoWindow.open(map);
+                        }
+                    })
+                }
+            });
+        }
+
+        function getAttrs() {
+            var result = [];
+            checkboxes.each(function () {
+                var $this = $(this);
+                if ($this.prop('checked'))
+                    result.push($this.prop('id'));
+            });
+            return result;
+        }
+    })
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=drawing&amp;callback=initMap"></script>

@@ -1,0 +1,63 @@
+.delete-choice > input {
+    margin-left: 10px;
+    position: absolute;
+}
+
+.img-size img{
+    height: 260px;
+    /*width: 90%;*/
+}
+
+.img-size.row{
+   margin-left: 25px;
+}
+
+.choice-radio{
+    margin-left: 42.5%
+}
+
+.poll-vote {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.poll-vote .img-size {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.messages > .warning{
+    color: #fff !important;
+    background-color: #dd4b39 !important;
+    padding: 10px 15px;
+    border-radius: 5px;
+    /*display:block;*/
+    margin-top:5px;
+    margin-bottom:10px;
+    width: 60%;
+}
+
+.messages > .success{
+    color: #fff !important;
+    background-color: #3bac6b !important;
+    padding: 10px 15px;
+    border-radius: 5px;
+    /*display:block;*/
+    margin-top:5px;
+    margin-bottom:10px;
+    width: 60%;
+}
+
+.exit{
+    color: inherit
+}
+.exit:hover{
+    color: #b3b3b3;
+}
+
+.error-list > ul >li{
+    list-style: none;
+    color: #a94442;;
+}

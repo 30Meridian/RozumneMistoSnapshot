@@ -1,0 +1,113 @@
+            {%  if town %}
+
+                    {% autoescape off %}{{ menu }}{% endautoescape %}
+            {% else %}
+
+
+<li class="header">Каталог доступних модулів: </li>
+                <li >
+              <a href="/">
+                <i class="fa fa-home"></i> <span>Стартова сторінка</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="/news">
+                <i class="fa fa-newspaper-o"></i> <span>Новини міста</span>
+              </a>
+            </li>
+            <li>
+              <a href="/defects" >
+                <i class="fa fa-search"></i>
+                <span>Дефекти ЖКГ</span>
+              </a>
+
+            </li>
+
+
+             <li><a href="/petitions" ><i class="fa fa-commenting-o"></i> <span>Петиції</span></a>
+
+
+            </li>
+
+            <li class="treeview">
+              <a href="/openbudget">
+                <i class="fa  fa-pie-chart"></i> <span>Відкритий бюджет</span>
+              </a>
+            </li>
+                <li class="treeview">
+              <a href="/edata">
+                <i class="fa fa-credit-card"></i>
+                <span>Відкриті фінанси</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="/polls">
+                <i class="fa  fa-check"></i> <span>Опитування</span>
+              </a>
+            </li>
+                <li class="treeview">
+              <a href="/igov">
+                <i class="fa  fa-briefcase"></i> <span>Електронні послуги "IGov"</span>
+              </a>
+            </li>
+                <li class="treeview">
+              <a href="/prozorro">
+                <i class="fa  fa-money"></i> <span>Електронні закупівлі "Prozorro"</span>
+              </a>
+            </li>
+              <li class="treeview">
+              <a href="/donors">
+                <i class="fa fa-heartbeat"></i> <span>Донорство крові</span>
+              </a>
+            </li>
+
+            <li class="treeview">
+              <a href="/medicines">
+                <i class="fa fa-edit"></i> <span>Реєстр ліків</span>
+
+              </a>
+            </li>
+              <li class="treeview">
+              <a href="/flats">
+                <i class="fa fa-users"></i>
+	            <span>Черги на житло</span>
+
+              </a>
+            </li>
+    <li>
+              <a href="/smartroads">
+                <i class="fa fa-road"></i>
+                <span>Розумні дороги</span>
+
+              </a>
+
+            </li>
+                <li class="treeview">
+              <a href="/budgetuchastiya">
+                <i class="fa fa-object-group    "></i> <span>Бюджет участі</span>
+                  <small class="label pull-right bg-yellow">у розробці</small>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="/mvs_wanted">
+                <i class="fa fa-taxi"></i>
+                <span>Розшук поліції</span>
+                <small class="label pull-right bg-grey">план</small>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="/regions">
+                <i class="fa fa-tree"></i>
+                <span>Енергозбереження</span>
+                <small class="label pull-right bg-grey">план</small>
+              </a>
+            </li>
+         <li class="treeview">
+              <a href="/regions">
+                <i class="fa fa-legal"></i>
+                <span>Аукціон держ. майна</span>
+                <small class="label pull-right bg-grey">план</small>
+              </a>
+            </li>
+
+            {% endif %}

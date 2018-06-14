@@ -1,0 +1,73 @@
+ <!-- Custom Tabs (Pulled to the right) -->
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+              <li class=""><a href="#tab_2-2" data-toggle="tab" aria-expanded="false">Допомога</a></li>
+              <li class="active"><a href="#tab_3-2" data-toggle="tab" aria-expanded="true">Про проект</a></li>
+              <li class="pull-left header"><i class="fa fa-th"></i>Електронні послуги "IGOV"</li>
+            </ul>
+            <div class="tab-content">
+
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2-2">
+               У розвитку iGov починається нова віха, і нам дуже потрібні волонтери!
+               Зараз перед нами стоять дві важливі задачі:<br/>
+               1. Ті послуги, які було обкатано в рамках пілотів, запустити по всій Україні.<br/>
+               2. Слідкувати за тим, щоб по тим послугам, які вже запущено, не було саботажу, а також моніторити якість їхнього надання. <br/>
+
+               Приєднуйтесь до нашої групи волонтерів! По-перше, ви зробите реальній внесок у боротьбу з корупцією, підвищення ефективності держапарату та комфорт громадян. По-друге, це буде весело! :)
+                  <br/>
+                  <a href="https://docs.google.com/forms/d/1w-BR01CSicvhWSXb36CiRjHCwvp-vyPuTHBaWw1iW4U/viewform">Заповнити форму!</a>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane active" id="tab_3-2">
+                <b>Про проект "IGOV.org.ua"</b>
+
+                <p>На порталі <strong>Igov.org.ua</strong> зібрано послуги, які державні органи України надають громадянам та бізнесу. Частина послуг
+                надається через Інтернет, інша частина послуг все ще очікує на своє впровадження в електронній формі.
+                Портал зроблено волонтерською командою iGov в рамках боротьби з корупцією в Україні та вдосконалення бізнес-процесів в наших державних органах.</p>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- nav-tabs-custom -->
+
+
+{% for k in sData %}
+
+    <div class="text-center"> <h3>{{k.sName}}</h3></div>
+
+    {% for sc in k.aSubcategory %}
+        <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{sc.sName}}</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+<table>
+	<tbody>
+		<tr><td>
+			<ul>
+			{% for service in sc.aService %}
+				<li><a href="https://igov.org.ua/service/{{service.nID}}/general" target="_blank">{{service.sName}}</a></li>
+			{% endfor %}
+			</ul>
+		</td></tr>
+
+
+	</tbody>
+</table>
+
+
+            </div>
+            <!-- /.box-footer -->
+          </div>
+
+{% endfor %}
+{% endfor %}

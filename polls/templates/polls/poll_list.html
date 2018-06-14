@@ -1,0 +1,98 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block title %} Голосування. Інформаційна система "Розумне місто".{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/polls.css' %}">
+            <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+    {% if allowed %}
+    <div class="col-md-12">
+
+        <div class="box box-warning">
+
+            <div class="box-body">
+
+                <a href="{% url 'polls:create' slug %}"><button type="button" class="btn btn-block btn-primary text-center">Додати опитування</button></a>
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+<h1 class="text-center">Місцеві стратегічні питання</h1><br/>
+{% if poll_list %}
+    {% if messages %}
+        <div class="col-md-6 messages">
+            {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }} "{% endif %}>
+                {{ message }}
+                <a class="exit" style="float: right; "> <i class="fa  fa-close"></i></a></div>
+            {% endfor %}
+
+        </div>
+    {% endif %}
+
+     <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th style="width: 30px"><div class="text-center"> Номер</div></th>
+                      <th style="width: 500px"><div class="text-center"> Назва опитування</div></th>
+                      <th class="table-column"><div class="text-center"> Старт опитування</div></th>
+                      <th class="table-column"><div class="text-center"> Кінець опитування</div></th>
+                      <th><div class="text-center"> Статус</div></th>
+                    </tr>
+
+              {% for poll in poll_list.all %}
+
+                <tr>
+                    <td class="vert-align">
+                    <a href="../polls/{{poll.id}}" class='title-poll' >{{poll.id}}</a>
+                    </td>
+                  <td class="vert-align">
+
+                    <a href="../polls/{{poll.id}}" class='title-poll'>{{poll.question}}</a>
+                  </td>
+                  <td class="vert-align table-column">
+
+                    <a href="../polls/{{poll.id}}" class='title-poll'>{{poll.date_start|date:"d-m-Y"}}</a>
+                  </td>
+                 <td class="vert-align table-column">
+                    <a href="../polls/{{poll.id}}" class='title-poll'>{{poll.date_end|date:"d-m-Y"}}</a>
+                  </td>
+                    <td class="vert-align">
+                        {% if poll.archive == 0 %}
+                    <a href="../polls/{{poll.id}}" class='title-poll'>Іде голосування</a>
+                        {% else %}
+                    <a href="../polls/{{poll.id}}" class='title-poll'>Архівний</a>
+                        {% endif %}
+                  </td>
+
+
+
+                </tr>
+
+
+            {% endfor %}
+              </tbody></table>
+
+
+{% else %}
+На жаль, підняті питання для вибраного міста відсутні.
+{% endif %}
+    </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+<script>
+    $('.exit').click(function(){
+        $(this).parent().toggle();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,375 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{% block title %}Стрічка новин. Розумне місто - електронне врядування для активних міст та спроможних
+    громад{% endblock %}</title>
+
+    {% block menustream %}
+                 <li class="getoutfromtown"><a href="/{% if townslugheader %}{{townslugheader}}{% endif %}">
+                    <i class="fa fa-chevron-left"></i> <span>На головну сторінку міста</span>
+                  </a></li>
+                {% endblock menustream %}
+
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-body">
+                <div class="col-md-12">
+                    <img src="{% static 'img/banner_livestream.jpg' %}" style="max-width: 100%"/>
+                    <br/><br/>
+                    <div class="btn-group col-md-4 col-md-offset-4">
+                     <button type="button" class="btn btn-default active" id="puls-button"><i class="fa fa-heartbeat" ></i> Пульс міст</button>
+                     <button type="button" class="btn btn-default" id="statistic-button"><i class="fa fa-bar-chart"></i> Статистика сервісу</button>
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12">
+
+                    <ul id="news-feed" class="timeline">
+
+                    </ul>
+                </div>
+
+                <div class="col-md-12" id="statistic">
+                <br/>
+
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Рейтинг міст по використанню інструментів сервісу </h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body no-padding">
+                                <table class="table table-condensed">
+                                    <tbody>
+                                    <tr>
+
+                                        <td>Населений пункт</td>
+                                        <td>Присутність у сервісах</td>
+                                        <td style="width: 40px">%</td>
+                                    </tr>
+
+                                    <td><strong><a href="/yuzhny">Южне</a></strong> <a href="/towns/15"> (Одеська область)</a></td>
+                                    <td>
+                                        <div class="progress progress-xs     active">
+                                            <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-green">100%</span></td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                    <tr>
+                                        <td><strong><a href="/druzhkivka">Дружківка</a></strong>
+                                            <a href="/towns/5">(Донецька область)</a></td>
+                                        <td>
+                                            <div class="progress progress-xs  active">
+                                                <div class="progress-bar progress-bar-green" style="width: 100%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-green">100%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong><a href="/netishyn">Нетішин</a></strong>
+                                            <a href="/towns/22">(Хмельницька область)</a> </td>
+                                        <td>
+                                            <div class="progress progress-xs  active">
+                                                <div class="progress-bar progress-bar-green" style="width: 92%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-green">92%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong><a href="/zorya">Зоря</a></strong>
+                                            <a href="/towns/17">(Рівненська область)</a></td>
+                                        <td>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar progress-bar-yellow" style="width: 83%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-yellow">83%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong><a href="/ostroh">Острог</a></strong>
+                                             <a href="/towns/17">(Рівненська область)</a></td>
+                                        <td>
+                                            <div class="progress progress-xs active">
+                                                <div class="progress-bar progress-bar-yellow" style="width: 83%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-yellow">83%</span></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td><strong><a href="/berdychiv">Бердичів</a></strong>
+                                            <a href="/towns/6"> (Житомирська область)</a></td>
+                                        <td>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar progress-bar-yellow" style="width: 75%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-yellow">75%</span></td>
+                                    </tr>
+
+                                    <tr>
+
+                                        <td><strong><a href="/zhydachiv">Жидачів</a></strong>
+                                            <a href="/towns/13">(Львівська область)</a></td>
+                                        <td>
+                                            <div class="progress progress-xs  active">
+                                                <div class="progress-bar progress-bar-red" style="width: 67%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-red">67%</span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong><a
+                                                href="/zdolbuniv">Здолбунів</a></strong>
+                                            <a href="/towns/17">(Рівненська область)</a></td>
+                                        <td>
+                                            <div class="progress progress-xs  active">
+                                                <div class="progress-bar progress-bar-red" style="width: 67%"></div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-red">67%</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Статистика сервісу "Розумне місто" за <strong><span
+                                        id="countdays"></span></strong> днів роботи</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body no-padding">
+                                <table class="table table-condensed">
+                                    <tbody>
+                                    <tr>
+                                        <td>Населених пунктів у системі</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.towns }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Зареєстрованих користувачів у системі</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.users }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Задіяних модулів системи (інструментів)</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.modules }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Додано новин</td>
+                                        <td style="width: 40px"><span class="badge bg-green">{{ statistic.news }}</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Додано заявок на усунення дефектів ЖКГ</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.issues }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Додатно петицій</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.petitions }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Віддано голосів за петиції</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.petitions_voices }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Створено опитуваннь (e-референдумів)</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.polls }}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Віддано голосів за опитування</td>
+                                        <td style="width: 40px"><span
+                                                class="badge bg-green">{{ statistic.polls_votes }}</span></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                    <script>
+                        //Set the two dates
+                        var millennium = new Date(2016, 01, 19) //Month is 0-11 in JavaScript
+                        today = new Date()
+                        //Get 1 day in milliseconds
+                        var one_day = 1000 * 60 * 60 * 24
+
+                        //Calculate difference btw the two dates, and convert to days
+                        var diffDays = Math.ceil((today.getTime() - millennium.getTime()) / (one_day))
+
+                        $("#countdays").text(diffDays)
+
+                    </script>
+
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+    </section><!-- /.content -->
+
+{% endblock %}
+
+{% block footerjs %}
+    <script>
+        $(function () {
+            var end_date = new Date();
+            var $window = $(window);
+            var $document = $(document);
+            var $news_feed = $('#news-feed');
+
+            function bind() {
+                $window.scroll(function () {
+                    if($window.scrollTop() + $window.height() > $document.height() - 100) {
+                        ajaxRequest(bind);
+                        $window.unbind('scroll');
+                    }
+                })
+            }
+
+            function createFeed(data) {
+                var flag = true;
+                console.log('Triggered');
+                data['value'].forEach(function (value) {
+                    if (value['type'] == 1) {
+                        $news_feed.append(
+                                $('<li>').attr('class', 'timelabel').append(
+                                        $('<span>').attr('class', 'bg-gray').append(value['date'])
+                                ));
+                    }
+                    else if (value['type'] == 2) {
+                        $news_feed.append(
+                                $('<li>').append(
+                                        $('<i>').attr('class', value['class'])
+                                ).append(
+                                        $('<div>').attr('class', 'timeline-item').append(
+                                                $('<span>').attr('class', 'time').append(
+                                                        $('<i>').attr('class', 'fa fa-clock-o').append(' ' + value['time'])
+                                                )
+                                        ).append(
+                                                $('<div>').attr('class', 'timeline-header').append(
+                                                        $('<div>').attr('class', 'btn-group').append(
+                                                                $('<a>').attr('class', 'btn btn-default btn-xs')
+                                                                        .attr('href', '/'+value['town_slug']+'/')
+                                                                        .append(value['town_name'])
+                                                        ).append(
+                                                                $('<a>').attr('class', 'btn btn-default btn-xs')
+                                                                        .attr('href', '/'+value['town_slug']+'/' + value['module_link'])
+                                                                        .append(value['module_name'])
+                                                        )
+                                                )
+                                        ).append(
+                                                $('<div>').attr('class', 'timeline-body').attr('style', 'overflow: auto')
+                                                        .append(
+                                                                $('<div>').attr('class', 'col-md-2').append(
+                                                                        $('<a>').attr('href', '/'+value['town_slug']+'/' + value['module_link'] + value['id']).append(
+                                                                                $('<img>').attr('src', value['image'] || '/static/img/empty.gif').attr('class', 'margin')
+                                                                                        .attr('style', 'max-width: 100%; max-height: 100%;')
+                                                                                        .error(function () {
+                                                                                            $(this).attr('src', '/static/img/empty.gif')
+                                                                                        })
+                                                                        )
+                                                                )
+                                                        ).append(
+                                                                $('<div>').attr('class', 'col-md-10').append(
+                                                                        $('<p>').attr('style', 'font-size: 14px').append(value['status'])
+                                                                ).append(
+                                                                        $('<a>').attr('href', '/'+value['town_slug']+'/' + value['module_link'] + value['id'])
+                                                                                .attr('style', 'font-size: 18px;')
+                                                                                .append(value['header'])
+                                                                ).append(
+                                                                        $('<p>').append(
+                                                                                $('<small>').append(value['content'])
+                                                                        )
+
+                                                )
+                                                )
+                                        )
+{#                                                .append(#}
+{#                                                $('<div>').attr('class', 'timeline-footer').append(#}
+{#                                                        $('<a>').attr('href', value['town_slug']+'/' + value['module_link'] + value['id'])#}
+{#                                                                .attr('class', 'btn btn-default btn-xs')#}
+{#                                                                .append('Ознайомитись')#}
+{#                                                )#}
+{#                                        )#}
+                                )
+                        )
+                    } else {
+                        /*No more news*/
+                        flag = false;
+                    }
+                });
+
+                end_date = new Date(data['end_date']);
+                if (flag) bind();
+                else {
+                    console.log('Unbinded');
+                    $news_feed.append(
+                            $('<li>').attr('class', 'time-label').append(
+                                    $('<span>').attr('class', 'bg-red').append('Схоже ви досягли останніх подій.\n Далі шляху немає')
+                            )
+                    )
+                }
+
+                $('#image').remove()
+            }
+
+            function ajaxRequest() {
+                $news_feed.append('<div id="image" class="text-center"><i class="fa fa-refresh fa-spin" style="font-size: 65px; color: #00733e"></i></div>');
+                $.ajax({
+                    url: '/lastnews',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        "date": end_date.toJSON()
+                    },
+                    success: function (response) {
+                        createFeed(response);
+                    }
+                })
+            }
+            
+            function taggleStatisticLiveStream() {
+                $('#puls-button').click(function(){
+                    $('#statistic').hide();
+                    $('#news-feed').show();
+                    $('#puls-button').removeClass('active').addClass('active');
+                    $('#statistic-button').removeClass('active');
+                });
+
+                $('#statistic-button').click(function() {
+                    $('#news-feed').hide();
+                    $('#statistic').show();
+                    $('#statistic-button').removeClass('active').addClass('active');
+                    $('#puls-button').removeClass('active');
+                })
+            }
+
+            $document.ready(function () {
+                $('#statistic').hide();
+                ajaxRequest();
+                taggleStatisticLiveStream();
+            });
+
+        });
+    </script>
+{% endblock footerjs %}

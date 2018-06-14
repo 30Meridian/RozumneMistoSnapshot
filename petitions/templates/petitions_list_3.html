@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Петиції. Відхилені модератором. Інформаційна система "Розумне місто".{% endblock %}
+{% load staticfiles %}
+
+
+{% block content %}
+                  <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+{% if petitions.object_list %}
+
+    <div class="box">
+        <div class="box-header with-border"><h3 class="box-title">Петиції, що відхилені модератором:</h3></div>
+                <div class="box-body">
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th  style="width: 65px">Ілюстрація</th>
+                      <th style="width: 115px">Номер</th>
+                      <th>Суть звернення</th>
+
+                    </tr>
+
+                    {% for petition in petitions.object_list %}
+
+                <tr>
+                    <td class="vert-align">
+                        {% if petition.image.thumbnail%}
+                        <a href="../../petitions/{{ petition.id }}" class="title-petition"><img src="{{ MEDIA_URL }}{{ petition.image.thumbnail }}" width="80px"></a>
+                        {% else %}
+                        <a href="../../petitions/{{ petition.id }}" class="title-petition"><img src="{{ MEDIA_URL }}/petitions/empty.gif" width="80px"></a>
+                        {% endif %}
+                    </td>
+                  <td class="vert-align"><a href="../../petitions/{{ petition.id }}" class="title-petition">01/{{ petition.id }}-ЕП</a></td>
+                  <td class="valign" style="word-break: break-all;word-wrap:break-word;"><a href="../../petitions/{{ petition.id }}" class="title-petition">{{ petition.title|truncatewords:25 }}</a></td>
+
+
+                </tr>
+            {% endfor %}
+              </tbody></table>
+            </div>
+
+</div>
+    <div class="col-md-5 col-md-offset-3">
+  {% if petitions.object_list >= 10 %}   {{ petitions.render }}{% endif %}
+    </div>
+
+{% else %}
+    На жаль, для Вашого міста відкритих петицій поки що немає
+{% endif %}
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+{% endblock %}
+

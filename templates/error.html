@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title %}Помилка. Інформаційна система "Розумне місто".{% endblock %}
+{% block head_top %}<meta http-equiv="refresh" content="4;url=http://rozumnemisto.org/">{% endblock %}
+{% block content %}
+ <section class="content">
+     <!-- Default box -->
+          <div class="box">
+                <div class="box-body">
+                    <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> {{ desc }}</h4>
+                    Якщо вам не зрозумілі причини помилки - зверніться в чат підтримки або на пошту office@rozumnemisto.org
+                </div>
+          </div><!-- /.box-body -->
+          </div><!-- /.box -->
+ </section><!-- /.content -->
+
+{% endblock %}

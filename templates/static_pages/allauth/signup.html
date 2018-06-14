@@ -1,0 +1,80 @@
+{% extends "first_page.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load socialaccount %}
+{% block head_title %}{% trans "Signup" %}.  Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+    <div class="inner">
+    <!-- Main content -->
+    <section class="content registration-section">
+
+        <!-- Default box -->
+        <div class="box">
+
+            <div class="box-body">
+                <br/>
+                <div class="col-md-12 text-center">
+                    <div class="btn btn-app">
+                        <i class="fa fa-user-plus"></i>Реєстрація
+                    </div>
+                    <a href="{% url 'first_page:login' %}" class="btn btn-app">
+                        <i class="fa fa-power-off"></i> Увійти
+                    </a>
+                    <h1>{% trans "Sign Up" %}</h1>
+
+                    <div class="callout callout-warning">
+                        <h4>Вказуйте свої реальні дані. Після реєстрації Вам потрібно підтвердити свій email</h4>
+
+                        <p>Після завершення реєстрації Ви автоматично отримаєте лист від системи з посиланням. Перейдіть
+                            по ньому і Ваш обліковий запит у системі буде активовано.</p>
+                    </div>
+                </div>
+                <form class="signup" id="signup_form" method="post" action="{% url 'first_page:signup' %}">
+                    {% csrf_token %}
+                    {{ form.error_list }}
+                    {% for field in form %}
+                        <div class="form-group" {{ field.html_name }}> {% if field.errors %}<!--has-error-->{% endif %}
+                            <label {{ field.label }}>{{ field.label }} {% if field.field.required %}* {% endif %}
+                                {% if field.errors %}({{ field.errors.as_text }}){% endif %} </label><br/>
+                            {{ field }}
+                            {% if field.errors %}{{ field.errors.as_text }}{% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="perinfo" name="perinfo">
+                                з <a href="{% url 'first_page:rules' %}"> правилами</a> сервісу "Розумне місто" ознайомлений(на) та даю згоду
+                                на
+                                <a href="/user_agreement" target="_blank">обробку персональних даних</a>
+                            </label>
+                        </div>
+                    </div>
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+
+                    <div class="text-center">
+                        <button class="btn  btn-primary btn-lg" type="submit"><i
+                                class="fa fa-paper-plane"></i> {% trans "Sign Up" %} </button>
+                    </div>
+                </form>
+            </div><!-- /.box-body -->
+
+        </div><!-- /.box -->
+
+    </section><!-- /.content -->
+    </div>
+    <script type="text/javascript">
+        $(id_towns).attr("multiple", false);
+    </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+{% endblock %}
+{% block footerjs %}
+{% endblock footerjs %}

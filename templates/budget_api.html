@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Відкритий бюджет</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta property="og:image" content="http://rozumnemisto.org/static/img/logo_fb.jpg"/>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/ico"/>
+    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=1.4">
+
+    <script src="{% static 'plugins/chartjs/Chart.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/jQuery/jQuery-2.1.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.pjax.min.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'js/livesearch.js' %}"></script>#}
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="application/javascript">
+        $('.togg-budget').nextUntil('tr.togg-budget').toggle();
+
+        $('.togg-budget').click(function(){
+           $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
+            $(this).nextUntil('tr.togg-budget').slideToggle(100, function(){
+            });
+        });
+    </script>
+
+</head>
+<body>
+    {% autoescape off %}{{ openbudget }}{% endautoescape %}
+</body>
+</html>

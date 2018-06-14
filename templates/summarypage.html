@@ -1,0 +1,283 @@
+{% extends 'base.html' %}
+ {% load staticfiles %}
+{% block title %}Розумне місто {{ town.name }}. Електронне врядування для активних міст та спроможних громад.{% endblock %}
+
+{% block content %}
+                  <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+{% for town_banner in town_banners %}
+<img src="{{ MEDIA_URL }}{{ town_banner.imgsource }}" style="max-width: 100%">
+<br/>
+{% endfor %}
+    <br/>
+
+{% if news %}
+
+    <div class="box">
+        <div class="box-header with-border"><h3 class="box-title">Останні новини міста:</h3></div>
+                <div class="box-body">
+                  <table class="table table-bordered table-hover">
+                    <tbody>
+
+                    {% for n in news %}
+
+                  <tr>
+                  <td class="vert-align" width="80px"><img src="{{ n.mainimg.thumbnail.url }}" width="80px"></td>
+                  <td style="word-break: break-all;word-wrap:break-word;"><h4><a href="../news/{{ n.id }}" class="title-article">{{ n.title|truncatewords:50 }}</a></h4>{{ n.shortdesc|truncatewords:50 }}</td>
+
+                      <td class="vert-align table-column" style="max-width: 150px"><span class="label label-success"><i class="fa fa-clock-o"></i> {{n.datetime_publish|date:" d/m/Y h:m"  }}</span></td>
+
+                  </td>
+                </tr>
+            {% endfor %}
+              </tbody></table>
+            </div>
+    <div class="box-footer">
+
+    <div class="btn-group pull-right ">
+
+                       <a href="../news/" class="btn btn-default">Читати усі новини</a>
+
+    </div>
+    </div>
+
+</div>
+
+{% endif %}
+
+
+
+
+ {% if petitions%}
+
+    <div class="box">
+        <div class="box-header with-border"><h3 class="box-title">Останні петиції, що збирають голоси:</h3></div>
+                <div class="box-body">
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th  style="width: 65px">Ілюстрація</th>
+                      <th style="width: 115px">Номер</th>
+                      <th>Суть звернення</th>
+                      <th class="table-column" style="width: 125px">Підписів</th>
+                    </tr>
+
+                    {% for petition in petitions %}
+
+                <tr>
+                    <td class="vert-align">
+                        {% if petition.image.thumbnail%}
+                        <a href="../petitions/{{ petition.id }}" class="title-petition"><img src="{{ MEDIA_URL }}{{ petition.image.thumbnail }}" width="80px"></a>
+                        {% else %}
+                        <a href="../petitions/{{ petition.id }}" class="title-petition"><img src="{{ MEDIA_URL }}/petitions/empty.gif" width="80px"></a>
+                        {% endif %}
+                    </td>
+                  <td class="vert-align"><a href="../petitions/{{ petition.id }}" class="title-petition">01/{{ petition.id }}-ЕП</a></td>
+                  <td class="valign"><a href="../petitions/{{ petition.id }}" class="title-petition">{{ petition.title|truncatewords:25 }}</a></td>
+                 <td class="vert-align table-column"><span class="badge bg-green"><a href="../petitions/{{ petition.id }}" class="title-petition">{{ petition.vote_count }}</a></span><br />
+                      <div class="progress progress-xs">
+                      <div class="progress-bar progress-bar-success" style="width:{{ petition.petitionsvoices_set.count }}%"></div>
+                    </div>
+
+                  </td>
+
+
+                </tr>
+            {% endfor %}
+              </tbody></table>
+            </div>
+    <div class="box-footer">
+
+    <div class="btn-group pull-right ">
+                       <a href="../petitions/add" class="btn btn-default">+ Додати петицію</a>
+                       <a href="../petitions/status/2" class="btn btn-default">Активні</a>
+                       <a href="../petitions/status/6" class="btn btn-default">Розглядаються</a>
+                       <a href="../petitions/status/4" class="btn btn-default">Розглянуті</a>
+    </div>
+
+</div>
+
+</div>
+
+{% else %}
+    <br/>
+{% endif %}
+
+    {% if issues %}
+
+
+ <div class="box">
+        <div class="box-header with-border"><h3 class="box-title">Останні заявки на усунення дефектів ЖКГ:</h3></div>
+                <div class="box-body">
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th  style="width: 65px">Ілюстрація</th>
+                      <th style="width: 115px">Номер заявки</th>
+                      <th>Суть заявки</th>
+                      <th class="table-column" style="width: 115px">Статус</th>
+                    </tr>
+
+{% for issue in issues|slice:":3" %}
+                <tr>
+                    <td class="vert-align">
+                        {% if issue.issuefiles_set.all.0.document_ref.type_name == "image" %}
+					 <a href="../defects/{{ issue.id  }}" id="defectitem"><img src="/media/defects/thumbnail.{{issue.issuefiles_set.all.0.document_ref.file_name}}"  alt="Зображення дефекту" width="100px" /></a>
+                        {% else %}
+                            <a href="../defects/{{ issue.id  }}" id="defectitem"><img src="{{ MEDIA_URL }}/defects/empty.gif" width="80px"></a>
+
+					    {% endif %}
+                    </td>
+
+                  <td class="vert-align">
+                  <a href="../defects/{{ issue.id  }}" id="defectitem">№{{ issue.id }}</a><br/>
+
+                  </td>
+                  <td class="valign">
+                   <b><a href="../defects/{{ issue.id  }}" id="defectitem">{{issue.title|truncatewords:30}}</a></b><br/>
+    	            <i class="fa fa-map-marker"></i>
+					<a href="../defects/{{ issue.id  }}" id="defectitem">{{issue.address}}</a>
+                  </td>
+                  <td class="vert-align table-column">
+                      <a href="../defects/{{ issue.id  }}" id="defectitem">
+                        {% if issue.last_issue.status == 1 %}
+                        <span class="badge bg-yellow">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 2 %}
+                        <span class="badge bg-green">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 4 %}
+                        <span class="badge bg-aqua">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 5 %}
+                        <span class="badge bg-gray">{{issue.last_issue.statusName}}</span>
+                        {% else%}
+                        <span class="badge bg-gray">{{issue.last_issue.statusName}}</span>
+                          {% endif %}
+
+                    </a>
+                  </td>
+
+                </tr>
+
+            {% endfor %}
+              </tbody></table>
+            </div>
+
+
+<div class="box-footer">
+
+    <div class="btn-group pull-right">
+                       <a href="../defects/add" class="btn btn-default">+ Додати дефект</a>
+                      <a href="../defects/" class="btn btn-default">Реєстр дефектів</a>
+
+     </div>
+
+              </div>
+</div>
+    {% else %}
+   <br/>
+
+
+
+{% endif %}
+
+
+ {% if polls %}
+     <div class="box">
+   <div class="box-header with-border"><h3 class="box-title">Останні опитування:</h3></div>
+  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th style="width: 30px"><div class="text-center"> Номер</div></th>
+                      <th style="width: 500px"><div class="text-center"> Назва опитування</div></th>
+                      <th class="table-column"><div class="text-center"> Старт опитування</div></th>
+                      <th class="table-column"><div class="text-center"> Кінець опитування</div></th>
+                      <th><div class="text-center"> Статус</div></th>
+                    </tr>
+
+              {% for poll in polls %}
+
+                <tr>
+                    <td class="vert-align">
+                    <a href="../polls/{{poll.id}}" class='title-poll'>{{poll.id}}</a>
+                    </td>
+                  <td class="vert-align">
+
+                    <a href="../polls/{{poll.id}}" class='title-poll'>{{poll.question}}</a>
+                  </td>
+                  <td class="vert-align table-column">
+
+                    <a href="../polls/{{poll.id}}" class='title-poll'>{{poll.date_start|date:"d-m-Y"}}</a>
+                  </td>
+                 <td class="vert-align table-column">
+                    <a href="../polls/{{poll.id}}" class='title-poll'>{{poll.date_end|date:"d-m-Y"}}</a>
+                  </td>
+                    <td class="vert-align">
+                        {% if poll.archive == 0 %}
+                    <span class="badge bg-green"><a href="polls/{{poll.id}}" class='title-poll'>Іде голосування</a></span>
+                        {% else %}
+                    <a href="../polls/{{poll.id}}" class='title-poll'>Архівний</a>
+                        {% endif %}
+                  </td>
+
+
+
+                </tr>
+
+
+            {% endfor %}
+              </tbody></table>
+
+</div>
+
+    {% else %}
+   <br/>
+
+{% endif %}
+
+
+
+ </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+        </section>
+
+<div class="modal fade login-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-main">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="myModalLabel">Ви зайшли, як анонімний користувач.</h2>
+      </div>
+      <div class="modal-body">
+       <div class="modal-text">
+           Реєстрація дозволить Вам користуватися сервісами на нашій платформі безкоштовно та змінювати своє місто на краще.
+        </div>
+      </div>
+      <div class="modal-footer">
+         <div class="tab-content">
+
+              <button type="button" id="without-reg" class="close" data-dismiss="modal" aria-label="Close" style="float: left">Дякую, продовжити без реєстрації</button>
+
+              <a href="/accounts/login/"><button type="button" class="close">Зареєструватись</button></a>
+
+         </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+    $(document).ready( function () {
+        {% if not request.user.is_authenticated and not 'message' in request.session %}
+           $('#myModal').modal();
+
+        {% endif %}
+    });
+    $('#without-reg').click(function () {
+        $.ajax({
+            type: "GET",
+            url : "{% url 'add_message' %}"
+        });
+    })
+    </script>
+{% endblock %}

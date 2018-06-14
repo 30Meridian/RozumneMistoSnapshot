@@ -1,0 +1,45 @@
+{% extends 'base.html'|pjax:request %}
+{% load staticfiles %}
+{% block title %}Приєднатися до проекту! Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+<div class="text-center"><h2>Станьте частиною реформ в Україні, приєднуйтесь до нашої команди!</h2></div>
+
+<div class="text-center"><h3>Для того, щоб запустити сервіс у Вашому населеному пункті, Вам необхідно зробити лише 4 кроки:</h3></div> <br/>
+<strong>1</strong> – <a href="contacts.html">зв’язатися</a> з нашим проект-менеджером та отримати відповіді на запитання, що виникли у Вас.
+                <br/><br/>
+<strong>2</strong> – підписати <a href="https://drive.google.com/drive/folders/0B15WbaoXIMn4YjFZOWg2LVA1Skk?usp=sharing/" target="_blank">меморандум</a>
+                про співпрацю між ГО «Розумне місто» та представником
+                місцевого апарату влади. Меморандум може бути трьохстороннім: ГО «Розумне місто», місцева влада та громадська організація, з якою Ви співпрацюєте.<br/><br/>
+<strong>3</strong> – заповнити  <a href="https://drive.google.com/file/d/0Bze-38nhjXwrMjdMb2h4Qk54ZXc/view?usp=sharing"
+                  target="_blank">заявки</a> на підключення модулів, необхідних Вашому місту.<br/><br/>
+<strong>4</strong> – надати можливість нашим спеціалістам провести навчання та сертифікацію Ваших представників.<br/> <br/>
+
+                <div class="text-center"><h3>Підключитись легко і швидко!</h3></div>
+                <img src="{% static 'img/infografics/4steps-rgb.jpg' %}" width="960px">
+
+                <br/><div class="text-center"><h3>Чому саме ми?</h3></div> <br/>
+                <img src="{% static 'img/infografics/why_we.jpg' %}" width="960px">
+
+
+                <div class="text-center"><h3>Основні модулі системи які ви можете підключити</h3></div> <br/>
+                <img src="{% static 'img/infografics/moduls.jpg' %}" width="960px">
+
+               <div class="text-center"><h3>Інтеграці системи</h3></div> <br/>
+                <img src="{% static 'img/infografics/viget.jpg' %}" width="960px">
+
+            </div><!-- /.box-body -->
+        </div>
+
+
+        </section><!-- /.content -->
+
+{% endblock %}

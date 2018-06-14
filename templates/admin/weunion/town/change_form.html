@@ -1,0 +1,173 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; {% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+&rsaquo; {% if add %}{% trans 'Add' %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}<div id="content-main">
+
+
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+    {% block object-tools-items %}
+    <li>
+        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+        <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
+    </li>
+    {% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
+    {% endblock %}
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}
+<form name="townForm" {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
+
+
+    <div>
+{% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
+{% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
+{% if save_on_top %}{% block submit_buttons_top %}{% submit_row %}{% endblock %}{% endif %}
+{% if errors %}
+    <p class="errornote">
+    {% if errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+    </p>
+    {{ adminform.form.non_field_errors }}
+{% endif %}
+
+{% block field_sets %}
+{% for fieldset in adminform %}
+  {% include "admin/weunion/town/includes/fieldset.html" %}
+{% endfor %}
+{% endblock %}
+
+{% block after_field_sets %}{% endblock %}
+
+{% block inline_field_sets %}
+{% for inline_admin_formset in inline_admin_formsets %}
+    {% include inline_admin_formset.opts.template %}
+{% endfor %}
+{% endblock %}
+
+{% block after_related_objects %}{% endblock %}
+
+{% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
+
+{% block admin_change_form_document_ready %}
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $('.add-another').click(function(e) {
+                    e.preventDefault();
+                    showAddAnotherPopup(this);
+                });
+            {% if adminform and add %}
+                $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus()
+            {% endif %}
+            });
+        })(django.jQuery);
+    </script>
+{% endblock %}
+
+{# JavaScript for prepopulated fields #}
+{% prepopulated_fields_js %}
+
+</div>
+</form>
+
+</div>
+
+    <script>
+    $(document).ready(function() {
+        var dict_of_names = {
+            additional_items: "Додаткові пункти меню",
+            petition_to: "Петиція до",
+            igov: "Електронні послуги",
+            donor: "Донорство крові",
+            flats: "Черги на житло",
+            medicines: "Реєстр ліків",
+            edata: "Відкриті фінанси",
+            moderators: "Регіональні модератори"
+        };
+
+        count_of_not_empty = 0;
+        for (var i=0; i <= 50; i++){
+            var name = "#id_additions-"+i+"-type";
+            key = $(name).val();
+            delete dict_of_names[key];
+            if (key){
+                count_of_not_empty++;
+            }
+        }
+
+        var to_remove  = count_of_not_empty+Object.keys(dict_of_names).length;
+        for (var i=to_remove; i<=50; i++){
+            var name = "#additions-"+i;
+            $(name).toggle()
+        }
+
+        for ( key in dict_of_names){
+            var type = "#id_additions-"+count_of_not_empty+"-type";
+            var title = "#id_additions-"+count_of_not_empty+"-title";
+            var body = "#id_additions-"+count_of_not_empty+"-body";
+            $(type).val(key).prop("readonly", true);
+            $(title).val(dict_of_names[key]).prop("readonly", true);
+            if (key=='petition_to'){
+                 $(body).attr("placeholder", "Введіть назву організації, якій призначається. (У родовому відмінку)");
+            }
+            else if(key=='edata'){
+                $(body).attr("placeholder", "Кількість днів, за які завантажуються платежі по замовчуванню. (Якщо ви не вкажете то буде встановлено 7 днів)");
+            }
+            count_of_not_empty++;
+        }
+        if (!$('#id_townallowedmodules_set-0-module').val()){
+            $('#id_townallowedmodules_set-0-module').val(4);
+            $('#id_townallowedmodules_set-1-module').val(6);
+            $('#id_townallowedmodules_set-2-module').val(14);
+            $('#id_townallowedmodules_set-3-module').val(15);
+
+{#            $('#id_townallowedmodules_set-0-active').toggle();#}
+{#            $('#id_townallowedmodules_set-1-active').toggle();#}
+{#            $('#id_townallowedmodules_set-2-active').toggle();#}
+{#            $('#id_townallowedmodules_set-3-active').toggle();#}
+
+            $('#id_townallowedmodules_set-4-module').val(1);
+            $('#id_townallowedmodules_set-5-module').val(2);
+            $('#id_townallowedmodules_set-6-module').val(3);
+            $('#id_townallowedmodules_set-7-module').val(5);
+{#            $('#id_townallowedmodules_set-8-module').val(7);#}
+            $('#id_townallowedmodules_set-8-module').val(8);
+            $('#id_townallowedmodules_set-9-module').val(13);
+{#            $('#id_townallowedmodules_set-11-module').val(16);#}
+{#            $('#id_townallowedmodules_set-12-module').val(18);#}
+
+        }
+        for (i = 0; i <= 12; i++){
+            module_id = '#id_townallowedmodules_set-' + i + '-module';
+            active_id = '#id_townallowedmodules_set-' + i + '-active';
+            if ($(module_id).val()==4 || $(module_id).val()==6 || $(module_id).val()==14 || $(module_id).val()==15){
+                $(active_id).toggle();
+            }
+        }
+
+    });
+    </script>
+{% endblock %}

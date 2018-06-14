@@ -1,0 +1,624 @@
+{% extends 'first_page.html' %}
+{% load static %}
+
+{% block menu %}
+    <ul class="main-menu-list">
+        <li class="dropdown">
+            <a href="projects_about" class="menu-item">Проект <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#meta"><span><img src="" alt=""></span>Мета проекту</a></li>
+                <li><a href="#mikroservices">Наші мікросервіси</a></li>
+                <li><a href="#citizens">Мешканцям</a></li>
+                <li><a href="#goverment">Владі</a></li>
+                <li><a href="#connect">Підключити місто</a></li>
+            </ul>
+        </li>
+        <li><a href="{% url 'first_page:team' %}" class="menu-item">Команда</a></li>
+        {#                      <li><a class="menu-item" href="#">Результати</a></li>#}
+        <li><a href="{% url 'first_page:results' %}" class="menu-item">Результати</a></li>
+        <li><a href="{% url 'first_page:contacts' %}" class="menu-item">Контакти</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <div class="clearfix"></div>
+    <div class="parallax_section5" id="meta">
+      <div class="container">
+        <strong>Мета проекту</strong>
+        <p class="less2">«Розумне Місто» – всеукраїнська інтернет-платформа електронного врядування та електронної демократії для розбудови зрілих громад.</p>
+        <p> Це інструмент розвитку партнерства між владою, громадянами та бізнесом. Їй притаманні унікальність, відкритість та незалежність.</p>
+        <p>Мета проекту - створення системи РОЗУМНОГО УПРАВЛІННЯ містами та громадами.</p>
+      </div>
+    </div>
+    <div class="features_sec3" >
+      <div class="container">
+        <div class="one_fourth">
+          <div class="box two">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-map"></span> </div>
+            <h5>Територія проекту</h5>
+            <p>Всі міста та громади України</p>
+          </div>
+          <!-- end section -->
+          <div class="box two">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-book-open"></span> </div>
+            <h5>Досвід</h5>
+            <p>Наші фахівці взяли участь у багатьох мастшабних всеукраїнських програмах</p>
+          </div>
+          <div class="box two last">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-organization"></span> </div>
+            <h5>Інтеграція</h5>
+            <p>Ми не конкуруємо з іншими проектами. Ми інтегруємо та об’єднуємо кращі рішення</p>
+          </div>
+          <!-- end section -->
+        </div>
+        <div class="one_fourth">
+          <div class="box two">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-pin"></span> </div>
+            <h5>Локалізація рішень</h5>
+            <p>Всі сервіси зібрані на одному порталі і для кожної громади налаштовані окремо </p>
+          </div>
+          <!-- end section -->
+          <div class="box two">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-globe  "></span> </div>
+            <h5>Міжнародна співпраця</h5>
+            <p>Ми розрабляємо наші сервіси з врахуванням міжнародного досвіду</p>
+          </div>
+          <!-- end section -->
+          <div class="box two last">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-cup"></span> </div>
+            <h5>Простота</h5>
+            <p>Легкість та зрозумілість сервісів для користувачів</p>
+          </div>
+          <!-- end section -->
+        </div>
+        <div class="one_fourth">
+          <div class="box two">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-graph"></span> </div>
+            <h5>Гнучкість</h5>
+            <p> Мікросервіси легко налаштовуються для потреб громади</p>
+          </div>
+          <!-- end section -->
+          <div class="box two last">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-graduation"></span> </div>
+            <h5>Експертиза</h5>
+            <p> Ми об’єднуємо експертів з місцевого самоврядування, обліку та фінансів, права, ЖКГ тощо</p>
+          </div>
+          <!-- end section -->
+        </div>
+        <div class="one_fourth last">
+          <div class="box two">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-like"></span> </div>
+            <h5>Сервіс найкращих практик</h5>
+            <p>За допомогою наших сервісів створюються найкращі практики управління громадами</p>
+          </div>
+          <!-- end section -->
+          <div class="box two last">
+            <div class="ciref outline-outward"> <span aria-hidden="true" class="icon-chart"></span> </div>
+            <h5>Сталий розвиток</h5>
+            <p>Спрямованість сервісів на встановлення балансу</p>
+          </div>
+          <!-- end section -->
+        </div>
+      </div>
+      <!-- <div class="one_full stcode_title11">
+            <h2>Мета проекту
+               <em>«Розумне Місто» – всеукраїнська інтернет-платформа електронного врядування та електронної демократії для розбудови зрілих громад. Це інструмент розвитку партнерства між владою, громадянами та бізнесом. Їй притаманні унікальність, відкритість та незалежність.
+              </em>
+              <em>
+                Мета проекту - створення системи РОЗУМНОГО УПРАВЛІННЯ містами та громадами.
+              </em>
+            </h2>
+          </div> -->
+      <!-- end section -->
+    </div>
+    <div class="clearfix"></div>
+    <div class="parallax_section6" id="services">
+      <div class="container">
+        <h2 class="first-h2">Наші мікросервіси</h2>
+        <div class="box hexagon-list">
+          <div class="hexagon">
+            <img src="{% static 'new-version/images/svg/defects.svg'%}" alt="">
+            <h6>Дефекти ЖКГ</h6>
+            <span class="grayd">“Модуль «Дефекти ЖКГ» - зроби місто кращім: додай проблему, познач на карті, додай фото. Інше робить відповідальна влада. Модуль працює там, де є відповідальна влада, яка прислуховується до потреб мешканців. Крок за кроком місто стає комфортнішим, чистішим та безпечнішим. Влада показує результат та отримує повагу мешканців. Гарними справами прославитися можно.
+            <br />
+                Ми допомагаємо містам автоматизувати цей процес повністю.
+                <br />
+                Підключено у {{ cities_allowed.defects }} містах.</span>
+          </div>
+          <div class="hexagon">
+            <img src="{% static 'new-version/images/svg/petition1.svg'%}" alt="">
+            <h6>Петиції</h6>
+            <span class="grayd">“Модуль “Петиції” - ефективний інструмент для прояву громадської активності і ідентифікації як проблем, так і корисних для міста/громади проектів. Розроблений за вимогами законодавства. Отримав нагороду DemLab як кращій проект у номінації “Інструменти е-участі”. Влада показує діалог, реагує на запити та отримує повагу мешканців.
+                <br />
+                Підключено у {{ cities_allowed.petitions }} містах.</span>
+          </div>
+          <div class="hexagon">
+            <img src="{% static 'new-version/images/svg/e-service.svg'%}" alt="">
+            <h6>Електронні послуги</h6>
+            <span class="grayd">“Модуль «Електронні послуги» - доступ до отримання державних електронних сервісів громадянами і бізнесом. Роботу модуля забезпечує інтеграція інтернет-платформи «Розумне місто» з порталом державних послуг (https://igov.org.ua/). Користувачеві пропонуються саме ті електронні сервіси, якими можливо скористатись на території його міста або громади. Влада це сервіс для громадян. Комфорт для громадян - повага суспільства.
+                <br />
+                Підключено у {{ cities_allowed.igov }} містах.</span>
+          </div>
+          <div class="hexagon">
+            <img src="{% static 'new-version/images/svg/card.svg'%}" alt="">
+            <h6>Відкриті фінанси</h6>
+            <span class="grayd">“Модуль «Відкриті фінанси» - інформація про видатки, які здійснюються розпорядниками і одержувачами бюджетних коштів міста/громади. Цей модуль є інтегрованим із системою e-data (e-data.gov.ua) і адаптованим до мережі розпорядників коштів бюджету відповідного міста/громади. Достовірна, повна інформація про видатки. Відкрита влада. Довіра суспільства. Також ми допомагаємо містам автоматизувати бюджетний процес.
+            <br />
+                Підключено у {{ cities_allowed.edata }} містах.</span>
+          </div>
+          <div class="hexagon">
+            <img src="{% static 'new-version/images/svg/open.svg'%}" alt="">
+            <h6>Відкритий бюджет</h6>
+            <span class="grayd">“Модуль «Відкритий бюджет» - інформація про доходи та видатки бюджету міста/громади доступно та легко. Ця інформація обов’язково має бути оприлюднена відповідно до законодавства. Модуль інтегрований із системою «Open Budget» і пропонує хорошу візуалізацію для розуміння структури доходів, видатків та загального стану бюджету. Користувач з легкістю отримує уявлення про основні джерела доходів та пріоритетні напрямки видатків відповідного бюджету. Достовірна, повна інформація про видатки. Відкрита влада. Довіра суспільства.
+            <br />
+                Також ми допомагаємо містам автоматизувати бюджетний процес.
+                <br />
+                Підключено у {{ cities_allowed.open_budget }} містах.</span>
+          </div>
+          <div class="hexagon">
+            <img src="{% static 'new-version/images/svg/building.svg'%}" alt="">
+            <h6>Розумне ОСББ</h6>
+            <span class="grayd">“Модуль «Розумне ОСББ» - управління своїм будинком: теплий будинок, комфортний під’їзд, економія на комунальних послугах. Залучайся до кращих практик України
+            <br />
+            Сервіс розбудови ОСББ, публічності процесів, прийняття управлінських рішень.
+            <br />
+{#                            Підключено у{{ cities_allowed. }}містах.#}
+            </span>
+          </div>
+          <div class="clearfix haxmargin"></div>
+          <div class="hexagon first">
+            <img src="{% static 'new-version/images/svg/pills.svg'%}" alt="">
+            <h6>Реєстр ліків</h6>
+            <span class="grayd">Модуль «Реєстр ліків» призначено для інформування мешканців про перелік залишків лікарських засобів, які надаються хворим безоплатно у лікарнях міста/громади Модуль ефективно працює там, де є відповідальна влада та прозорі медичні установи. Реєстр ліків Влада показує прозорість та отримує повагу мешканців.
+            <br />
+                Також, ми допомагаємо містам автоматизувати процес надання медичних послуг, стати медичному сервісу ближче до людей.
+                <br />
+                Підключено у {{ cities_allowed.medicines }} містах.
+                            </span>
+          </div>
+          <div class="hexagon two">
+            <img src="{% static 'new-version/images/svg/purchase.svg'%}" alt="">
+            <h6>Електронні закупівлі</h6>
+            <span class="grayd">“Модуль «Електронні закупівлі» - доступ до інформації про закупівлі. Модуль інтегрований із Прозорро (www.prozorro.gov.ua ) і забезпечує адаптацію (налагодження) сервісу Прозорро під відповідне місто/громаду. Відкрита влада. Довіра суспільства.
+            <br />
+                Також ми автоматизуємо процедури проведення аукціонів по оренді комунального майна.
+                <br />
+                Підключено у {{ cities_allowed.prozorro }} містах.</span>
+          </div>
+          <div class="hexagon three">
+            <img src="{% static 'new-version/images/svg/blood.svg'%}" alt="">
+            <h6>Донорство крові</h6>
+            <span class="grayd">“Модуль «Донорство крові» створений для пошуку донорів крові і встановлення швидкого контакту "донор - реципієнт". Модуль «Донорство крові» є інтегрованим із системою Donor.ua (www.donor.ua). Благородний вчинок, який рятує життя.
+            <br />
+                            Підключено у {{ cities_allowed.donor }} містах.</span>
+          </div>
+          <div class="hexagon four">
+            <img src="{% static 'new-version/images/svg/news.svg'%}" alt="">
+            <h6>Новини міста</h6>
+            <span class="grayd">Модуль «Новини міста» призначено для оприлюднення новин міста/громади, оперативного донесення важливої та цікавої інформації мешканцям. Влада показує прозорість та отримує повагу мешканців. Гарними справами прославитися можна.
+
+                <br />
+                Підключено у {{ cities_allowed.news }} містах.</span>
+          </div>
+          <div class="hexagon five">
+            <img src="{% static 'new-version/images/svg/poll.svg'%}" alt="">
+            <h6>Опитування</h6>
+            <span class="grayd">“Модуль «Опитування» - створення зручного каналу спілкування з мешканцями міста/громади, дозволяє вимірювати «градус» ставлення мешканців до будь-якого питання/проблеми. Влада показує діалог, реагує на запити та отримує повагу мешканців.
+            <br />
+                Підключено у {{ cities_allowed.polls }} містах.</span>
+          </div>
+        </div>
+      </div>
+        <div class="features_sec12 mikro-list">
+      <div class="container">
+        <div class="one_full stcode_title10">
+          <h2>Наші мікросервіси
+        <span class="line"><i class="fa fa-umbrella"></i></span></h2>
+        </div>
+        <div id="st-accordion-four" class="st-accordion-four">
+          <ul>
+            <li>
+              <a href="#">Дефекти ЖКГ<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>“Модуль «Дефекти ЖКГ» - зроби місто кращім: додай проблему, познач на карті, додай фото. Інше робить відповідальна влада. Модуль працює там, де є відповідальна влада, яка прислуховується до потреб мешканців. Крок за кроком місто стає комфортнішим, чистішим та безпечнішим. Влада показує результат та отримує повагу мешканців. Гарними справами прославитися можно.
+                </p>
+                <br />
+                <p>Ми допомагаємо містам автоматизувати цей процес повністю.</p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">“Петиції”<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>L“Модуль “Петиції” - ефективний інструмент для прояву громадської активності і ідентифікації як проблем, так і корисних для міста/громади проектів. Розроблений за вимогами законодавства. Отримав нагороду DemLab як кращій проект у номінації “Інструменти е-участі”. Влада показує діалог, реагує на запити та отримує повагу мешканців.</p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Електронні послуги<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>“Модуль «Електронні послуги» - доступ до отримання державних електронних сервісів громадянами і бізнесом. Роботу модуля забезпечує інтеграція інтернет-платформи «Розумне місто» з порталом державних послуг (https://igov.org.ua/). Користувачеві пропонуються саме ті електронні сервіси, якими можливо скористатись на території його міста або громади. Влада це сервіс для громадян. Комфорт для громадян - повага суспільства.
+                </p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Відкриті фінанси<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>“Модуль «Відкриті фінанси» - інформація про видатки, які здійснюються розпорядниками і одержувачами бюджетних коштів міста/громади. Цей модуль є інтегрованим із системою e-data (e-data.gov.ua) і адаптованим до мережі розпорядників коштів бюджету відповідного міста/громади. Достовірна, повна інформація про видатки. Відкрита влада. Довіра суспільства. Також ми допомагаємо містам автоматизувати бюджетний процес.
+                </p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Відкритий бюджет<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>“Модуль «Відкритий бюджет» - інформація про доходи та видатки бюджету міста/громади доступно та легко. Ця інформація обов’язково має бути оприлюднена відповідно до законодавства. Модуль інтегрований із системою «Open Budget» і пропонує хорошу візуалізацію для розуміння структури доходів, видатків та загального стану бюджету. Користувач з легкістю отримує уявлення про основні джерела доходів та пріоритетні напрямки видатків відповідного бюджету. Достовірна, повна інформація про видатки. Відкрита влада. Довіра суспільства.
+                </p>
+                <br />
+                <p>Також ми допомагаємо містам автоматизувати бюджетний процес.</p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Електронні закупівлі<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>“Модуль «Електронні закупівлі» - доступ до інформації про закупівлі. Модуль інтегрований із Прозорро (www.prozorro.gov.ua ) і забезпечує адаптацію (налагодження) сервісу Прозорро під відповідне місто/громаду. Відкрита влада. Довіра суспільства.
+                </p>
+                <br />
+                <p>Також ми автоматизуємо процедури проведення аукціонів по оренді комунального майна.</p>
+                <br />
+                <p>Підключено у 60 }містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Донорство крові<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>“Модуль «Донорство крові» створений для пошуку донорів крові і встановлення швидкого контакту "донор - реципієнт". Модуль «Донорство крові» є інтегрованим із системою Donor.ua (www.donor.ua). Благородний вчинок, який рятує життя.
+                </p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Новини міста<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>Модуль «Новини міста» призначено для оприлюднення новин міста/громади, оперативного донесення важливої та цікавої інформації мешканцям. Влада показує прозорість та отримує повагу мешканців. Гарними справами прославитися можна.
+                </p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Опитування<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>“Модуль «Опитування» - створення зручного каналу спілкування з мешканцями міста/громади, дозволяє вимірювати «градус» ставлення мешканців до будь-якого питання/проблеми. Влада показує діалог, реагує на запити та отримує повагу мешканців.
+                </p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Реєстр ліків<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>Модуль «Реєстр ліків» призначено для інформування мешканців про перелік залишків лікарських засобів, які надаються хворим безоплатно у лікарнях міста/громади Модуль ефективно працює там, де є відповідальна влада та прозорі медичні установи. Реєстр ліків Влада показує прозорість та отримує повагу мешканців.
+                </p>
+                <br />
+                <p>Також, ми допомагаємо містам автоматизувати процес надання медичних послуг, стати медичному сервісу ближче до людей.</p>
+                <br />
+                <p>Підключено у 60 містах.</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Розумне ОСББ<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>“Модуль «Розумне ОСББ» - управління своїм будинком: теплий будинок, комфортний під’їзд, економія на комунальних послугах. Залучайся до кращих практик України
+                </p>
+                <br />
+                <p>Сервіс розбудови ОСББ, публічності процесів, прийняття управлінських рішень.</p>
+                <br />
+                <p>Також, ми автоматизуємо облік ОСББ.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- end features section 12 -->
+    </div>
+    <div class="clearfix"></div>
+    <div class="project-cards" id="citizens">
+      <div class="container">
+        <div class="stcode_title8">
+          <h2><span class="line"></span><span class="text">Мешканцям</span></h2>
+        </div>
+        <!-- end section title heading -->
+        <div class="clearfix margin_top3"></div>
+        <div class="one_fourth">
+          <div class="flips2">
+            <div class="flips2_front flipscont2">
+              <img src="{% static 'new-version/images/svg/defects.svg'%}" alt="">
+              <p>“Модуль «Дефекти ЖКГ» </p>
+            </div>
+            <div class="flips2_back flipscont1">
+              <!-- <h4 class="white"><strong>Flip Animation</strong></h4> -->
+              <p>Знаєте про дефекти житлово-комунального господарства – у вашому домі, під’їзді, дворі, на дорозі ? – залиште заявку про потребу виправлення цього за допомогою модуля «Заявки ЖКГ»</p>
+              <br />
+              <br />
+              <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- end section -->
+        <div class="one_fourth">
+          <div class="flips2">
+            <div class="flips2_front flipscont2">
+              <img src="{% static 'new-version/images/svg/card.svg'%}" alt="">
+              <p>Модуль «Відкритий бюджет»</p>
+            </div>
+            <div class="flips2_back flipscont1">
+              <!-- <h4 class="white"><strong>Flip Animation</strong></h4> -->
+              <p>Хочете переконатися, що бюджет вашого міста формується і розподіляється як годиться? – перевірте це за допомогою модуля «Відкритий бюджет» </p>
+              <br />
+              <br />
+              <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- end section -->
+        <div class="one_fourth">
+          <div class="flips2">
+            <div class="flips2_front flipscont2">
+              <img src="{% static 'new-version/images/svg/open.svg'%}" alt="">
+              <p>Модуль «Відкриті фінанси»</p>
+            </div>
+            <div class="flips2_back flipscont1">
+              <!-- <h4 class="white"><strong>Flip Animation</strong></h4> -->
+              <p> Потребуєте інформації про видатки, які здійснюються розпорядниками і одержувачами бюджетних коштів ? – скористайтеся модулем «Відкриті фінанси». </p>
+              <br />
+              <br />
+              <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- end section -->
+        <div class="one_fourth last">
+          <div class="flips2">
+            <div class="flips2_front flipscont2">
+              <img src="{% static 'new-version/images/svg/e-service.svg'%}" alt="">
+              <p>Модуль «Електронні послуги»</p>
+            </div>
+            <div class="flips2_back flipscont1">
+              <!-- <h4 class="white"><strong>Flip Animation</strong></h4> -->
+              <p> Не хочете витрачати час на черги за довідками? - скористайтеся державними електронними сервісами за допомогою модуля «Електронні послуги» </p>
+              <br />
+              <br />
+              <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+            </div>
+          </div>
+        </div>
+        <div class="clearfix margin_top3"></div>
+        <div class="one_fourth">
+          <div class="flips2">
+            <div class="flips2_front flipscont2">
+              <img src="{% static 'new-version/images/svg/purchase.svg'%}" alt="">
+              <p>Модуль «Електронні закупівлі» </p>
+            </div>
+            <div class="flips2_back flipscont1">
+              <!-- <h4 class="white"><strong>Flip Animation</strong></h4> -->
+              <p>Цікавитеся закупівлями, які здійснюються органами/підприємствами міста/громади? – зверніться до модуля «Електронні закупівлі» </p>
+              <br />
+              <br />
+              <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- end section -->
+        <div class="one_fourth">
+          <div class="flips2">
+            <div class="flips2_front flipscont2">
+              <img src="{% static 'new-version/images/svg/blood.svg'%}" alt="">
+              <p>Модуль «Донорство крові»</p>
+            </div>
+            <div class="flips2_back flipscont1">
+              <!-- <h4 class="white"><strong>Flip Animation</strong></h4> -->
+              <p>Ви є донором крові чи самі шукаєте донорів ? – для Вас працює модуль «Донорство крові» </p>
+              <br />
+              <br />
+              <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- end section -->
+        <div class="one_fourth">
+          <div class="flips2">
+            <div class="flips2_front flipscont2">
+              <img src="{% static 'new-version/images/svg/petition1.svg'%}" alt="">
+              <p>Модуль «Петиції»</p>
+            </div>
+            <div class="flips2_back flipscont1">
+              <!-- <h4 class="white"><strong>Flip Animation</strong></h4> -->
+              <p>Бажаєте змінити своє місто на краще? – напишіть колективне звернення у модулі «Петиції»</p>
+              <br />
+              <br />
+              <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- end section -->
+        <div class="one_fourth last">
+          <div class="flips2">
+            <div class="flips2_front flipscont2">
+              <img src="{% static 'new-version/images/svg/news.svg'%}" alt="">
+              <p>Модуль «Новини міста»</p>
+            </div>
+            <div class="flips2_back flipscont1">
+              <!-- <h4 class="white"><strong>Flip Animation</strong></h4> -->
+              <p> Бажаєте дізнатися останні новини свого міста? – для Вас модуль «Новини міста» </p>
+              <br />
+              <br />
+              <!-- <a href="#" class="but_small5 light"><i class="fa fa-paper-plane"></i>&nbsp; Read more</a> -->
+            </div>
+          </div>
+        </div>
+        <!-- end section -->
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- end parallax section 6 -->
+
+    <div class="features_sec38" id="goverment">
+      <div class="container">
+        <div class="one_full stcode_title9">
+          <h2>Владі</h2>
+          <p>«Розумне місто» - інтернет-платформа для конструктивної та відповідальної місцевої влади ОТГ та міст. Впроваджуючи «Розумне місто» влада отримує ефективні інструменти виконання своїх функцій, комунікації та співпраці з громадою.
+          </p>
+        </div>
+        <div class="one_full stcode_title7">
+          <h2>Навіщо Розумне місто владі?</h2>
+        </div>
+        <div id="st-accordion-two" class="st-accordion">
+          <ul>
+            <li>
+              <a href="#">Довіра мешканців<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>Задоволені мешканці, які бачать що влада працює на благо громади (інформування про вирішені задачі та результати роботи)</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Контроль виконання<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>Інструменти контролю виконання установами та комунальними підприємствами роботи на благо громади</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Пульс міста<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>Мешканці інформують про потреби громади (петиції, дефекти ЖКГ), створюються механізми взаємодії та контролю настроїв громади</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Аналітика та консалтинг<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>Ми не тільки пропонуємо е-інструменти, але й пропонуємо консалтинг з найкращого використання цих інструментів з метою задоволення потреб мешканців</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">Вимоги законодавства<span class="st-arrow">Open or Close</span></a>
+              <div class="st-content">
+                <p>Розумне місто зручно поєднує всі обов’язкові за законом е-сервіси для громадян (відкритий бюджет, петиції тощо)</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="one_full stcode_title7">
+          <h2>5 причин обрати рішення “Розумне місто”: </h2>
+        </div>
+        <div class="container meta">
+          <br>
+          <br>
+          <div class="one_half">
+            <img src="{% static 'new-version/images/svg/mone1.svg'%}" alt="">
+            <h6>Оптимальні витрати</h6>
+            <p>Типові рішення мережі Розумних міст дозволяють налаштувати та підтримувати роботу системи за розумні кошти.</p>
+            <div class="clearfix margin_top4"></div>
+            <img src="{% static 'new-version/images/svg/safety.svg'%}" alt="">
+            <h6>Випробувані та надійні рішення</h6>
+            <p>Наші рішення випробувані часом (працює з лютого 2016 року). Системою користується ХХ міст</p>
+            <div class="clearfix margin_top4"></div>
+            <img src="{% static 'new-version/images/svg/support.svg'%}" alt="">
+            <h6>Гарантована підтримка</h6>
+            <p>Ми гарантуємо якісну підтримку відповідно до обраного тарифного плану</p>
+          </div>
+          <!-- end section -->
+          <div class="one_half last">
+            <img src="{% static 'new-version/images/svg/interface.svg'%}" alt="">
+            <h6>Простота використання</h6>
+            <p>Інтуітивний та зрозумілий інтерфейс, детальні інструкції по використанню системи. Нічого зайвого</p>
+            <div class="clearfix margin_top4"></div>
+            <img src="{% static 'new-version/images/svg/development.svg'%}" alt="">
+            <h6>Індивідуальні розробки</h6>
+            <p>Ми пропонуємо розробки будь-яких рішень для потреб міста/громади.</p>
+            <div class="clearfix margin_top4"></div>
+          </div>
+          <!-- end section -->
+        </div>
+      </div>
+    </div>
+    <!-- end features section 38 -->
+    <div class="clearfix"></div>
+    <div class="features_sec65" id="connect">
+      <div class="container">
+        <div class="one_full stcode_title11">
+          <h2>Підключити місто
+        <em>Бажаєте отримати ці та інші переваги «Розумного міста» в своєму місті/громаді? – телефонуйте нам і ми разом налаштуємо «Розумне місто» якнайкраще для Вас.</em>
+        <span class="line"></span></h2>
+        </div>
+        <div id="cd-timeline" class="cd-container">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture"> 1 </div>
+            <!-- cd-timeline-img -->
+            <div class="cd-timeline-content">
+              <h2>Обираємо тарифний план</h2>
+              <p class="head-timeline">Тарифний план та договір</p>
+              <p class="text">Міська рада обирає зручний для себе тарифний план на обслуговування та підтримку порталу "Розумне місто".</p>
+              <p class="text">Укладається та підписується відповідний договір </p>
+              <p class="text italic">Тарифний план може бути розроблено індивідуально для міста</p>
+            </div>
+          </div>
+          <!-- cd-timeline-block -->
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-movie"> 2 </div>
+            <!-- cd-timeline-img -->
+            <div class="cd-timeline-content">
+              <h2>Призначення модераторів</h2>
+              <p class="head-timeline">Відповідальні особи</p>
+              <p class="text">Визначаються відповідальні особи для модуля "Петиції" та організації-виконавців для модуля "Дефекти ЖКГ".</p>
+              <p class="text">Модератори реєструються на сайті, повідомляють свої e-mail та отримують відповідні права</p>
+              <p class="text italic">Можливе розподілення доступу до модулів</p>
+              <!-- <a href="#" class="cd-read-more">Read more</a> <span class="cd-date"><b>Dec 17</b></span>  -->
+            </div>
+            <!-- cd-timeline-content -->
+          </div>
+          <!-- cd-timeline-block -->
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture"> 3 </div>
+            <!-- cd-timeline-img -->
+            <div class="cd-timeline-content">
+              <h2>Налаштовуємо систему</h2>
+              <p class="head-timeline">Налаштування модулів</p>
+              <p class="text">Наші спеціалісти налаштовують систему під Ваше місто та підключають всі модулі.</p>
+              <p class="text">На даному етапі відбувається комунікація з місцевими модераторами</p>
+              <p class="text italic">Робота займе від 3 до 5 робочих днів.</p>
+            </div>
+            <!-- cd-timeline-content -->
+          </div>
+          <!-- cd-timeline-block -->
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-location">4 </div>
+            <!-- cd-timeline-img -->
+            <div class="cd-timeline-content">
+              <h2>Популяризуємо систему</h2>
+              <p class="head-timeline">Інформаційна робота</p>
+              <p class="text">Починається інформування мешканців міста про підключення до системи "Розумне місто" через всі наявні інформаційні ресурси(телебачення, періодичні видання, місцеві веб-сайти та соціальні мережі).</p>
+              <p class="text italic">Банери та інший необхідний матеріал ми надамо в електронному вигляді</p>
+            </div>
+            <!-- cd-timeline-content -->
+          </div>
+          <!-- cd-timeline-block -->
+          <!-- cd-timeline-block -->
+          <!-- cd-timeline-block -->
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+{% endblock %}
+{% block footerjs %}
+{% endblock footerjs %}

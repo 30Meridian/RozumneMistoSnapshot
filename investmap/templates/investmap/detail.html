@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Інвестиційний проект - {{ object.name }}. Система "Розумне місто".
+{% endblock title %}
+
+{% block content %}
+    <div class="content-header">
+        <h2>Інвестиційний проект - {{ object.name }}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+            <li><a href="{% url 'investmap:index' townslug %}">Інвестиційні проекти</a></li>
+            <li class="active">Проект</li>
+        </ol>
+    </div>
+    <div class="content">
+    <div class="box">
+        <div class="box-body">
+            <div class="box">
+                <div class="box-body">
+
+                        <div class="box-body">
+                            {% if allow %}
+                            <div class="box">
+                                <a class="btn btn-danger btn-file"
+                                   href="{% url 'investmap:delete' object.town.slug object.id %}">
+                                    <div class="col-md-12">
+                                        Видалити
+                                    </div>
+                                </a>
+                                <a class="btn btn-info btn-file"
+                                   href="{% url 'investmap:edit' object.town.slug object.id %}">
+                                    <div class="col-md-12">
+                                        Редагувати
+                                    </div>
+                                </a>
+                                <div class="pull-right">
+                                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f23dc3c4265dc08"></script>
+                                    <div class="addthis_sharing_toolbox" >
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="col-md-6">
+                                <div>
+                                    <label>Категорія:</label>
+                                    {{ object.get_project_type_display }}
+                                </div>
+                                <div>
+                                    <label>Площа:</label>
+                                    {{ object.metrics }}
+                                </div>
+                                <div>
+                                    <label>Адреса:</label>
+                                    {{ object.address }}
+                                </div>
+                                <div>
+                                    <label>Ціна:</label>
+                                    {{ object.price }}
+                                </div>
+                                <div>
+                                    <label>Контакти:</label>
+                                    {{ object.contacts }}
+                                </div>
+                                {% if object.document %}
+                                <div>
+                                    <label>Додатково:</label>
+                                    <a href="{{ object.document.url }}">Скачати</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <img src="{{ object.image.url }}" style="max-height: 640px; max-width: 100%">
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h4>Опис проекту</h4>
+                        </div>
+                        <div class="box-body">
+                            <div>
+                                {% autoescape off %}
+                                {{ object.description }}
+                                {% endautoescape %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock content %}

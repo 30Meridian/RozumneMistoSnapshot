@@ -1,0 +1,11 @@
+  Вас вітає команда проекту "Розумне місто" !<br/><br/>
+  По заявці <strong><a href="http://www.rozumnemisto.org/{{townslug}}/defects/{{defect_id}}">{{title}}</a></strong> змінено статус на "{{status}}"<br/>
+{{resolution}}<br/><br/>
+{% if status == 'Виконана'%}
+Будемо вдячні Вам якщо Ви напишете відгук про нас у соц. мережі Facebook. Це допоможе проекту <a href='www.rozumnemisto.org'>"Розумне місто"</a>
+залучити більше таких же СПРАЖНІХ громадян як Ви.<br/><br/>{% endif %}
+
+<strong>Статуси змінюються <a href="http://www.rozumnemisto.org/{{townslug}}/moderators/">регіональними модераторами</a> вашого міста.</strong><br/><br/>
+
+  З повагою,<br/>
+  команда проекту <a href='www.rozumnemisto.org'>"Розумне місто"</a><br/>

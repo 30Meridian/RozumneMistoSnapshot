@@ -1,0 +1,6 @@
+  Вітаємо Вас !<br/><br/>
+  Вашу організацію назначили відповідальною за заявку на усунення дефекту <a href="http://www.rozumnemisto.org/{{townslug}}/defects/{{defect_id}}">{{title}}</a></strong>, яка чекає Вашого підтвердження.<br/><br/><br/>
+
+  З повагою,<br/>
+  команда проекту <a href='www.rozumnemisto.org'>"Розумне місто"</a><br/>
+

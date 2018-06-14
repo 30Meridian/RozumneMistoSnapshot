@@ -1,0 +1,252 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}Профіль користувача. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="box">
+
+            <div class="box-body">
+                <div class="col-md-9 nav-tabs-custom">
+
+                    <ul class="nav nav-tabs pull">
+                        <li class="active"><a href="#tab_2-2" data-toggle="tab" aria-expanded="true">Мої дані профілю</a></li>
+                        <li class=""><a href="#tab_3-2" data-toggle="tab" aria-expanded="false">Підписка на дайджест</a></li>
+{#                        <li class=""><a href="#tab_1-2" data-toggle="tab" aria-expanded="false">Підписка на платежі</a></li>#}
+                    </ul>
+                <div class="tab-content">
+                    <div class="box  tab-pane active" id="tab_2-2">
+                    <br/>
+                        <div class="box-body">
+                            <div class="col-md-6">
+                                <h3>Профіль користувача </h3>
+
+                                <strong>Місто: </strong> {{ user.towns.first }}<br/>
+                                <strong>Прізвище: </strong> {{ user.last_name }}<br/>
+                                <strong>Ім'я: </strong> {{ user.first_name }}<br/>
+                                {% if user.id == request.user.id or allowed or request.user.is_superuser %}
+                                    <strong>По батькові: </strong> {{ user.middle_name }}<br/>
+                                    <strong>Електронна пошта:</strong> {{ user.email }}<br/>
+                                    <strong>Телефон: </strong> {{ user.phone }}<br/><br/>
+                                {% endif %}
+
+
+                                {% if user.id == request.user.id %}
+                                    (<a href="/accounts/logout">Вийти з сиcтеми</a>)
+                                {% endif %}
+
+            {% if allowed %}
+                {%if user.is_active == 1 %}
+                    <a href="/profile/userban/{{ user.id }}/0">Заблокувати користувача</a>
+                {% else %}
+                    <a href="/profile/userban/{{ user.id }}/1">Розблокувати користувача</a>
+                {% endif %}
+            {% endif %}
+                </div>
+                 {% if allowed %}
+                <br/>
+                <a href="/moderator" class="btn btn-default">Панель модератора</a>
+                <a href="/moderator/zvit" class="btn btn-default">Звіти</a>
+                {% endif %}
+                <br/>
+                <br/>
+
+                <a href="{% url 'profileChange' %}" class="btn btn-default"> Змінити дані профіля </a>
+{#                            </div>#}
+
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+
+                    <div class="tab-pane" id="tab_3-2">
+                        <div class="box-body">
+                            <div class="col-md-6">
+                                <h4>Дайджест останніх подій</h4>
+                                {% if subscribe_form %}
+                                    <form method="post" id="subscribe_form">
+                                        {% csrf_token %}
+                                        {% for field in subscribe_form.choices %}
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    {{ field }}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <hr/>
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <a id="check_all" class="btn btn-default btn-xs" onclick="uncheck_all();">
+                                                Відписатись від усіх
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Зберегти</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                <!--
+                    <div class="tab-pane" id="tab_1-2">
+                        <h4>Підписка на платежі модулю "Відкриті фінанси" ("E-Data")</h4>
+
+                        {% if user.is_authenticated %}
+
+                            <table id="subscr" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr role="row" >
+                                    <th style="width: 40px; text-align: center" data-toggle="modal" data-target="#receipt"># </th>
+                                    <th style="width: 200px; text-align: center">Параметр</th>
+                                    <th style="width: 100px;text-align: center">Умова(якщо)</th>
+                                    <th style="width: 150px;text-align: center;">Значення</th>
+                                    <th class="table-column" style="width: 150px;text-align: center">Дата створення</th>
+                                    <th class="table-column" style="width: 100px;text-align: center">Статус</th>
+                                    <th class="table-column" style="width: 100px;text-align: center">Видалити</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for ss in ss_list %}
+                                    <tr>
+                                        <td class="vert-align">{{forloop.counter}}</td>
+                                        <td class="vert-align" style="word-break: break-all;word-wrap:break-word;">
+                                            {% if ss.parameter == 'amount' %}
+                                            Сума транзакції(грн.)
+                                            {% elif ss.parameter == 'recipt_edrpou' %}
+                                            ЄРДПОУ-код отримувача
+                                            {% elif ss.parameter == 'recipt_name' %}
+                                            Маска назви отримувача
+                                            {% elif ss.parameter == 'payer_edrpou' %}
+                                            ЄРДПОУ-код платника
+                                            {% endif %}
+                                        </td>
+                                        <td class="vert-align">{{ss.comparison}}</td>
+                                        <td class="vert-align" style="word-break: break-all;word-wrap:break-word;">{{ss.value}}</td>
+                                        <td class="vert-align table-column">{{ss.created_date|date:"Y-m-d"}}</td>
+                                        <td class="vert-align table-column">
+                                            <div >
+                                                {% if ss.is_active %}<a href="/{% if townslugheader %}{{townslugheader}}{% endif %}/edata/ssdeactivate/{{ ss.id }}?profile=true" title="Підписка активована. Деактивувати?"><i class="fa fa-toggle-on text-green"></i></a></span>
+                                                {% else %}<a href="/{% if townslugheader %}{{townslugheader}}{% endif %}/edata/ssactivate/{{ ss.id }}?profile=true" title="Підписка деактивована. Активувати?" ><i class="fa fa-toggle-off text-yellow"></i></a>{% endif %}
+                                            </div>
+                                        </td>
+                                        <td class="vert-align table-column"><a href="/{% if townslugheader %}{{townslugheader}}{% endif %}/edata/ssdelete/{{ ss.id }}?profile=true"><i class="fa fa-times-circle text-red"></i></a></td>
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <br/>
+                            <div class="text-right">
+                                <button class="btn btn-middle btn-success" data-toggle="modal" data-target="#addSSModal"><i class="fa  fa-plus-circle"></i> Додати нову підписку</button>
+                            </div>
+
+
+                            <!-- Modal -->
+                            <!--
+                            <div class="modal fade" id="addSSModal" tabindex="-1" role="dialog" aria-labelledby="addSSModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Закрити"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="tenderModalLabel">Додати підписку</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <form id="ssAdd" action="/{{townslugheader}}/edata/ssadd" method="post" >
+                                                {% csrf_token %}
+
+                                                <div class="form-group">
+                                                    <h4>Назва параметру</h4>
+                                                    {{ ssAddForm.parameter.errors }}
+                                                    {{ ssAddForm.parameter }}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <h4>Умова</h4>
+                                                    {{ ssAddForm.comparison.errors }}
+                                                    {{ ssAddForm.comparison }}<br />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <h4>Значення</h4>
+                                                    {{ ssAddForm.value.errors }}
+                                                    {{ ssAddForm.value }}
+                                                </div>
+                                                <input style="display: none" name="profile" value="true">
+
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success"><i class="fa  fa-plus-circle"></i> Додати</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa  fa-times-circle-o"></i> Закрити</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% else %}
+
+                            <p>
+                            Зареєструйтесь для оформлення підписки на платежі
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+                    -->
+                </div>
+            </div>
+                <div class="col-md-3">
+                    <div class="box">
+                        <div class="box-header">Вклад у розвиток міста:</div>
+                        <div class="box-body">
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h1>{{ user.points }}</h1>
+
+                                    <p>КАРМА</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-heartbeat"></i>
+                                </div>
+                                <a href="/profile/karma/{{ user.id }}" class="small-box-footer">Докладно по нарахуванням
+                                    <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                            <a class="btn  btn-default btn-block" href="/help#karma">Що таке системна "карма" ?</a>
+                            <a class="btn  btn-default btn-block" href="../{{ user.towns.first.slug }}/rating">Рейтинг
+                                користувачів</a>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div>
+
+
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+    </section><!-- /.content -->
+{% endblock %}
+
+
+
+{% block footerjs %}
+    <script type="text/javascript">
+        function uncheck_all(event){
+            var checkboxes = $('#subscribe_form').find('.checkbox').find('input');
+            console.log(checkboxes);
+            for(var i=0, n=checkboxes.length; i<n; i++){
+                checkboxes[i].checked = this.checked;
+            }
+        }
+
+        // Javascript to enable link to tab
+        var url = document.location.toString();
+        if (url.match('#')) {
+            $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
+    </script>
+
+{% endblock %}

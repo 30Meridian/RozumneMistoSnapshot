@@ -1,0 +1,37 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}Профіль користувача. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>
+            Змінити дані профіля
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+            <li> <a href="/profile/{{user.id}}"> Профіль</a></li>
+            <li class="active">  Зміна даних профіля </li>
+        </ol>
+    </section>
+   <section class="content">
+        <div class="box">
+            <div class="box-body">
+                <div class="col-md-12">
+                    <div class="modal-body">
+                    {% block subject %}<h4>Що змінити та на що?</h4> {% endblock %}
+                    {% block body  %}
+                        <form action="profileChange" method="POST">
+                        {% csrf_token %}
+                        <div class="field"> {{ form.text }} </div>
+                        <h4>Причина</h4>
+                        <div class="field"> {{ form.reason }} </div>
+                    {% endblock %}
+                    &nbsp
+                            <input type="submit" class="btn btn-block btn-primary btn-lg text-center btn-center" value="Відправити до модератора">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+{% endblock %}

@@ -1,0 +1,63 @@
+
+{% extends 'base.html'|pjax:request %}
+{% load static %}
+{% block title %}{{ gromada.title }}. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+
+              <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+    <div class="col-md-12">
+    <div class="text-center">
+        <img src="{% static 'img/progress_reg_2.png' %}"style="max-width: 100%"/>
+        <h3 class="box-title">Виберіть населений пункт зі списку:</h3>
+        </div>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><a href="/towns/{{gromada.main_town_ref.region_ref.id}}"> <i class="fa fa-toggle-left"></i> повернутись назад</a> </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th></th>
+                  <th>Населений пункт</th>
+                  <th>Територіальна громада</th>
+                </tr>
+                {% for village in gromada.townsgromadasvillages_set.all  %}
+                <tr>
+                <td class="vert-align"><i class="fa fa-map-marker"></i></td>
+                  <td>  <div class="ct">  <a href="/choosetown/{{ gromada.main_town_ref.id }}"> {{ village.title }}</a></div></td>
+                  <td>
+                      {{ gromada.title }}, {{gromada.main_town_ref.region_ref.name}}
+
+                  </td>
+
+
+                </tr>
+                {% endfor %}
+              </tbody>
+             </table>
+            </div>
+
+
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+
+
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,33 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}Контакти. Інформаційна система "Розумне місто".{% endblock %}
+{% load staticfiles %}
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+<div class="text-center">
+    <h2>Зв'язок з командою Розумного міста</h2></div>
+                <div class="col-md-6">
+        <h4><i class="fa fa-clock-o"></i> Працюємо: з 9:00 - 18:00</h4>
+        <h4><i class="fa fa-phone-square"></i> 044 539 44 22, 067 549 44 22 - технічна підтримка</h4>
+        <h4><i class="fa fa-phone-square"></i> 067 569 44 22 - відділ продажу</h4>
+        <a href="https://www.facebook.com/rozumnemisto.org/?fref=ts" target="_blank"><img src="{% static 'img/facebook.png' %}"></a>
+                </div>
+                <div class="col-md-6">
+        <h4><i class="fa  fa-chrome"></i> Компанія "30th Meridian"</h4>
+        <h4><i class="fa fa-envelope"></i> Email: office@rozumnemisto.org</h4>
+                </div>
+
+      </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+    
+{% endblock %}

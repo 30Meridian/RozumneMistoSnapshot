@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block title %}Заявки на усунення дефектів ЖКГ. Інформаційна система "Розумне місто".{% endblock %}
+{% block content %}
+     <!-- Main content -->
+        <section class="content">
+          <!-- Default box -->
+          <div class="box">
+            <div class="box-body">
+                <!-- Карта и статистика -->
+                <div class="box">
+                    <div class="box-body">
+                        <div class="col-md-3">
+                            <div class="marg-lable">
+                            <h4><span class="label label-warning">{{ defects_open  }}</span> - <a href="?status=1">Відкриті</a></h4>
+                            <h4><span class="label label-success">{{ defects_done }}</span> -  <a href="?status=2">Виконані</a></h4>
+                            <h4><span class="label label-primary">{{ defects_get }}</span> - <a href="?status=4">У роботі</a></h4>
+                            <h4><span class="label label-gray-def">{{ defects_planning }}</span> - <a href="?status=5">Заплановані</a></h4>
+                            </div>
+                        </div>
+            <div class="col-md-9">
+<div id="map" style="max-width: 700px; height: 200px;"></div>
+  <script>
+      function initMap() {
+          //var uluru = {lat: {{ town.map_lon }}, lng: {{ town.map_lat}}};
+          var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: {{ town.zoom }},
+              center: {lat: {{ town.map_lon }}, lng: {{ town.map_lat}}}
+          });
+          setMarkers(map);
+      }
+
+
+      function setMarkers(map) {
+        var infowindow = new google.maps.InfoWindow({
+          maxWidth: 160
+        });
+
+      var pinOpen = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|f39c12");
+      var pinGet = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|3c8dbc");
+      var pinPlan = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|d2d6de");
+      var pinDone = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00a65a");
+
+
+        {% for issue in issues.object_list %}
+            {% if issue.last_issue.status != 0 and issue.last_issue.status != 3 %}
+
+                var marker{{ issue.id }} = new google.maps.Marker({
+                  position: {lat: {% if issue.map_lat %}{{issue.map_lat}}{% else %}{{town.map_lon}}{% endif %},
+                      lng: {% if issue.map_lon %}{{issue.map_lon}}{% else %}{{town.map_lat}}{% endif %}},
+                  map: map,
+                    {% if issue.last_issue.status == 1%}
+                        icon: pinOpen,
+                    {% elif issue.last_issue.status == 4 %}
+                        icon: pinGet,
+                    {% elif issue.last_issue.status == 5 %}
+                        icon: pinPlan,
+                    {% elif issue.last_issue.status == 2 %}
+                        icon: pinDone,
+                    {% endif %}
+
+                  title: '{{ issue.title }}'
+                });
+
+                   var infowindow{{ issue.id }} = new google.maps.InfoWindow({
+                    content: "{{ issue.title }}"+
+                             "<br/><a href='../defects/{{ issue.id }}'><div class='pull-right'>перейти до заявки</div></a>",
+
+                });
+
+                google.maps.event.addListener(marker{{ issue.id }}, 'click', function() {
+                  infowindow{{ issue.id }}.open(map,marker{{ issue.id }});
+                });
+
+
+            {% endif %}
+          {%endfor%}
+      }
+
+    </script>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+
+      <div class="box">
+        <div class="box-header with-border"><h3 class="box-title">Заявки на усунення дефектів ЖКГ.
+        {% if request.session.statuses %}
+            Показуємо тільки:
+                    {% if 1 in request.session.statuses %}
+                            <span class="label label-warning"><a href="?status=9">Відкриті <i class="fa  fa-times"></i></a> </span>
+                    {% elif 2 in request.session.statuses %}
+                            <span class="label label-success"><a href="?status=9">Виконані <i class="fa  fa-times"></i></a></span>
+                    {% elif 4 in request.session.statuses%}
+                            <span class="label label-primary"><a href="?status=9">У роботі <i class="fa  fa-times"></i></a></span>
+                    {% elif 5 in request.session.statuses %}
+                            <span class="label label-gray-def"> <a href="?status=9">Заплановані <i class="fa  fa-times"></i></a></span>
+                    {% endif %}
+        {% endif %}
+        </h3>
+           <div class="pull-right">
+
+                <select id="subcontractors">
+                <option value="0">Усі організації</option>
+                {% for subcontractor in subcontractor_list %}
+                    <option value="{{subcontractor.id}}" {% if request.session.subcontractor == subcontractor.id %} selected="selected" {% endif %}>{{ subcontractor.name }}</option>
+                {% endfor %}
+                </select>
+           </div>
+
+
+
+            </div>
+                <div class="box-body">
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th class="table-column" style="width: 65px">Ілюстрація</th>
+                      <th style="width: 115px">Номер заявки</th>
+                      <th>Суть заявки</th>
+                      <th style="width: 115px">Статус</th>
+                    </tr>
+
+{% for issue in issues.object_list %}
+    {% if issue.last_issue.status != 0 and issue.last_issue.status != 3 %}
+                <tr>
+                    <td class="vert-align table-column">
+                        {% if issue.issuefiles_set.all.0.document_ref.type_name == "image" %}
+					 <a href="../defects/{{ issue.id  }}" id="defectitem"><img src="/media/defects/thumbnail.{{issue.issuefiles_set.all.0.document_ref.file_name}}"  alt="Зображення дефекту" width="100px" /></a>
+                        {% else %}
+                            <a href="../defects/{{ issue.id  }}" id="defectitem"><img src="{{ MEDIA_URL }}/defects/empty.gif" width="80px"></a>
+
+					    {% endif %}
+                    </td>
+
+                  <td class="vert-align">
+                  <a href="../defects/{{ issue.id  }}" id="defectitem">№{{ issue.id }}</a><br/>
+
+                  </td>
+                  <td class="valign">
+                   <b><a href="../defects/{{ issue.id  }}" id="defectitem">{{issue.title|truncatewords:30}}</a></b><br/>
+    	            <i class="fa fa-map-marker"></i>
+					<a href="../defects/{{ issue.id  }}" id="defectitem">{{issue.address}}</a>
+                  </td>
+                  <td class="vert-align">
+                    <a href="../defects/{{ issue.id  }}" id="defectitem">
+                        {% if issue.last_issue.status == 1 %}
+                        <span class="badge bg-yellow">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 2 %}
+                        <span class="badge bg-green">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 4 %}
+                        <span class="badge bg-aqua">{{issue.last_issue.statusName}}</span>
+                        {% elif issue.last_issue.status == 5 %}
+                        <span class="badge bg-gray">{{issue.last_issue.statusName}}</span>
+                        {% else%}
+                        <span class="badge bg-gray">{{issue.last_issue.statusName}}</span>
+                        {% endif %}
+                    </a>
+                  </td>
+
+                </tr>
+    {% endif %}
+            {% endfor %}
+              </tbody></table>
+            </div>
+
+      {% if issues.paginator.count > 10 %}
+    <div class="col-md-12">
+<div class="center-block">   {{ issues.render }}</div>
+    </div>
+{% endif %}
+ </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+</div>
+        </section><!-- /.content -->
+        <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap">
+
+    </script>
+    <script>
+    $("#subcontractors").change(function () {
+        var a = $('#subcontractors option:selected').val()
+        window.location = "?subcontractor="+a;
+        console.log('Form has been changed to: '+a)
+    });
+    </script>
+{% endblock %}

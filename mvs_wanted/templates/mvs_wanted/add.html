@@ -1,0 +1,82 @@
+{% extends 'base.html' %}>
+
+{% block title %} Додати розшукувану особу. Інформаційна система "Розумне місто".{% endblock %}
+
+
+{% block content %}
+    <section class="content-header">
+        <h1>
+            Додати розшукувану особу для міста - {{ request.user.towns.all.0 }}
+
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+            <li><a href="../mvs_wanted/category/1">Розшукувані особи</a></li>
+            <li class="active">Додати</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="box">
+
+            <div class="box-body">
+
+                <div class="col-md-12">
+
+                    <form id="addMvsWanted" action="../mvs_wanted/add" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <h4>Категорія</h4>
+                            <select class="form-control" name="category">
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.category }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <h4>Ім'я розшукуваної особи</h4>
+                            {{ form.name.errors }}
+                            {{ form.name }}
+                        </div>
+
+                        <div class="form-group">
+                            <h4>Дата народження</h4>
+                            {{ form.birth_date.errors }}
+                            {{ form.birth_date }}
+                        </div>
+
+                        <div class="form-group">
+                            <h4>Інформація про розшукувану особу </h4>
+                            {{ form.text.errors }}
+                            {{ form.text }}<br/>
+                        </div>
+
+                        <div class="form-group">
+                            <h4>Фото </h4>
+                            {{ form.image.errors }}
+                            {{ form.image }}
+                        </div>
+
+
+                        <div class="col-md-12">
+
+                            <div class="text-center"><input type="submit" class="btn btn-primary btn-lg"
+                                                            value="Зберегти"></div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

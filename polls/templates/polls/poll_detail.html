@@ -1,0 +1,166 @@
+{% extends "base.html"%}
+{% load static %}
+{% block title %}Опитування-"{{poll.question|truncatechars:25}}". Інформаційна система "Розумне місто".{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/polls.css' %}">
+                <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+            {% if allowed %}
+
+            <div class="col-md-12">
+
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Інструменти модератора:</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="col-md-6">
+                            <a href="../update/{{ poll.id }}"><button type="button" class="btn btn-block btn-primary">Редагувати опитування</button></a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <a href="../delete/{{ poll.id }}"><button type="button"  data-toggle="modal" data-target="#modal_hidearticle" class="btn btn-block btn-danger">Видалити опитування</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if messages %}
+                <div class="col-md-6 messages">
+                    {% for message in messages %}
+                    <div {% if message.tags %} class="{{ message.tags }} "{% endif %}>
+                        {{ message }}
+                        <a class="exit" style="float: right; "> <i class="fa  fa-close"></i></a></div>
+                    {% endfor %}
+
+                </div>
+            {% endif %}
+            <div class="col-md-12">
+
+            <h2><div class="text-center">{{poll.question}}</div></h2>
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <i class="fa fa-clock-o"></i>
+
+              <h3 class="box-title">Опитування триває з {{ poll.date_start|date:" d-m-Y" }} по {{ poll.date_end|date:" d-m-Y" }}</h3>
+                  <div class="pull-right">{% if poll.archive == False %}<span class="label label-success">Активне голосування</span>{% else %}<span class="label label-gray"> Архівне Голосування</span>{% endif %} </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+<div class="col-md-6">
+              <blockquote>
+                <p>{{poll.description}}</p>
+              </blockquote>
+</div>
+<div class="{% if poll.has_image %}col-md-12{% else %}col-md-6{% endif %}">
+{% if poll.votable%}
+    <form action="../../polls/{{poll.id}}/vote/" method="post">
+        {% csrf_token %}
+        {% for choice in poll.choice_set.all %}
+
+
+            <div class="form-group">
+            <div class="{% if poll.has_image %}col-md-6{% endif %} radio">
+                <div class="{% if poll.has_image %}row img-size{% endif %}" >
+
+                    {% if poll.has_image %}
+                        {% if choice.image %}
+                            <a href="#" class="pop">
+                            <img src="{{ choice.image.url }}"></a>
+                        {% else %}
+                            <img src="{% static "img/empty.gif" %}">
+                        {% endif %}
+
+                    {% endif %}
+
+
+
+                <label class="radio {% if poll.has_image %}choice-radio{% endif %}">
+                    <input type="radio" name="choice_pk" value="{{choice.id}}" required> {{choice.choice}}
+                </label>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+        <div class="{% if poll.has_image %}col-md-12 text-center{% else %}pull-left{% endif %} "> <input type="submit" class="btn btn-primary" value="Голосувати"></div>
+    </form>
+{% else %}
+
+    <ul>
+
+        {% for choice in poll.choice_set.all %}
+            {% if not poll.has_image %}
+            <li>{{choice.choice}} - <b>{{choice.count_votes}}</b></li>
+            {% endif %}
+        {% endfor %}
+
+    </ul>
+
+    {% for choice in poll.choice_set.all %}
+        {% if poll.has_image %}
+         <div class="col-md-6 poll-vote" >
+             <div class="row img-size ">
+                {% if choice.image %}
+                    <a href="#" class="pop">
+                    <img src="{{ choice.image.url }}" ></a>
+                {% else %}
+                    <img src="{% static "img/empty.gif" %}" >
+                {% endif %}
+            </div>
+             <b>{{choice.count_votes}}</b>
+           </div>
+         {% endif %}
+    {% endfor %}
+
+{% endif %}
+</div>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+    </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+
+        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-body" >
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <img src="" class="imagepreview" style="width: 100%;" >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </section><!-- /.content -->
+
+
+<script>
+
+    $(function() {
+            $('.pop').on('click', function() {
+                $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                $('#imagemodal').modal('show');
+            });
+    });
+
+    $('.exit').click(function(){
+        $(this).parent().toggle();
+    });
+</script>
+{% endblock %}

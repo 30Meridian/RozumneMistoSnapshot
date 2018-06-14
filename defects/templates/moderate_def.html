@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Сторінка модератора. Дефекти ЖКГ. Інформаційна система "Розумне місто".{% endblock %}
+{% load staticfiles %}
+
+
+
+{% block content %}
+
+ <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+    <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Заявки на модерації</a></li>
+              <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Відхилені</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                <b>Пам'ятка по модерації доданих заявок на усунення дефектів ЖКГ:</b>
+
+                <p><code>"На модерації"</code> - заявка не показується нікому окрім модераторів та адміністраторів
+                    проекту. Вам потрібно
+                    перевірити заявку на відповідність правилам і прийняти рішення: Призначити відповідальну організацію, Відхилити, виставити статус "Виконана" або "Запланована".
+                </p>
+
+
+                {% if defects_moderate %}
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th style="width: 115px">Дата створення</th>
+                        <th style="width: 115px">Номер заявки</th>
+                      <th>Назва дефекту </th>
+
+
+                    </tr>
+
+                    {% for defect_moderate in defects_moderate %}
+                         {% if defect_moderate.last_issue.status == 0  %}
+                    <tr>
+
+
+                    <td class="valign"><a href="../defects/{{ defect_moderate.id }}" class="title-defect_moderate">{{ defect_moderate.created|date:"d-m-Y h:m" }}</a></td>
+                    <td class="vert-align"><a href="../defects/{{ defect_moderate.id }}" class="title-defect_moderate">{{ defect_moderate.id }}</a></td>
+                    <td class="valign"><a href="../defects/{{ defect_moderate.id }}" class="title-defect_moderate">{{ defect_moderate.title|truncatewords:25 }}</a></td>
+
+
+                    </tr>
+                        {% endif %}
+            {% endfor %}
+
+              </tbody></table>
+              
+              {% else %}
+                На жаль, для Вашого міста поки що немає заявок на модерацію
+              {% endif %}
+              
+              
+              
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2">
+               <code>Відхилені заявки</code> - це заявки, які не пройшли модерацію.<br/><br/>
+
+             {% if defects_disaprove %}
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th style="width: 115px">Дата створення</th>
+                        <th style="width: 115px">Номер заявки</th>
+                      <th>Назва дефекту </th>
+
+
+                    </tr>
+
+                    {% for defect_disaprove in defects_disaprove %}
+            {% if defect_disaprove.last_issue.status == 3  %}
+                <tr>
+
+
+                <td class="valign"><a href="../defects/{{ defect_disaprove.id }}" class="title-defect_disaprove">{{ defect_disaprove.created|date:"d-m-Y h:m" }}</a></td>
+                <td class="vert-align"><a href="../defects/{{ defect_disaprove.id }}" class="title-defect_disaprove">{{ defect_disaprove.id }}</a></td>
+                <td class="valign"><a href="../defects/{{ defect_disaprove.id }}" class="title-defect_disaprove">{{ defect_disaprove.title|truncatewords:25 }}</a></td>
+
+
+                </tr>
+                        {% endif %}
+            {% endfor %}
+              </tbody></table>
+              
+              {% else %}
+                На жаль, для Вашого міста поки що немає заявок на модерацію
+              {% endif %}
+              
+
+
+              </div>
+              <!-- /.tab-pane -->
+
+
+              <!-- /.tab-pane -->
+            </div>
+
+
+            <!-- /.tab-content -->
+          </div>
+
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+
+{% endblock %}
+

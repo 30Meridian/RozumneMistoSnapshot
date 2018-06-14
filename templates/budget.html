@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Відкритий бюджет. Інформаційна система "Розумне місто". {% endblock %}
+{% block head_top %}
+<script src="{% static 'plugins/chartjs/Chart.min.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+            <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+{% autoescape off %}{{ openbudget }}{% endautoescape %}
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+{% endblock %}
+
+
+    <script type="application/javascript">
+ $('.togg-budget').nextUntil('tr.togg-budget').toggle();
+
+$('.togg-budget').click(function(){
+   $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
+    $(this).nextUntil('tr.togg-budget').slideToggle(100, function(){
+    });
+});
+</script>

@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}Картка аварійної зони "{{ issue.title }}". Інформаційна система "Розумне місто".{% endblock %}
+{% load staticfiles %}
+
+
+{% block content %}
+<!-- Main content -->
+    <section class="content-header">
+      <h1>Картка - {{ issue.title }}{% if is_allowed %} <a href="../smartroads/edit/{{ issue.id }}" class="btn btn-sm btn-default">Редагувати</a>{% endif %} </h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+        <li><a href="../smartroads">Усі картки</a></li>
+        <li class="active">Картка аварійної зони</li>
+      </ol>
+    </section>
+
+        <section class="content">
+{% if allowed %}
+        <div class="box">
+                    <div class="box-header with-border">
+              <h3 class="box-title"></h3>
+            </div>
+                     <div class="box-body">
+
+
+                    </div>
+                </div>
+ {% endif %}
+
+
+          <!-- Default box -->
+          <div class="box">
+          <div class="box-header with-border">
+              <h3 class="box-title">Статус: {{issue.status_ref.title}}</h3>
+
+                    <div class="pull-right">
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f23dc3c4265dc08"></script>
+<div class="addthis_sharing_toolbox"></div>
+                    </div>
+            </div>
+
+                <div class="box-body">
+
+<div id="map" style="width: 970px; height: 300px;"></div>
+
+
+  <script>
+      function initMap() {
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 14,
+              center: {lng: {{ issue.lon }}, lat: {{issue.lat}}}
+          });
+          setMarkers(map);
+      }
+
+
+      function setMarkers(map) {
+        var infowindow = new google.maps.InfoWindow({
+          maxWidth: 1900
+        });
+
+      var pinOpen = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|dd4b39");
+      var pinGet = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|3c8dbc");
+      var pinDone = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00a65a");
+
+
+
+                var marker{{ issue.id }} = new google.maps.Marker({
+                  position: {lat: {{issue.lat}}, lng: {{issue.lon}}},
+                  map: map,
+                    {% if issue.status_ref.id == 1%}
+                        icon: pinOpen,
+                    {% elif issue.status_ref.id == 3 %}
+                        icon: pinDone,
+                    {% elif issue.status_ref.id == 2 %}
+                        icon: pinGet,
+                    {% endif %}
+
+                  title: '{{ issue.title }}'
+                });
+
+
+                google.maps.event.addListener(marker{{ issue.id }}, 'click', function() {
+                  infowindow{{ issue.id }}.open(map,marker{{ issue.id }});
+                });
+
+
+      }
+
+    </script>
+
+  <br/>
+                <div class="box">
+                    <div class="box-header with-border">
+              <h3 class="box-title">Опис аварійної зони</h3>
+            </div>
+                     <div class="box-body">
+                         {% autoescape off %}
+                {{ issue.description }}
+                         {% endautoescape %}
+
+                    </div>
+                </div>
+
+ {% if issue.status_ref.id == 2 or issue.status_ref.id == 2 %}
+                <div class="box">
+                    <div class="box-header with-border">
+              <h3 class="box-title">Що потрібно змінити?</h3>
+            </div>
+                     <div class="box-body">
+                         {% autoescape off %}
+                {{ issue.what_to_do }}
+                         {% endautoescape %}
+
+                    </div>
+                </div>
+{% endif %}
+
+                <div class="box">
+                    <div class="box-header with-border">
+              <h3 class="box-title">Яка орієнтовна вартість робіт?</h3>
+            </div>
+                     <div class="box-body">
+                         {% if issue.cost %}
+                             {% autoescape off %}
+                            {{ issue.cost }}
+                             {% endautoescape %}
+                         {% else %}
+                            Визначається
+                         {% endif %}
+
+                    </div>
+                </div>
+
+
+           {% if issue.status_ref.id == 3 %}
+            <div class="box">
+                    <div class="box-header with-border">
+              <h3 class="box-title">Які роботи проведені?</h3>
+            </div>
+                     <div class="box-body">
+                         {% autoescape off %}
+                {{ issue.resolution }}
+                         {% endautoescape %}
+
+                    </div>
+                </div>
+            {% endif %}
+                </div>
+
+
+                </div><!-- /.box-body -->
+
+        </section><!-- /.content -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap">
+    </script>
+{% endblock %}

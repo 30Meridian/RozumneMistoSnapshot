@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Успішно відправлено. Інформаційна система "Розумне місто".
+{% endblock title %}
+
+{% block head_top %}
+    <meta http-equiv="refresh" content="2;{% url 'investmap:list' townslug %}">
+{% endblock head_top %}
+
+{% block content %}
+    <div class="content">
+        <div class="box">
+            <div class="box-body">
+                <h4>Ви успішно відправили проект!</h4>
+                <p>Ваші дані передані модераторам на розгляд.</p>
+            </div>
+        </div>
+    </div>
+{% endblock content%}

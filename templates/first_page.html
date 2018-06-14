@@ -1,0 +1,895 @@
+{% load static %}
+<!doctype html>
+<!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en-gb" class="isie ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en-gb" class="no-js">
+<!--<![endif]-->
+{#  <script type="text/javascript" src="{% static 'plugins/jQuery/jQuery-2.1.4.min.js' %}"></script>#}
+{#    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>#}
+{#    <script type="text/javascript" src="{% static 'new-version/js/universal/jquery.js'%}"></script>#}
+{#    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>#}
+<head>
+  <title>Розумне місто</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/ico"/>
+  <!-- Favicon -->
+  <!-- this styles only adds some repairs on idevices  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google fonts - witch you want to use - (rest you can just remove) -->
+  <script type="text/javascript" src="{% static 'plugins/jQuery/jQuery-2.1.4.min.js' %}"></script>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Dancing+Script:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+  <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <!-- ######### CSS STYLES ######### -->
+  <link rel="stylesheet" href="{% static 'new-version/css/reset.css'%}" type="text/css" />
+  <!-- font awesome icons -->
+  <link rel="stylesheet" href="{% static 'new-version/css/font-awesome/css/font-awesome.min.css'%}">
+  <!-- simple line icons -->
+  <link rel="stylesheet" type="text/css" href="{% static 'new-version/css/simpleline-icons/simple-line-icons.css'%}" media="screen" />
+  <!-- animations -->
+  <link href="{% static 'new-version/js/animations/css/animations.min.css'%}" rel="stylesheet" type="text/css" media="all" />
+  <!-- responsive devices styles -->
+
+  <!-- shortcodes -->
+  <link rel="stylesheet" media="screen" href="{% static 'new-version/css/shortcodes.css'%}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'new-version/css/style.css'%}" type="text/css" />
+  <link rel="stylesheet" media="screen" href="{% static 'new-version/css/owl.carousel.min.css'%}" type="text/css" />
+  <link rel="stylesheet" media="screen" href="{% static 'new-version/css/owl.theme.default.css'%}" type="text/css" />
+  <!-- just remove the below comments witch color skin you want to use -->
+  <!--<link rel="stylesheet" href="css/colors/blue.css" />-->
+  <link rel="stylesheet" href="{% static 'new-version/css/colors/green.css'%}" />
+  <!--<link rel="stylesheet" href="css/colors/cyan.css" />-->
+  <!--<link rel="stylesheet" href="css/colors/orange.css" />-->
+  <!--<link rel="stylesheet" href="css/colors/lightblue.css" />-->
+  <!--<link rel="stylesheet" href="css/colors/pink.css" />-->
+  <!--<link rel="stylesheet" href="css/colors/purple.css" />-->
+  <!--<link rel="stylesheet" href="css/colors/bridge.css" />-->
+  <!--<link rel="stylesheet" href="css/colors/slate.css" />-->
+  <!--<link rel="stylesheet" href="css/colors/yellow.css" />-->
+  <!--<link rel="stylesheet" href="css/colors/darkred.css" />-->
+  <!-- just remove the below comments witch bg patterns you want to use -->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-default.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-one.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-two.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-three.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-four.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-five.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-six.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-seven.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-eight.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-nine.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-ten.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-eleven.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-twelve.css" />-->
+  <!--<link rel="stylesheet" href="css/bg-patterns/pattern-thirteen.css" />-->
+  <!-- mega menu -->
+  <link href="{% static 'new-version/js/mainmenu/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'new-version/js/mainmenu/menu-3.css'%}" rel="stylesheet">
+  <!-- slide panel -->
+  <link rel="stylesheet" type="text/css" href="{% static 'new-version/js/slidepanel/slidepanel.css'%}">
+  <!-- MasterSlider -->
+  <link rel="stylesheet" href="{% static 'new-version/js/masterslider/style/masterslider.css'%}" />
+  <link rel="stylesheet" href="{% static 'new-version/js/masterslider/skins/default/style.css'%}" />
+  <!-- owl carousel -->
+{#  <link href="{% static 'new-version/js/carouselowl/owl.transitions.css'%}" rel="stylesheet">#}
+{#  <link href="{% static 'new-version/js/carouselowl/owl.carousel.css'%}" rel="stylesheet">#}
+  <!-- icon hover -->
+  <link rel="stylesheet" href="{% static 'new-version/js/iconhoverefs/component.css'%}" />
+  <!-- basic slider -->
+  <link rel="stylesheet" href="{% static 'new-version/js/basicslider/bacslider.css'%}" />
+  <!-- cubeportfolio -->
+  <link rel="stylesheet" type="text/css" href="{% static 'new-version/js/cubeportfolio/cubeportfolio.min.css'%}">
+  <!-- flexslider -->
+  <link rel="stylesheet" href="{% static 'new-version/js/flexslider/flexslider.css'%}" type="text/css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="{% static 'new-version/js/flexslider/skin.css'%}" />
+  <!-- tabs -->
+  <link rel="stylesheet" type="text/css" href="{% static 'new-version/js/tabs/assets/css/responsive-tabs3.css'%}">
+  <!-- accordion -->
+  <link rel="stylesheet" type="text/css" href="{% static 'new-version/js/accordion/style.css'%}" />
+  <!-- forms -->
+  <link rel="stylesheet" href="{% static 'new-version/js/form/sky-forms.css'%}" >
+      <link rel="stylesheet" media="screen" href="{% static 'new-version/css/responsive-leyouts.css'%}" type="text/css" />
+ <link rel="stylesheet" href="{% static 'new-version/css/responsive.css'%}" type="text/css" media="all">
+</head>
+
+<body>
+
+  <div class="site_wrapper">
+    <header class="header innerpages">
+      <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="{% url 'first_page:index' %}">
+            <img src="{% static 'new-version/images/logo1.png'%}" alt="">
+          </a>
+        </div>
+        <!-- Navigation Menu -->
+        <nav class="menu_main">
+          <div class="navbar yamm navbar-default">
+
+              <div class="navbar-header">
+                <div class="navbar-toggle .navbar-collapse .pull-right " data-toggle="collapse" data-target="#navbar-collapse-1"> <span>Menu</span>
+                  <button type="button"> <i class="fa fa-bars"></i></button>
+                </div>
+              </div>
+              <div id="navbar-collapse-1" class="navbar-collapse collapse pull-right">
+                <ul class="nav navbar-nav">
+                  <li class="dropdown" ><a href="{% url 'first_page:projects_about' %}">Проект <span></span></a>
+                    <ul class="dropdown-menu stwo multilevel" role="menu">
+                      <li><a href="{% url 'first_page:projects_about' %}#meta">Мета проекту</a></li>
+                      <li><a href="{% url 'first_page:projects_about' %}#services">Наші мікросервіси</a></li>
+                      <li><a href="{% url 'first_page:projects_about' %}#citizens">Мешканцям</a></li>
+                      <li><a href="{% url 'first_page:projects_about' %}#goverment">Владі</a></li>
+                      <li><a href="{% url 'first_page:projects_about' %}#connect">Підключити місто</a></li>
+                    </ul>
+                  </li>
+                  <li class="" ><a href="{% url 'first_page:team' %}" >Команда</a>
+                  <li class="" ><a href="{% url 'first_page:results' %}" >Результати</a>
+                  <li class="" ><a href="{% url 'first_page:contacts' %}" >Контакти</a>
+                  </li>
+                </ul>
+              </div>
+
+          </div>
+        </nav>
+        <!-- end Navigation Menu -->
+            {% if request.user.is_authenticated %}
+                <div class="menu_right">
+                    <a href="/profile/{{ request.user.id }}" class="buynow"><i class="fa fa-user"></i>{{ request.user.get_full_name }}</a>
+                {% if request.session.town and request.user.is_authenticated %}
+
+                        <a href="/{{ request.user.towns.all.0.slug }}" class="buynow">{{ request.user.towns.all.0.name }}</a>
+
+            {% endif %}
+                </div>
+            {% else %}
+                <div class="menu_right">
+                    <a href="/accounts/login/" class="buynow">Вхід/Реєстрація</a>
+                </div>
+            {% endif %}
+
+
+      </div>
+    </header>
+   {% block content %}
+    <div class="features_sec0">
+      <div class="all-text">
+        <h3 class="head-main"> “Розумне місто” - всеукраїнський інструмент керування своїм містом.</h3>
+      </div>
+      <div class="container">
+        <div class="owl-carousel owl-theme my-slider">
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/defects.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong> Дефекти ЖКГ </strong></figcaption>
+            </figure>
+          </div>
+
+{#          <div class="advantage-item">#}
+{#            <figure class="advantage">#}
+{#              <div class="slide-img">#}
+{#                <img class="advantage-img" src="{% static 'new-version/images/svg/advantage1.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">#}
+{#              </div>#}
+{#              <figcaption><strong> Зручний та інтуітивно зрозумілий інтерфейс </strong></figcaption>#}
+{#            </figure>#}
+{#          </div>#}
+{#            #}
+{#          <div class="advantage-item">#}
+{#            <figure class="advantage">#}
+{#              <div class="slide-img">#}
+{#                <img class="advantage-img" src="{% static 'new-version/images/svg/advantage2.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">#}
+{#              </div>#}
+{#              <figcaption><strong> Багатофункціональність </strong></figcaption>#}
+{#            </figure>#}
+{#          </div>#}
+{#            #}
+{#          <div class="advantage-item">#}
+{#            <figure class="advantage">#}
+{#              <div class="slide-img">#}
+{#                <img class="advantage-img" src="{% static 'new-version/images/svg/advantage3.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">#}
+{#              </div>#}
+{#              <figcaption><strong> Можливість встановлення додаткових модулів </strong></figcaption>#}
+{#            </figure>#}
+{#          </div>#}
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/news.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Новини міста</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/petition1.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Петиції</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/poll.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Опитування</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/e-service.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Електроні послуги</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/open.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Відкриті фінанси</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/card.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Відкритий бюджет</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/purchase.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Електронні закупівлі</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/blood.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Донорство крові</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/pills.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Реєстр ліків</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="advantage-item">
+            <figure class="advantage">
+              <div class="slide-img">
+                <img class="advantage-img" src="{% static 'new-version/images/svg/building.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">
+              </div>
+              <figcaption><strong>Черги на житло</strong></figcaption>
+            </figure>
+          </div>
+
+{#          <div class="advantage-item   ">#}
+{#            <figure class="advantage">#}
+{#              <div class="slide-img">#}
+{#                <img class="advantage-img" src="{% static 'new-version/images/svg/advantage4.svg'%}" alt="Зручний та інтуітивно зрозумілий інтерфейс">#}
+{#              </div>#}
+{#              <figcaption><strong> Розподілення доступу до модулів в залежності від обраного#}
+{#                                    міста </strong></figcaption>#}
+{#            </figure>#}
+{#          </div>#}
+
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- Slider ======================================= -->
+    <div class="content_fullwidth search">
+      <div class="container">
+        <div class="one_full stcode_title8">
+
+      <h2><span class="line"></span><span class="text">Знайди своє місто <!-- <strong>місто</strong> --></span></h2>
+          <div class="search-city">
+            <input class="search-city__input" type="text" id="project" placeholder="Знайди своє місто">
+            <input class="search-city__button" type="submit" value="">
+          </div>
+
+       </div>
+      </div>
+    </div>
+    <div class="content_fullwidth content-map">
+      <div class="one_full">
+             <div id="map" style="height: 500px;"></div>
+      </div>
+      <!-- end google map -->
+    </div>
+    <div class="content_fullwidth news">
+      <div class="container">
+        <div class="one_full stcode_title8 spec">
+
+      <h2><span class="line"></span><span class="text">Останні новини</span></h2>
+
+
+       </div>
+        <!-- end section -->
+          <div class="row">
+        <div class="news-block" id="news-feed">
+</div>
+                  </div>
+          </div>
+        </div>
+
+      <div class="news-section">
+          <div class="container">
+              <div class="row">
+
+              </div>
+          </div>
+      </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="show-more">
+                        <a href="#!" id="show-news" class="but_medium2"><i class="fa fa-spinner fa-lg imagede"></i>&nbsp; Хочеш ще?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <!-- end section -->
+      <!-- end features section 31 -->
+      <!-- end recent works -->
+      <div class="clearfix"></div>
+      <!-- end features section 4 -->
+      <div class="clearfix"></div>
+    {% endblock %}
+      <footer class="footer style2">
+        <div class="container">
+          <div class="one_fourth">
+            <div class="footer-logo">
+              <a href="index.html">
+                <img src="{% static 'new-version/images/footer-logo1.png'%}" alt="">
+                <p class="logo-text1">розумне місто</p>
+                <p class="logo-text2">електронне врядування</p>
+              </a>
+            </div>
+          </div>
+          <div class="one_fourth links-one">
+            <div class="qlinks">
+              <!-- <h4 class="lmb">Useful Links</h4> -->
+              <ul>
+                <li><a href="{% url 'first_page:projects_about' %}"><i class="fa fa-angle-right"></i> Про проект</a></li>
+                <li><a href="{% url 'first_page:projects_about' %}#goverment"><i class="fa fa-angle-right"></i> Для місцевої влади</a></li>
+                <li><a href="{% url 'first_page:projects_about' %}#citizens"><i class="fa fa-angle-right"></i> Для мешканців</a></li>
+                <li><a href="{% url 'first_page:projects_about' %}#connect"><i class="fa fa-angle-right"></i> Як підключити місто?</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- end links -->
+          <div class="one_fourth links-two">
+            <div class="qlinks">
+              <!-- <h4 class="lmb">Useful Links</h4> -->
+              <ul>
+                <li><a href="{% url 'first_page:team' %}"><i class="fa fa-angle-right"></i> Команда</a></li>
+                <li><a href="{% url 'first_page:results' %}"><i class="fa fa-angle-right"></i> Результати</a></li>
+                <li><a href="{% url 'first_page:contacts' %}"><i class="fa fa-angle-right"></i> Контакти</a></li>
+                <li><a href="../rules_common.html"><i class="fa fa-angle-right"></i> Правила користування сайтом</a></li>
+              </ul>
+            </div>
+            <!-- end footer blogs -->
+          </div>
+          <!-- end address -->
+          <!-- end site info -->
+          <div class="one_fourth last">
+            <!-- <h4>Address Info</h4> -->
+            <ul class="faddress">
+              <li><i class="fa fa-map-marker fa-lg"></i>&nbsp; вул. Старокиївська, 10и, Київ, 04116</li>
+              <li><i class="fa fa-phone"></i>&nbsp;Відділ продажу: +38(067) 569-44-22</li>
+              <li><i class="fa fa-phone"></i>&nbsp;Відділ підтримки: +38(044) 539-44-22</li>
+              <li><i class="fa fa-phone"></i>&nbsp;Відділ підтримки: +38(067) 549-44-22</li>
+              <li><a href="mailto:office@rozumnemisto.org"><i class="fa fa-envelope"></i>&nbsp; office@rozumnemisto.org</a></li>
+            </ul>
+            <div class="clearfix margin_top2"></div>
+          </div>
+          <!-- end about -->
+        </div>
+        <!-- end footer -->
+        <div class="clearfix"></div>
+        <div class="copyright_info two">
+          <div class="container">
+            <div class="clearfix divider_dashed10"></div>
+            <div class="one_half animate" data-anim-type="fadeInRight">
+              Copyright © 2017 Розумне місто. Всі права захищені. <a href="http://www.rozumnemisto.org/rules_common">Правила використання</a>
+            </div>
+            <div class="one_half last">
+              <ul class="footer_social_links two">
+                <li class="animate" data-anim-type="zoomIn"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <!-- <li class="animate" data-anim-type="zoomIn"><a href="#"><i class="fa fa-twitter"></i></a></li> -->
+                <li class="animate" data-anim-type="zoomIn"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- end copyright info -->
+      </footer>
+      <a href="#" class="scrollup">Scroll</a>
+      <!-- end scroll to top of the page-->
+    </div>
+    <!-- ######### JS FILES ######### -->
+
+    <!-- get jQuery from the google apis -->
+    <script type="text/javascript" src="{% static 'new-version/js/universal/jquery.js'%}"></script>
+    <!-- style switcher -->
+    <script src="{% static 'new-version/js/style-switcher/jquery-1.js'%}"></script>
+    <script src="{% static 'new-version/js/style-switcher/styleselector.js'%}"></script>
+    <!-- animations -->
+    <script src="{% static 'new-version/js/animations/js/animations.min.js'%}" type="text/javascript"></script>
+    <!-- slide panel -->
+    <script type="text/javascript" src="{% static 'new-version/js/slidepanel/slidepanel.js'%}"></script>
+    <!-- mega menu -->
+    <script src="{% static 'new-version/js/mainmenu/bootstrap.min.js'%}"></script>
+    <script src="{% static 'new-version/js/mainmenu/customeUI.js'%}"></script>
+    <!-- MasterSlider -->
+    <script src="{% static 'new-version/js/masterslider/jquery.easing.min.js'%}"></script>
+    <script src="{% static 'new-version/js/masterslider/masterslider.min.js'%}"></script>
+    <script src="{% static 'new-version/js/owl.carousel.min.js'%}"></script>
+
+  <style>
+      .ui-autocomplete {
+      background-color: white;
+      width: 400px;
+      max-height: 400px;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      z-index: 100;
+      font-size: 14px;
+      list-style-type: none;
+}
+  </style>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+      var projects = [];
+                     $.ajax({
+                         url: '/filter-cities',
+                         type: 'POST',
+                         dataType: 'json',
+                                success: function (data) {
+                                    projects = data;
+                                    $( "#project" ).autocomplete({
+                                    minLength: 0,
+                                    source: data,
+                                    focus: function( event, ui ) {
+                                    $( "#project" ).val( ui.item.value );
+                                    return false;
+                                    },
+                                 select: function( event, ui ) {
+                                    $( "#project" ).val( ui.item.value );
+                                    $( "#project-description" ).html( ui.item.desc );
+                                    $( "#project-region" ).html( ui.item.region );
+                                    $( "#project-type" ).html( ui.item.type );
+                                    return false;
+                          }
+                             })
+                    .autocomplete( "instance" )._renderItem = function( ul, item ) {
+                    $("#project").on('keyup', function (e) {
+                                        if (e.keyCode == 13) {
+                                            projects.forEach(function (town) {
+                                                if(town.value === $( "#project" ).val()) {
+                                                    console.log(town.value);
+                                                    window.location.href = "/" + String(town.desc)
+                                                }
+                                            })
+                                        }
+                    });
+                      return $('<li style="border: solid; border-width: 1px; border-top: 0px solid; border;">')
+                        .append( '<div>' + '<strong><a id="link-1" href="/' + String(item.desc) + '">' +  item.type + ' ' + item.label + ' ' + '</a>' + '</strong>' + '(' + item.region +  ')' + '</div>')
+                              .appendTo(ul);
+                        };
+                         }
+                     });
+    });
+  </script>
+
+
+
+
+    <script type="text/javascript">
+    (function($) {
+      "use strict";
+
+      var slider = new MasterSlider();
+      // adds Arrows navigation control to the slider.
+      slider.control('arrows');
+      slider.control('bullets');
+
+      slider.setup('masterslider', {
+        width: 1400, // slider standard width
+        height: 750, // slider standard height
+        space: 0,
+        speed: 45,
+        layout: 'fullwidth',
+        loop: true,
+        preload: 0,
+        autoplay: true,
+        view: "basic"
+      });
+
+    })(jQuery);
+    </script>
+
+    <!-- scroll up -->
+    <script src="{% static 'new-version/js/scrolltotop/totop.js'%}" type="text/javascript"></script>
+    <!-- sticky menu -->
+    <script type="text/javascript" src="{% static 'new-version/js/mainmenu/sticky-main.js'%}"></script>
+    <script type="text/javascript" src="{% static 'new-version/js/mainmenu/modernizr.custom.75180.js'%}"></script>
+    <!-- forms -->
+    <script src="{% static 'new-version/js/form/jquery.form.min.js'%}"></script>
+    <script src="{% static 'new-version/js/form/jquery.validate.min.js'%}"></script>
+    <script type="text/javascript">
+    (function($) {
+      "use strict";
+
+      $(function() {
+        // Validation
+        $("#sky-form").validate({
+          // Rules for form validation
+          rules: {
+            name: {
+              required: true
+            },
+            email: {
+              required: true,
+              email: true
+            },
+            message: {
+              required: true,
+              minlength: 10
+            }
+          },
+
+          // Messages for form validation
+          messages: {
+            name: {
+              required: 'Please enter your name',
+            },
+            email: {
+              required: 'Please enter your email address',
+              email: 'Please enter a VALID email address'
+            },
+            message: {
+              required: 'Please enter your message'
+            }
+          },
+
+          // Ajax form submition
+          submitHandler: function(form) {
+            $(form).ajaxSubmit({
+              success: function() {
+                $("#sky-form").addClass('submited');
+              }
+            });
+          },
+
+          // Do not change code below
+          errorPlacement: function(error, element) {
+            error.insertAfter(element.parent());
+          }
+        });
+      });
+
+    })(jQuery);
+    </script>
+
+    <!-- cubeportfolio -->
+    <script type="text/javascript" src="{% static 'new-version/js/cubeportfolio/jquery.cubeportfolio.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'new-version/js/cubeportfolio/main.js'%}"></script>
+    <script type="text/javascript" src="{% static 'new-version/js/cubeportfolio/main2.js'%}"></script>
+    <!-- flexslider -->
+    <script defer src="{% static 'new-version/js/flexslider/jquery.flexslider.js'%}"></script>
+    <script defer src="{% static 'new-version/js/flexslider/custom.js'%}"></script>
+    <!-- owl carousel -->
+{#    <script src="{% static 'new-version/js/carouselowl/owl.carousel.js'%}"></script>#}
+    <!-- basic slider -->
+    <script type="text/javascript" src="{% static 'new-version/js/basicslider/bacslider.js'%}"></script>
+    <script type="text/javascript">
+    (function($) {
+      "use strict";
+
+      $(document).ready(function() {
+        // $(".main-slider-container").sliderbac();
+        $(".owl-carousel").owlCarousel({
+          items: 6,
+          loop: true,
+          autoplay: true,
+          nav: true,
+          dots: false,
+          autoplayTimeout: 1500,
+          responsive: {
+            0: {
+              items: 1
+            },
+            480: {
+              items: 2
+            },
+            600: {
+              items: 3
+            },
+            1000: {
+              items: 4
+            },
+            1200: {
+              items: 5
+            },
+            1600: {
+              items: 6
+            }
+          }
+        });
+      });
+
+    })(jQuery);
+    </script>
+
+    <!-- tabs -->
+    <script src="{% static 'new-version/js/tabs/assets/js/responsive-tabs.min.js'%}" type="text/javascript"></script>
+    <!-- Accordion-->
+    <script type="text/javascript" src="{% static 'new-version/js/accordion/jquery.accordion.js'%}"></script>
+    <script type="text/javascript" src="{% static 'new-version/js/accordion/custom.js'%}"></script>
+    <!-- animate number -->
+    <script src="{% static 'new-version/js/aninum/jquery.animateNumber.min.js'%}"></script>
+
+    <script type="text/javascript" src="{% static 'new-version/js/tooltips/jquery.darktooltip.js'%}"></script>
+    <script type="text/javascript" src="{% static 'new-version/js/universal/custom.js'%}"></script>
+
+    <script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.pjax.min.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'js/livesearch.js' %}"></script>#}
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    {% block footerjs %}
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap"></script>
+        <script>
+            function initMap() {
+                var markers = [];
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 6,
+                    center: {lat: 48.924, lng: 31.887},
+                    scrollwheel: false,
+                });
+
+                {% for town in town %}
+                    var string = '{{ town.name|escapejs }}'.replace("місто", '');
+                    var label = string.match(/([^\s\"]+?)\w{0}/g)[0];
+                    var marker{{ town.id }} = new google.maps.Marker({
+                        position: {lat: Number('{{ town.map_lon }}'), lng: Number('{{ town.map_lat }}')},
+                        label: label,
+                        title: '{{ town.name|escapejs }}'
+                    });
+                    markers.push(marker{{ town.id }});
+
+                    var infowindow{{ town.id }} = new google.maps.InfoWindow({
+                        content: 'Місто: "{{ town.name }}"' +
+                        "<br/><a href='../{{ town.slug }}/home' target=_blank><div class='pull-right'>перейти до міста</div></a>"
+                    });
+
+                    google.maps.event.addListener(marker{{ town.id }}, 'click', function () {
+                        infowindow{{ town.id }}.open(map, marker{{ town.id }});
+                    });
+                {% endfor %}
+
+                // Add a marker clusterer to manage the markers.
+                var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            }
+        </script>
+
+
+        <script>
+            $(function () {
+                var end_date = new Date();
+                var $window = $(window);
+                var $document = $(document);
+                var $news_feed = $('#news-feed');
+
+                function bind() {
+                    {#                $window.scroll(function () {#}
+                    {#                    if($window.scrollTop() + $window.height() > $document.height() - 100) {#}
+                    {#                        ajaxRequest(bind);#}
+                    {#                        $window.unbind('scroll');#}
+                    {#                    }#}
+                    {#                })#}
+                }
+
+                function createFeed(data) {
+                    var flag = true;
+                    console.log('Triggered');
+                    data['value'].forEach(function (value) {
+                        if (value['type'] == 1) {
+                            $news_feed.append(
+                                    $('<li>').attr('class', 'timelabel').append(
+    {#                                        $('<span>').attr('class', 'bg-gray').append(value['date'])#}
+                                    ));
+                        }
+                        else if (value['type'] == 2) {
+                            $news_feed.append(
+                                    $('<div>').attr('class', 'col-md-6').append(
+                                                    $('<div>').attr('class', 'timeline-body').attr('style', 'overflow: auto')
+                                                            .append(
+                                                                    $('<div>').attr('class', 'col-md-12').append(
+                                                                            $('<a>').attr('href', '/' + value['town_slug'] + '/' + value['module_link'] + value['id']).append(
+                                                                                    $('<img>').attr('src', value['image'] || 'http://placehold.it/1170x520').attr('class', 'margin')
+
+                                                                                            .error(function () {
+                                                                                                $(this).attr('src', '/static/img/empty.gif')
+                                                                                            })
+                                                                            )
+                                                                    )
+                                                            ).append(
+    {#                                        $('<i>').attr('class', value['class'])#}
+                                    ).append(
+                                            $('<div>').attr('class', 'timeline-item').append(
+                                                    $('<div>').attr('class', 'time col-md-4').append(
+                                                            $('<i>').attr('class', 'fa fa-clock-o').append(' ' + value['datetime'])
+                                                    )
+                                            ).append(
+                                                    $('<div>').attr('class', 'timeline-header').append(
+                                                            $('<div>').attr('class', 'btn-group').append(
+                                                                    $('<a>').attr('class', 'btn btn-default btn-xs')
+                                                                            .attr('href', '/' + value['town_slug'] + '/')
+                                                                            .append(value['town_name'])
+                                                            ).append(
+                                                                    $('<a>').attr('class', 'btn btn-default btn-xs')
+                                                                            .attr('href', '/' + value['town_slug'] + '/' + value['module_link'])
+                                                                            .append(value['module_name'])
+                                                            )
+                                                    )
+                                            ).append(
+                                                            $('<div>').attr('class', 'col-md-12').append(
+    {#                                                                $('<p>').attr('style', 'font-size: 14px').append(value['status'])#}
+                                                            ).append(
+                                                                    $('<a>').attr('href', '/' + value['town_slug'] + '/' + value['module_link'] + value['id'])
+                                                                            .attr('style', 'font-size: 18px;')
+                                                                            .append(value['header'])
+                                                            ).append(
+                                                                    $('<p>').append(
+                                                                            $('<small>').append(value['content'])
+                                                                    )
+                                                            ).append(
+                                                                    $('<div>').attr('class', 'clearfix divider_line9')
+                                                            )
+                                                    )
+                                            )
+                                            {#                                                .append(#}
+                                            {#                                                $('<div>').attr('class', 'timeline-footer').append(#}
+                                            {#                                                        $('<a>').attr('href', value['town_slug']+'/' + value['module_link'] + value['id'])#}
+                                            {#                                                                .attr('class', 'btn btn-default btn-xs')#}
+                                            {#                                                                .append('Ознайомитись')#}
+                                            {#                                                )#}
+                                            {#                                        )#}
+                                    )
+                            )
+                        } else {
+                            /*No more news*/
+                            flag = false;
+                        }
+                    });
+
+                    end_date = new Date(data['end_date']);
+                    if (flag) bind();
+                    else {
+                        console.log('Unbinded');
+                        $news_feed.append(
+                                $('<li>').attr('class', 'time-label').append(
+                                        $('<span>').attr('class', 'bg-red').append('Схоже ви досягли останніх подій.\n Далі шляху немає')
+                                )
+                        )
+                    }
+
+                    $('#image').remove()
+                }
+
+                function ajaxRequest() {
+                    $news_feed.append('<div id="image" class="text-center"><i class="fa fa-refresh fa-spin" style="font-size: 65px; color: #00733e"></i></div>');
+                    $.ajax({
+                        url: '/lastnews',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            "date": end_date.toJSON()
+                        },
+                        success: function (response) {
+                            createFeed(response);
+                        }
+                    })
+                }
+
+                function taggleStatisticLiveStream() {
+                    $('#puls-button').click(function () {
+                        $('#statistic').hide();
+                        $('#news-feed').show();
+                        $('#puls-button').removeClass('active').addClass('active');
+                        $('#statistic-button').removeClass('active');
+                    });
+
+                    $('#statistic-button').click(function () {
+                        $('#news-feed').hide();
+                        $('#statistic').show();
+                        $('#statistic-button').removeClass('active').addClass('active');
+                        $('#puls-button').removeClass('active');
+                    })
+                }
+
+                $document.ready(function () {
+                    $('#statistic').hide();
+                    {#                ajaxRequest();#}
+                    ajaxRequest(bind);
+                    taggleStatisticLiveStream();
+                });
+
+                $('#show-news').click(function () {
+                    {#                ajaxRequest();#}
+                    ajaxRequest(bind);
+                })
+
+            });
+
+            $('.open-menu').click(function (e) {
+                $('.main-menu').toggleClass('open');
+            });
+            {#    $('.navmenu').offcanvas();#}
+        $(window).on("scroll", function () {
+        if ($(this).scrollTop() > 100) {
+            $(".header").addClass("header-new");
+        }
+        else {
+            $(".header").removeClass("header-new");
+        }
+        });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 0) {
+                $('#scroller').fadeIn();
+                $('#scroller').css({'opacity' : '1'});
+            } else {
+                $('#scroller').fadeOut();
+            }
+        });
+
+        $('#scroller').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 400);
+            return false;
+        });
+
+        </script>
+    {% endblock footerjs %}
+
+</body>
+
+
+</html>

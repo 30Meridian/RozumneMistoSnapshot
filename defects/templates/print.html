@@ -1,0 +1,68 @@
+<section class="content-header">
+
+
+                  <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+{% for i in issue.getTree %}
+    {% if i.firstIssue %}
+
+
+           <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Заявка №{{ i.id }}. {{i.title}} </h3>
+                </div>
+        <div class="box-body">
+
+            <div class="col-md-6">
+
+				<div class="cardOwner"><strong>Додав:</strong> {{i.owner_ref.first_name}} {{issue.owner_ref.last_name}}</div>
+			<div class="cardTown"><strong>Місто: </strong>{{i.town_ref}}</div>
+			<div class="cardAddress"><strong>Адреса: </strong>
+				{{i.address}}
+                </div>
+    <div class="cardDescr"><strong>Опис заявки:</strong><br/> {{i.description}}</div>
+
+
+                </div>
+
+                <div class="col-md-6">
+				<div class="cardMap">
+					<img style="max-width: 100%" src="http://maps.googleapis.com/maps/api/staticmap?center={{issue.map_lat}},{{issue.map_lon}}&amp;zoom=18&amp;size=450x250&amp;markers=color:red|{{issue.map_lat}},{{issue.map_lon}}&amp;sensor=false"></div>
+                </div></div></div>
+
+            <div class="box">
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Зображення:</h3>
+                </div>
+                <div class="box-body">
+
+			{% if i.issuefiles_set.all.0.document_ref.type_name == "image" %}
+            <div class="defbox">
+				<a href="/media/defects/{{i.issuefiles_set.all.0.document_ref.file_name}}" data-lightbox="card_image" target="_blank">
+                    <img class="cardImgItem" src="/media/defects/medium.{{i.issuefiles_set.all.0.document_ref.file_name}}"></a>
+			</div>
+            {% endif %}
+
+
+
+                </div>
+        </div>
+
+    {% endif %}
+
+
+		{% endfor %}
+
+ </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->

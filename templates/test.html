@@ -1,0 +1,3496 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Розумне місто - сервіс для "розумного міста".{% endblock %}
+{% block head_top %}
+<script src="{% static 'plugins/chartjs/Chart.min.js' %}"></script>
+{% endblock %}
+{% block content %}
+                  <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+
+<div class="text-center"><h2>Доходи та витрати бюджету м.Кузнецовськ за 2015 рік</h2>
+     <a><i class="fa fa-facebook-official" style="font-size: 24px"></i></a>
+   <a> <i class="fa fa-vk" style="font-size: 24px"></i></a>
+   <a> <i class="fa fa-odnoklassniki-square" style="font-size: 24px"></i></a>
+   <a> <i class="fa  fa-twitter" style="font-size: 24px"></i></a> </div>
+
+
+
+<br/>
+           <div class="col-md-12">
+
+                    <div class="callout callout-success">
+
+                <p><div class="text-center"><h3>Надходження бюджету</h3></div></p>
+              </div>
+                    </div>
+
+        <div class="col-md-7" style>
+   <h3> Загальний фонд </h3>
+<table class="table table-budget">
+<tr>
+    <th>
+        Код
+    </th>
+    <th>
+        Назва статті доходу
+    </th>
+    <th>
+        Затверджено, тис. грн.
+    </th>
+	<th>
+        Отримано, тис. грн.
+    </th>
+    <th>
+        Відсоток
+    </th>
+</tr>
+    <tr class="bud-tab-main">
+    <th colspan="2">
+ПОДАТКОВІ НАДХОДЖЕННЯ:
+
+    </th>
+
+    <th>
+92 274,7
+    </th>
+	<th>
+98 155,6
+    </th>
+    <th>
+        <div class="badge bg-green">106,4%</div>
+    </th>
+</tr>
+<tr class="togg-budget">
+    <th>
+        11000000
+
+    </th>
+    <th>
+        <span>+</span> Податки на доходи, податки на прибуток, податки на збільшення ринкової вартості
+
+    </th>
+    <th>
+        73 307,6
+    </th>
+	<th>
+        78 284,7
+    </th>
+    <th>
+        <div class="badge bg-green">106,8%</div>
+    </th>
+</tr>
+<tr>
+    <td>
+
+
+    </td>
+    <td>
+       Податок та збір на доходи фізичних осіб
+    </td>
+    <td>
+       73 161,1
+    </td>
+	<td>
+        78 300,1
+    </td>
+    <td>
+         <span class="badge bg-green">107,0%</span>
+    </td>
+</tr>
+<tr>
+    <td>
+
+
+    </td>
+    <td>
+        Податок на прибуток підприємств
+    </td>
+    <td>
+       146,5
+    </td>
+	<td>
+        -15,4
+    </td>
+    <td>
+        <span class="badge bg-red">-10,5%</span>
+    </td>
+</tr>
+<tr class="togg-budget">
+    <th>
+        13000000
+    </th>
+    <th>
+        Рентна плата та плата за використання інших природних ресурсів
+
+    </th>
+    <th>
+        30,5
+    </th>
+	<th>
+        30,5
+    </th>
+    <th>
+        <div class="badge bg-green">100,1%</div>
+    </th>
+</tr>
+
+<tr class="togg-budget">
+    <th>
+14000000
+    </th>
+    <th>
+    Акцизний податок (внутрішні податки на товари та послуги)  
+    </th>
+    <th>
+3 750,0
+    </th>
+	<th>
+4 216,8
+    </th>
+    <th>
+        <div class="badge bg-green">112,4%</div>
+    </th>
+</tr>
+<tr class="togg-budget">
+    <th>
+18000000
+    </th>
+    <th>
+        <span>+</span> Місцеві податки
+    </th>
+    <th>
+15 128,4
+    </th>
+	<th>
+15 566,2
+    </th>
+    <th>
+        <div class="badge bg-green">102,9%</div>
+    </th>
+</tr>
+<tr>
+    <td>
+
+    </td>
+    <td>
+Податок на майно
+    </td>
+    <td>
+9 941,4
+    </td>
+	<td>
+10 228,8
+    </td>
+    <td>
+         <span class="badge bg-green">102,9%</span>
+    </td>
+</tr>
+<tr>
+    <td>
+
+    </td>
+    <td>
+Туристичний збір 
+    </td>
+    <td>
+3,0
+    </td>
+	<td>
+3,4
+    </td>
+    <td>
+         <span class="badge bg-green">112,3%</span>
+    </td>
+</tr><tr>
+    <td>
+
+    </td>
+    <td>
+Збір за провадження деяких видів підприємницької діяльності, що справлявся до 1 січня 2015 року
+    </td>
+    <td>
+0,0
+    </td>
+	<td>
+-40,9
+    </td>
+    <td>
+         <span class="badge bg-red">0,0%</span>
+    </td>
+</tr><tr>
+    <td>
+
+    </td>
+    <td>
+Єдиний податок  
+    </td>
+    <td>
+5 184,0
+    </td>
+	<td>
+5 374,9
+    </td>
+    <td>
+         <span class="badge bg-green">103,7%</span>
+    </td>
+</tr>
+<tr class="togg-budget">
+    <th>
+19000000
+    </th>
+    <th>
+        Екологічний податок 
+    </th>
+    <th>
+58,2
+    </th>
+	<th>
+57,3
+    </th>
+    <th>
+        <div class="badge bg-yellow">98,5%</div>
+    </th>
+</tr>
+  <tr class="togg-budget" bgcolor="#f4f4f4">
+    <th colspan="2">
+НЕПОДАТКОВІ НАДХОДЖЕННЯ:
+
+    </th>
+
+    <th>
+1 009,3
+    </th>
+	<th>
+1 032,0
+    </th>
+    <th>
+        <div class="badge bg-green">102,2%</div>
+    </th>
+</tr>
+    <tr class="togg-budget">
+    <th>
+ 21000000
+   </th>
+    <th>
+        <span>+</span> Доходи від  власності та підприємницької діяльності
+
+    </th>
+    <th>
+114,9
+    </th>
+	<th>
+116,6
+    </th>
+    <th>
+        <div class="badge bg-green">101,5%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Частина чистого прибутку (доходу) державних або комунальних унітарних підприємств та їх об'єднань, що вилучається до відповідного бюджету, та дивіденди (дохід), нараховані на акції (частки, паї) господарських товариств, у статутних капіталах яких є державна або комунальна власність
+    </td>
+    <td>
+78,4
+    </td>
+	<td>
+78,4
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші надходження
+    </td>
+    <td>
+36,5
+    </td>
+	<td>
+38,2
+    </td>
+    <td>
+         <span class="badge bg-green">104,6%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+    <th>
+22000000
+    </th>
+    <th>
+        <span>+</span> Адміністративні збори та платежі, доходи від некомерційної господарської діяльності 
+
+    </th>
+    <th>
+765,1
+    </th>
+	<th>
+782,2
+    </th>
+    <th>
+        <div class="badge bg-green">102,2%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Плата за надання адміністративних послуг
+
+    </td>
+    <td>
+193,9
+    </td>
+	<td>
+196,3
+    </td>
+    <td>
+         <span class="badge bg-green">101,2%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Надходження від орендної плати за користування цілісним майновим комплексом та іншим державним майном  
+    </td>
+    <td>
+466,7
+    </td>
+	<td>
+467,1
+    </td>
+    <td>
+         <span class="badge bg-green">100,1%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Державне мито
+    </td>
+    <td>
+104,5
+    </td>
+	<td>
+118,9
+    </td>
+    <td>
+         <span class="badge bg-green">113,8%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+    <th>
+24000000
+    </th>
+    <th>
+     Інші неподаткові надходження  
+    </th>
+    <th>
+129,3
+    </th>
+	<th>
+133,2
+    </th>
+    <th>
+        <div class="badge bg-green">103,0%</div>
+    </th>
+</tr>
+
+<tr class="togg-budget" bgcolor="#f4f4f4">
+    <th colspan="2">
+ОФІЦІЙНІ ТРАНСФЕРТИ:
+
+    </th>
+
+    <th>
+121 042,9
+    </th>
+	<th>
+120 959,8
+    </th>
+    <th>
+        <div class="badge bg-yellow">99,9%</div>
+    </th>
+</tr>
+
+ <tr class="togg-budget" bgcolor="#f4f4f4">
+    <th colspan="2">
+ДОХОДИ ВІД ОПЕРАЦІЙ З КАПІТАЛОМ:
+
+    </th>
+
+    <th>
+4,8
+    </th>
+	<th>
+5,5
+    </th>
+    <th>
+        <div class="badge bg-green">114,6%</div>
+    </th>
+</tr>
+
+ <tr class="togg-budget">
+    <th colspan="2">
+ВСЬОГО:
+
+    </th>
+
+    <th>
+214 447,1
+    </th>
+	<th>
+220 260,3
+    </th>
+    <th>
+        <div class="badge bg-green">102,7%</div>
+    </th>
+</tr>
+</table>
+</div>
+
+        <div class="col-md-5">
+<h3> Візуалізація </h3>
+<div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Загальний фонд</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="chart-responsive">
+                    <canvas id="pieChart" height="320" width="410" style="width: 410px;
+                    height: 320px; max-width: 100%"></canvas>
+                  </div>
+                  <!-- ./chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-12">
+                  <ul class="nav nav-pills nav-stacked">
+                <li><i class="fa fa-circle-o text-red"></i> Податкові надходження
+                  <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 6,4%</span></li>
+                <li><i class="fa fa-circle-o text-green"></i>  Неподаткові надходження <span class="pull-right
+                text-green"><i class="fa
+                fa-angle-up"></i> 2,2%</span>
+                </li>
+                <li><i class="fa fa-circle-o text-yellow"></i> Офіційны трансфери
+                  <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 0,1%</span></li>
+                  <li><i class="fa fa-circle-o text-aqua"></i> Доходи від операцій з капіталом
+                  <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 14,6%</span></li>
+              </ul>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding">
+
+            </div>
+            <!-- /.footer -->
+          </div>
+</div>
+
+         <div class="col-md-7">
+   <h3> Cпеціальний фонд </h3>
+<table class="table table-budget">
+<tr>
+    <th>
+        Код
+    </th>
+    <th>
+        Назва статті доходу
+    </th>
+    <th>
+        Затверджено, тис. грн.
+    </th>
+	<th>
+        Отримано, тис. грн.
+    </th>
+    <th>
+        Відсоток
+    </th>
+</tr>
+    <tr class="bud-tab-main">
+    <th colspan="2">
+ПОДАТКОВІ НАДХОДЖЕННЯ:
+
+    </th>
+
+    <th>
+0
+    </th>
+	<th>
+-7,5
+    </th>
+    <th>
+        <div class="badge bg-red">0,0%</div>
+    </th>
+</tr>
+<tr class="togg-budget">
+    <th>
+        12000000
+
+    </th>
+    <th>
+        Податки на власність
+    </th>
+    <th>
+        0
+    </th>
+	<th>
+        1,7
+    </th>
+    <th>
+        <div class="badge bg-green">0,0%</div>
+    </th>
+</tr>
+
+<tr class="togg-budget">
+    <th>
+18000000
+    </th>
+    <th>
+        <span>+</span> Місцеві податки і збори
+    </th>
+    <th>
+0,0
+    </th>
+	<th>
+-9,2
+    </th>
+    <th>
+        <div class="badge bg-red">0,0%</div>
+    </th>
+</tr>
+  <tr class="togg-budget" bgcolor="#f4f4f4">
+    <th colspan="2">
+НЕПОДАТКОВІ НАДХОДЖЕННЯ:
+
+    </th>
+
+    <th>
+4 148,9
+    </th>
+	<th>
+6 111,6
+    </th>
+    <th>
+        <div class="badge bg-green">147,3%</div>
+    </th>
+</tr>
+    <tr class="togg-budget">
+    <th>
+ 24000000
+   </th>
+    <th>
+        <span>+</span> Інші неподаткові надходження
+    </th>
+    <th>
+85,2
+    </th>
+	<th>
+179,1
+    </th>
+    <th>
+        <div class="badge bg-green">210,2%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Надходження коштів пайової участі у розвитку інфраструктури населеного пункту
+    </td>
+    <td>
+80,0
+    </td>
+	<td>
+159,9
+    </td>
+    <td>
+         <span class="badge bg-green">199,8%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші надходження
+    </td>
+    <td>
+5,2
+    </td>
+	<td>
+19,3
+    </td>
+    <td>
+         <span class="badge bg-green">368,3%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+    <th>
+25000000
+    </th>
+    <th>
+        <span>+</span> Власні надходження бюджетних установ
+    </th>
+    <th>
+4 063,7
+    </th>
+	<th>
+5 932,5
+    </th>
+    <th>
+        <div class="badge bg-green">146,0%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Надходження від плати за послуги, що надаються бюджетними установами згідно із законодавством 
+
+    </td>
+    <td>
+4 063,7
+    </td>
+	<td>
+4 200,6
+    </td>
+    <td>
+         <span class="badge bg-green">103,4%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші джерела власних надходжень бюджетних установ  
+  
+    </td>
+    <td>
+0,0
+    </td>
+	<td>
+1 731,8
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+
+<tr class="togg-budget" bgcolor="#f4f4f4">
+    <th colspan="2">
+ДОХОДИ ВІД ОПЕРАЦІЙ З КАПІТАЛОМ:
+
+    </th>
+
+    <th>
+0
+    </th>
+	<th>
+12,4
+    </th>
+    <th>
+        <div class="badge bg-green">0,0%</div>
+    </th>
+</tr>
+
+ <tr class="togg-budget" bgcolor="#f4f4f4">
+    <th colspan="2">
+ЦІЛЬОВІ ФОНДИ:
+
+    </th>
+
+    <th>
+45,0
+    </th>
+	<th>
+26,0
+    </th>
+    <th>
+        <div class="badge bg-yellow">57,9%</div>
+    </th>
+</tr>
+     <tr class="togg-budget" bgcolor="#f4f4f4">
+    <th colspan="2">
+ІНШІ СУБВЕНЦІЇ:
+
+    </th>
+
+    <th>
+1 662,5
+    </th>
+	<th>
+1 638,0
+    </th>
+    <th>
+        <div class="badge bg-yellow">98,5%</div>
+    </th>
+</tr>
+
+ <tr class="togg-budget">
+    <th colspan="2">
+ВСЬОГО:
+
+    </th>
+
+    <th>
+5 856,4
+    </th>
+	<th>
+7 780,6
+    </th>
+    <th>
+        <div class="badge bg-green">132,9%</div>
+    </th>
+</tr>
+</table>
+</div>
+
+        <div class="col-md-5">
+<h3> Візуалізація </h3>
+<div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Спеціальний фонд</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="chart-responsive">
+                    <canvas id="pieChart1" height="320" width="410" style="width: 410px;
+                    height: 320px; max-width: 100%"></canvas>
+                  </div>
+                  <!-- ./chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-12">
+                  <ul class="nav nav-pills nav-stacked">
+                <li><i class="fa fa-circle-o text-grey"></i> Податкові надходження
+                  <span class="pull-right text-red"><i class="fa fa-angle-left"></i> 0,0%</span></li>
+                 <li><i class="fa fa-circle-o text-red"></i> Неподаткові надходження
+                  <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 47,3%</span></li>
+                <li><i class="fa fa-circle-o text-green"></i>  Інші субвенції <span class="pull-right
+                text-red"><i class="fa
+                fa-angle-down"></i> 1,5%</span>
+                </li>
+                <li><i class="fa fa-circle-o text-yellow"></i> Доходи від операцій з капіталом
+                  <span class="pull-right text-green"><i class="fa fa-angle-left"></i> 0,0%</span></li>
+                  <li><i class="fa fa-circle-o text-aqua"></i> Цільові фонди
+                  <span class="pull-right text-yellow"><i class="fa fa-angle-down"></i> 42,1%</span></li>
+              </ul>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+
+            <!-- /.footer -->
+          </div>
+</div>
+
+                <div class="col-md-12">
+
+                    <div class="callout callout-danger">
+
+                <p><div class="text-center"><h3>Видатки бюджету</h3></div></p>
+              </div>
+                    </div>
+
+
+       <div class="col-md-7">
+   <h3> Загальний фонд </h3>
+<table class="table table-budget">
+<tr>
+    <th>
+        Код
+    </th>
+    <th>
+        Назва статті витрати
+    </th>
+    <th>
+        Затверджено, тис. грн.
+    </th>
+	<th>
+        Витрачено, тис. грн.
+    </th>
+    <th>
+        Відсоток
+    </th>
+</tr>
+    <tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> ВИКОНАВЧИЙ КОМІТЕТ:
+
+    </th>
+
+    <th>
+63 984,0
+    </th>
+	<th>
+58 048,7
+    </th>
+    <th>
+        <div class="badge bg-green">90,7%</div>
+    </th>
+</tr>
+<tr>
+    <td>
+
+
+    </td>
+    <td>
+      Органи місцевого самоврядування
+    </td>
+    <td>
+      7 798,2
+    </td>
+	<td>
+    7 793,2
+    </td>
+    <td>
+         <span class="badge bg-green">99,9%</span>
+    </td>
+</tr>
+<tr>
+    <td>
+
+
+    </td>
+    <td>
+        Спеціалізовані лікарні та інші спеціалізовані заклади (центри, диспансери, госпіталі для інвалідів ВВВ, лепрозорії, медико - санітарні частини тощо, що мають ліжкову мережу)
+    </td>
+    <td>
+       46 739,1
+    </td>
+	<td>
+     41 143,5
+    </td>
+    <td>
+        <span class="badge bg-red">88,0%</span>
+    </td>
+</tr>
+<tr >
+    <td>
+
+    </td>
+    <td>
+        Інші видатки на соціальний захист населення
+    </td>
+    <td>
+        315,4
+    </td>
+	<td>
+        273,9
+    </td>
+    <td>
+        <div class="badge bg-green">86,8%</div>
+    </td>
+</tr>
+
+<tr >
+    <td>
+
+    </td>
+    <td>
+    Інші програми соціального захисту дітей
+ 
+    </td>
+    <td>
+17,5
+    </td>
+	<td>
+17,4
+    </td>
+    <th>
+        <div class="badge bg-green">99,9%</div>
+    </th>
+</tr>
+<tr>
+    <td>
+
+    </td>
+    <td>
+     Соціальні програми і заходи державних органів у справах молоді
+    </td>
+    <td>
+16,6
+    </td>
+	<td>
+16,6
+    </td>
+    <td>
+        <div class="badge bg-green">100,0%</div>
+    </td>
+</tr>
+<tr>
+    <td>
+
+    </td>
+    <td>
+Заходи з оздоровлення та відпочинку дітей, крім заходів з оздоровлення дітей, що здійснюються за рахунок коштів на оздоровлення громадян, які постраждали внаслідок Чорнобильської катастрофи
+
+    </td>
+    <td>
+73,1
+    </td>
+	<td>
+73,1
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+<tr>
+    <td>
+
+    </td>
+    <td>
+Житлово - експлуатаційне господарство
+
+    </td>
+    <td>
+184,1
+    </td>
+	<td>
+182,2
+    </td>
+    <td>
+         <span class="badge bg-green">99,0%</span>
+    </td>
+</tr><tr>
+    <td>
+
+    </td>
+    <td>
+Благоустрій міст, сіл, селищ
+
+    </td>
+    <td>
+5 064,8
+    </td>
+	<td>
+5 006,6
+    </td>
+    <td>
+         <span class="badge bg-red">98,9%</span>
+    </td>
+</tr><tr>
+    <td>
+
+    </td>
+    <td>
+Відшкодування різниці між розміром ціни (тарифу) на житлово - комунальні послуги, що затверджувалися або погоджувалися рішенням місцевого органу виконавчої влади та органу місцевого самоврядування, та розміру економічно обгрунтованих витрат на їх виробництво
+  
+    </td>
+    <td>
+400,0
+    </td>
+	<td>
+400,0
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Періодичні видання (газети та журнали)
+
+    </td>
+    <td>
+180,0
+    </td>
+	<td>
+180,0
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Проведення навчально - тренувальних зборів і змагань
+
+    </td>
+    <td>
+277,0
+    </td>
+	<td>
+276,9
+    </td>
+    <td>
+         <span class="badge bg-green">99,9%</span>
+    </td>
+</tr>
+
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Розробка схем та проектних рішень масового застосування
+    </td>
+    <td>
+16,2
+    </td>
+	<td>
+16,2
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Землеустрій
+    </td>
+    <td>
+220,1
+    </td>
+	<td>
+196,6
+    </td>
+    <td>
+         <span class="badge bg-green">89,3%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші заходи у сфері автомобільного транспорту
+
+    </td>
+    <td>
+110,0
+    </td>
+	<td>
+16,8
+    </td>
+    <td>
+         <span class="badge bg-green">15,2%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на проведення робіт, пов"язаних із будівництвом, реконструкцією, ремонтом та утриманням автомобільних доріг
+
+    </td>
+    <td>
+1 157,3
+    </td>
+	<td>
+1 157,1
+    </td>
+    <td>
+         <span class="badge bg-green">99,9%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші природоохоронні заходи
+
+    </td>
+    <td>
+58,2
+    </td>
+	<td>
+44,0
+    </td>
+    <td>
+         <span class="badge bg-green">75,6%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Заходи у сфері захисту населенняі територій від надзвичайниї ситуацій техногенного та природного характеру
+
+    </td>
+    <td>
+161,5
+    </td>
+	<td>
+111,5
+    </td>
+    <td>
+         <span class="badge bg-green">69,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Проведення виборів депутатів місцевих рад та сільських, селищних, міських голів
+
+    </td>
+    <td>
+422,5
+    </td>
+	<td>
+410,1
+    </td>
+    <td>
+         <span class="badge bg-green">97,1%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+417,9
+    </td>
+	<td>
+417,9
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші видатки
+
+    </td>
+    <td>
+354,4
+    </td>
+	<td>
+314,9
+    </td>
+    <td>
+         <span class="badge bg-green">88,9%</span>
+    </td>
+</tr>
+<tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> ФІНАНСОВЕ УПРАВЛІННЯ ВИКОНАВЧОГО КОМІТЕТУ:
+
+    </th>
+
+    <th>
+16 861,1
+    </th>
+	<th>
+16 681,8
+    </th>
+    <th>
+        <div class="badge bg-green">98,9%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Органи місцевого самоврядування
+    </td>
+    <td>
+1 609,4
+    </td>
+	<td>
+1 609,3
+    </td>
+    <td>
+         <span class="badge bg-green">99,9%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Резервний фонд
+
+    </td>
+    <td>
+16,0
+    </td>
+	<td>
+0,0
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Реверсна дотація
+
+    </td>
+    <td>
+15 056,4
+    </td>
+	<td>
+15 056,4
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+179,2
+    </td>
+	<td>
+16,0
+    </td>
+    <td>
+         <span class="badge bg-green">8,9%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> ВІДДІЛ ОСВІТИ ВИКОНАВЧОГО КОМІТЕТУ:
+
+    </th>
+
+    <th>
+59 899,6
+    </th>
+	<th>
+59 676,3
+    </th>
+    <th>
+        <div class="badge bg-green">99,6%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Органи місцевого самоврядування
+
+    </td>
+    <td>
+460,5
+    </td>
+	<td>
+460,5
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Дошкільні заклади освіти
+
+    </td>
+    <td>
+24 795,7
+    </td>
+	<td>
+24 792,8
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Загальноосвітні школи ( в т.ч. школа-дитячий садок, інтернат при школі, спеціалізовані школи, ліцеї, гімназії, колегіуми)
+
+    </td>
+    <td>
+29 780,4
+    </td>
+	<td>
+29 564,4
+    </td>
+    <td>
+         <span class="badge bg-green">99,3%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Позашкільні заклади освіти, заходи із позашкільної роботи з дітьми
+    </td>
+    <td>
+2 622,0
+    </td>
+	<td>
+2 622,8
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Методична робота, інші заходи у сфері народної освіти
+
+    </td>
+    <td>
+748,4
+    </td>
+	<td>
+748,4
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Централізовані бухгалтерії обласних, міських, районних відділів освіти
+    </td>
+    <td>
+457,6
+    </td>
+	<td>
+457,6
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Групи централізованого господарського обслуговування
+    </td>
+    <td>
+632,3
+    </td>
+	<td>
+632,3
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Допомога дітям сиротам та дітям позбавлених батьківського піклування, яким виповнюється 18 років
+
+    </td>
+    <td>
+7,2
+    </td>
+	<td>
+7,2
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Заходи з оздоровлення та відпочинку дітей, крім заходів з оздоровлення дітей, що здійснюються за рахунок коштів на оздоровлення громадян, які постраждали внаслідок Чорнобильської катастрофи
+
+    </td>
+    <td>
+313,9
+    </td>
+	<td>
+309,8
+    </td>
+    <td>
+         <span class="badge bg-green">98,7%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+81,5
+    </td>
+	<td>
+81,5
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> УПРАВЛІННЯ ПРАЦІ ТА СОЦІАЛЬНОГО ЗАХИСТУ НАСЕЛЕННЯ:
+
+    </th>
+
+    <th>
+47 376,3
+    </th>
+	<th>
+47 299,9
+    </th>
+    <th>
+        <div class="badge bg-green">99,8%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Дитячі будинки (в т.ч. сімейного типу, прийомні сім"ї).
+
+    </td>
+    <td>
+231,4
+    </td>
+	<td>
+230,6
+    </td>
+    <td>
+         <span class="badge bg-green">99,6%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги ветеранам війни, особам, на яких поширюється чинність Закону України "Про статус ветеранів війни, гарантії їх соціального захисту, особам які мають особливі заслуги перед Батьківщиною, вдовам (вдівцям) та батькам померлих (загиблих) осіб, які мають особливі заслуги перед Батьківщиною, жертвам нацистських переслідувань та реабілітованим громадянам , які стали інвалідами внаслідок репресій або є пенсіонерами на житлово - комунальні послуги
+
+    </td>
+    <td>
+732,4
+    </td>
+	<td>
+732,4
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги ветеранам війни, особам, на яких поширюється чинність Закону України "Про статус ветеранів війни, гарантії їх соціального захисту, особам які мають особливі заслуги перед Батьківщиною, вдовам (вдівцям) та батькам померлих (загиблих) осіб які мають особливі заслуги перед Батьківщиною, вдовам (вдівцям)  та батькам померлих (загиблих) осіб, які мають особливі заслуги перед Батьківщиною на придбання твердого палива та скрапленого газу
+
+    </td>
+    <td>
+20,9
+    </td>
+	<td>
+20,9
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші пільги ветеранам війни, ветеранам праці,  особам, на яких поширюється чинність Закону України "Про статус ветеранів війни, гарантії їх соціального захисту, особам які мають особливі  заслуги перед Батьківщиною, вдовам (вдівцям) та батькам померлих (загиблих) осіб, які мають особливі заслуги перед Батьківщиною, ветеранам праці, громадянам, які стали інвалідами внаслідок репресій або є пенсіонерами
+
+    </td>
+    <td>
+27,2
+    </td>
+	<td>
+17,7
+    </td>
+    <td>
+         <span class="badge bg-green">65,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги ветеранам військової служби та ветеранам органів внутрішніх справ, ветеранам податкової міліції, ветеранам державної пожедної охорони, ветеранам Державної кримінально - виконавчої служби, ветеранам служби цивільного захисту, ветеранам Державної служби
+
+    </td>
+    <td>
+134,9
+    </td>
+	<td>
+134,9
+    </td>
+    <td>
+         <span class="badge bg-green">100%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги громадян, які постраждали внаслідок Чорнобильської катастрофи, дружинам (чоловікам) та опікунам (на час опікунства) дітей померлих громадян, смерть яких пов"язана х Чорнобильської катастрофою на житлово-комунальні послуги
+
+    </td>
+    <td>
+981,1
+    </td>
+	<td>
+981,1
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги громадян, які постраждали внаслідок Чорнобильської катастрофи, дружинам (чоловікам) та опікунам (на час опікунства) дітей померлих громадян, смерть яких пов"язана х Чорнобильської катастрофою на придбання твердого палива
+
+    </td>
+    <td>
+1,9
+    </td>
+	<td>
+1,9
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші пільги громадян, які постраждали внаслідок Чорнобильської катастрофи, дружинам (чоловікам) та опікунам (на час опікунства) дітей померлих громадян, смерть яких пов"язана з Чорнобильською катастрофою
+
+    </td>
+    <td>
+14,0
+    </td>
+	<td>
+6,4
+    </td>
+    <td>
+         <span class="badge bg-green">45,9%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги пенсіонерам з числа спеціалістів із захисту рослин, передбачені частиною чертвертою статті 20 Закону України "Про захист рослин" громадянам , передбачені пунктом "ї"частини першої статті 77 Основ законодавства про охорону здоров"я
+
+    </td>
+    <td>
+1,2
+    </td>
+	<td>
+1,2
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги на медичне обслуговування громадян, які постраждали внаслідок Чорнобильської катастрофи
+
+    </td>
+    <td>
+87,3
+    </td>
+	<td>
+87,3
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги окремим категоріям громадян з послуг зв"язку
+
+    </td>
+    <td>
+155,2
+    </td>
+	<td>
+149,1
+    </td>
+    <td>
+         <span class="badge bg-green">96,1%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги багатодітним сім'ям, дитячим будинкам сімейного типу та прийомним сім"ям , в яких не менше року проживають відповідно троє або більше дітей, а також сім"ям (крім багатодітних сімей), в в яких не менше року проживають троє і більше дітей, враховуючи тих, над якими встановлено опіку чи піклування на житлово-комунальні послуги
+
+    </td>
+    <td>
+362,6
+    </td>
+	<td>
+362,6
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги багатодітним сім'ям, дитячим будинкам сімейного типу та прийомним сім"ям , в яких не менше року проживають відповідно троє або більше дітей, а також сім"я  (крім багатодітних сімей) , в яких не менше року проживають троє і більше дітей, враховуючи тих, над якими встановлено опіку чи піклування  на придбання твердого палива та скрапленого газу
+
+    </td>
+    <td>
+4,5
+    </td>
+	<td>
+4,5
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Допомога в з"язку з вагітністю і пологами
+
+    </td>
+    <td>
+338,9
+    </td>
+	<td>
+338,9
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Допомога на догляд за дитиною віком до 3-х років
+
+    </td>
+    <td>
+298,3
+    </td>
+	<td>
+298,1
+    </td>
+    <td>
+         <span class="badge bg-green">99,9%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Допомога при народженні дитини
+
+    </td>
+    <td>
+20 609,6
+    </td>
+	<td>
+20 609,6
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Допомога на дітей, над якими встановлено опіку чи піклування
+
+    </td>
+    <td>
+1 416,7
+    </td>
+	<td>
+1 416,7
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Допомога на дітей одиноким матерям
+
+    </td>
+    <td>
+2 235,6
+    </td>
+	<td>
+2 235,6
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Тимчасова державна допомога дітям
+
+    </td>
+    <td>
+801,7
+    </td>
+	<td>
+801,7
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Допомога при усиновленні дитини
+
+    </td>
+    <td>
+71,4
+    </td>
+	<td>
+71,4
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Державна соціальна допомога малозабезпеченим сім"ям
+
+    </td>
+    <td>
+4 897,9
+    </td>
+	<td>
+4 897,9
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Субсидії населенню для відшкодування витрат на оплату житлово-комунальних послуг
+
+    </td>
+    <td>
+1 858,4
+    </td>
+	<td>
+1 858,4
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Субвенція населенню на відшкодування витрат на придбання твердого та рідкого палива та скрапленого газу
+
+    </td>
+    <td>
+59,3
+    </td>
+	<td>
+56,8
+    </td>
+    <td>
+         <span class="badge bg-green">95,6%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Компенсація населенню додаткових витрат на оплату послуг газопостачання, центрального опалення та центрального постачання гарячої води
+
+    </td>
+    <td>
+0,02
+    </td>
+	<td>
+0,02
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші видатки на соціальний захист населення
+
+    </td>
+    <td>
+523,4
+    </td>
+	<td>
+508,3
+    </td>
+    <td>
+         <span class="badge bg-green">97,1%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Допомога на догляд за інвалідами І чи ІІ групи внаслідок психічного розгляду
+
+    </td>
+    <td>
+1 146,7
+    </td>
+	<td>
+1 146,7
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Компенсація особам, які згідно із статтями 43 та 48 Гірничого закону України мають право на безоплатне отримання вугілля на побутові потреби, але проживають у будинках, що мають центральне опалення
+
+    </td>
+    <td>
+0,2
+    </td>
+	<td>
+0,2
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Витрати на поховання учасників бойових дій та інвалідів війни
+
+    </td>
+    <td>
+9,9
+    </td>
+	<td>
+3,3
+    </td>
+    <td>
+         <span class="badge bg-green">33,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Територіальні центри соціального обслуговування (надання соціальних послуг)
+
+    </td>
+    <td>
+1 001,6
+    </td>
+	<td>
+996,2
+    </td>
+    <td>
+         <span class="badge bg-green">99,5%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Виплати грошової компенсації фізичним особам, які надають соціальні послуги гроиадянам похилого віку, інвалідам, дітям - інвалідам, хворим, які не здатні до самообслуговування і потребують сторонньої допомоги
+
+    </td>
+    <td>
+103,1
+    </td>
+	<td>
+102,9
+    </td>
+    <td>
+         <span class="badge bg-green">99,8%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Центри рсоціальної реабілітації дітей інвалідів, центри професійної реабілітації інвалідів
+
+    </td>
+    <td>
+1 076,9
+    </td>
+	<td>
+1 076,9
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Пільги що надаються населенню (крім  ВВв та праці, органів внутрішніх справ та громадянам , які постраждали внаслідок Чорнобильської катастрофи) на оплату житлово-комунальних послуг та природного газу
+
+    </td>
+    <td>
+136,6
+    </td>
+	<td>
+136,6
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Фінансова підтримка громадських організацій інвалідів і ветеранів
+
+    </td>
+    <td>
+21,0
+    </td>
+	<td>
+21,0
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Державна соціальна допомога інвалідам з дитинства та дітям-інвалідам
+
+    </td>
+    <td>
+4 850,5
+    </td>
+	<td>
+4 850,5
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Компенсаційні виплати інвалідам на бензин, ремонт, тех. обслуговування автотранспорту та транспортне обслуговування
+
+    </td>
+    <td>
+18,1
+    </td>
+	<td>
+16,9
+    </td>
+    <td>
+         <span class="badge bg-green">93,2%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Компенсаційні виплати на пільговий проїзд автомобільним транспортом окремим категоріям населення
+
+    </td>
+    <td>
+152,0
+    </td>
+	<td>
+131,3
+    </td>
+    <td>
+         <span class="badge bg-green">86,4%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+13,2
+    </td>
+	<td>
+13,2
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Органи місцевого самоврядування
+
+    </td>
+    <td>
+2 979,9
+    </td>
+	<td>
+2 979,9
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+  <th colspan="2">
+        <span>+</span> ЦЕНТР СОЦІАЛЬНИХ СЛУЖБ ДЛЯ МОЛОДІ:
+    </th>
+    <th>
+816,9
+    </th>
+	<th>
+815,9
+    </th>
+    <th>
+        <div class="badge bg-green">99,9%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Утримання центрів соціальних служб сім"ї дітей та молоді
+
+    </td>
+    <td>
+814,7
+    </td>
+	<td>
+813,9
+    </td>
+    <td>
+         <span class="badge bg-green">99,9%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Заходи з оздоровлення та відпочинку дітей
+
+    </td>
+    <td>
+1,5
+    </td>
+	<td>
+1,5
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+0,6
+    </td>
+	<td>
+0,6
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+ <th colspan="2">
+        <span>+</span> ФОНД КОМУНАЛЬНОГО МАЙНА:
+    </th>
+    <th>
+182,0
+    </th>
+	<th>
+181,5
+    </th>
+    <th>
+        <div class="badge bg-green">99,7%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Органи місцевого самоврядування
+
+    </td>
+    <td>
+181,9
+    </td>
+	<td>
+181,4
+    </td>
+    <td>
+         <span class="badge bg-green">99,7%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+0,08
+    </td>
+	<td>
+0,08
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+</table>
+</div>
+
+        <div class="col-md-5">
+<h3> Візуалізація </h3>
+<div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Загальний фонд</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="chart-responsive">
+                    <canvas id="pieChart2" height="320" width="410" style="width: 410px;
+                    height: 320px; max-width: 100%"></canvas>
+                  </div>
+                  <!-- ./chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-12">
+                  <ul class="nav nav-pills nav-stacked">
+                <li><i class="fa fa-circle-o text-red"></i> Податкові надходження
+                  <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 6,4%</span></li>
+                <li><i class="fa fa-circle-o text-green"></i>  Неподаткові надходження <span class="pull-right
+                text-green"><i class="fa
+                fa-angle-up"></i> 2,2%</span>
+                </li>
+                <li><i class="fa fa-circle-o text-yellow"></i> Офіційны трансфери
+                  <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 0,1%</span></li>
+                  <li><i class="fa fa-circle-o text-aqua"></i> Доходи від операцій з капіталом
+                  <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 14,6%</span></li>
+              </ul>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding">
+
+            </div>
+            <!-- /.footer -->
+          </div>
+</div>
+
+
+         <div class="col-md-7">
+   <h3> Cпеціальний фонд </h3>
+<table class="table table-budget">
+<tr>
+    <th>
+        Код
+    </th>
+    <th>
+        Назва статті витрати
+    </th>
+    <th>
+        Затверджено, тис. грн.
+    </th>
+	<th>
+        Витрачено, тис. грн.
+    </th>
+    <th>
+        Відсоток
+    </th>
+</tr>
+    <tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> ВИКОНАВЧИЙ КОМІТЕТ:
+
+    </th>
+
+    <th>
+16 136,5
+    </th>
+	<th>
+15 126,8
+    </th>
+    <th>
+        <div class="badge bg-green">93,7%</div>
+    </th>
+</tr>
+<tr>
+    <td>
+
+
+    </td>
+    <td>
+      Органи місцевого самоврядування
+    </td>
+    <td>
+     969,9
+    </td>
+	<td>
+    1 028,0
+    </td>
+    <td>
+         <span class="badge bg-green">106,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+
+    </td>
+    <td>
+       Дошкільні заклади освіти
+    </td>
+    <td>
+      99,0
+    </td>
+	<td>
+     0,0
+    </td>
+    <td>
+        <span class="badge bg-red">0,0%</span>
+    </td>
+</tr>
+<tr>
+    <td>
+
+
+    </td>
+    <td>
+        Спеціалізовані лікарні та інші спеціалізовані заклади (центри, диспансери, госпіталі для інвалідів ВВВ, лепрозорії, медико - санітарні частини тощо, що мають ліжкову мережу)
+    </td>
+    <td>
+       1 705,5
+    </td>
+	<td>
+    1 593,4
+    </td>
+    <td>
+        <span class="badge bg-red">93,4%</span>
+    </td>
+</tr>
+<tr >
+    <td>
+
+    </td>
+    <td>
+      Житлово - експлуатаційне господарство
+
+    </td>
+    <td>
+        64,7
+    </td>
+	<td>
+        64,7
+    </td>
+    <td>
+        <div class="badge bg-green">100,0%</div>
+    </td>
+</tr>
+
+<tr >
+    <td>
+
+    </td>
+    <td>
+    Капітальний ремонт житлового фонду місцевих органів влади
+
+    </td>
+    <td>
+5 228,9
+    </td>
+	<td>
+4 569,7
+    </td>
+    <th>
+        <div class="badge bg-green">87,4%</div>
+    </th>
+</tr>
+<tr>
+    <td>
+
+    </td>
+    <td>
+    Благоустрій міст, сіл, селищ
+    </td>
+    <td>
+2 198,9
+    </td>
+	<td>
+2 194,2
+    </td>
+    <td>
+        <div class="badge bg-green">99,8%</div>
+    </td>
+</tr>
+<tr>
+    <td>
+
+    </td>
+    <td>
+Комбінати комунальних підприємств , районні виробничі об"єднання та інші підприємства, установи та організації житлово - комунального господарства
+    </td>
+    <td>
+60,0
+    </td>
+	<td>
+60,0
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+<tr>
+    <td>
+
+    </td>
+    <td>
+Проведення навчально-тренувальних зборів і змагань
+
+
+    </td>
+    <td>
+231,0
+    </td>
+	<td>
+230,6
+    </td>
+    <td>
+         <span class="badge bg-green">99,8%</span>
+    </td>
+</tr><tr>
+    <td>
+
+    </td>
+    <td>
+Капітальні вкладення
+    </td>
+    <td>
+2 221,8
+    </td>
+	<td>
+2 102,3
+    </td>
+    <td>
+         <span class="badge bg-red">94,6%</span>
+    </td>
+</tr><tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на проведення робіт, пов"язаних із будівництвом, реконструкцію, ремонтом та утриманням автомобільних доріг
+  
+    </td>
+    <td>
+1 460,2
+    </td>
+	<td>
+1 424,6
+    </td>
+    <td>
+         <span class="badge bg-green">97,6%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Охорона та раціональне використання природних ресурсів
+    </td>
+    <td>
+59,3
+    </td>
+	<td>
+57,5
+    </td>
+    <td>
+         <span class="badge bg-green">96,9%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Цільові фонди, утворені Верховною радою Автономної Республіки Крим, органами місцевого самоврядування і місцевими органами виконавчої влади
+    </td>
+    <td>
+45,0
+    </td>
+	<td>
+0,0
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+    </td>
+    <td>
+1 342,5
+    </td>
+	<td>
+1 321,6
+    </td>
+    <td>
+         <span class="badge bg-green">98,4%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші видатки
+
+    </td>
+    <td>
+449,6
+    </td>
+	<td>
+480,1
+    </td>
+    <td>
+         <span class="badge bg-green">106,8%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Надання пільгового довгострокового кредиту громадянам на будівництво (реконструкцію)та придбання житла
+
+    </td>
+    <td>
+0,0
+    </td>
+	<td>
+0,0
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+    <th colspan="2">
+        <span>+</span> ВІДДІЛ ОСВІТИ ВИКОНАВЧОГО КОМІТЕТУ:
+    </th>
+    <th>
+7 904,4
+    </th>
+	<th>
+ 9 089,4
+    </th>
+    <th>
+        <div class="badge bg-green">115,0%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Дошкільні заклади освіти
+
+    </td>
+    <td>
+4 194,5
+    </td>
+	<td>
+4 801,6
+    </td>
+    <td>
+         <span class="badge bg-green">114,5%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Загальноосвітні школи ( в т.ч. школа-дитячий садок, інтернат при школі) спеціалізовані школи, ліцеї, гімназії, колегіуми
+
+    </td>
+    <td>
+3 302,7
+    </td>
+	<td>
+3 740,6
+    </td>
+    <td>
+         <span class="badge bg-green">113,3%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Позашкільні заклади освіти, заходи із позашкільної роботи з дітьми
+
+    </td>
+    <td>
+25,9
+    </td>
+	<td>
+75,4
+    </td>
+    <td>
+         <span class="badge bg-green">290,6%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Методична робота, інші заходи у сфері народної освіти
+
+    </td>
+    <td>
+0,0
+    </td>
+	<td>
+77,0
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Групи централізованого господарського обслуговування
+
+    </td>
+    <td>
+0,0
+    </td>
+	<td>
+13,5
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+381,2
+    </td>
+	<td>
+381,2
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+<tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> ФІНАНСОВЕ УПРАВЛІННЯ ВИКОНАВЧОГО КОМІТЕТУ:
+
+    </th>
+
+    <th>
+31,4
+    </th>
+	<th>
+30,2
+    </th>
+    <th>
+        <div class="badge bg-green">96,1%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Органи місцевого самоврядування
+    </td>
+    <td>
+31,4
+    </td>
+	<td>
+30,2
+    </td>
+    <td>
+         <span class="badge bg-green">96,1%</span>
+    </td>
+</tr>
+
+    <tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> ВІДДІЛ ОСВІТИ ВИКОНАВЧОГО КОМІТЕТУ:
+
+    </th>
+
+    <th>
+7 904,0
+    </th>
+	<th>
+9 089,4
+    </th>
+    <th>
+        <div class="badge bg-green">115,0%</div>
+    </th>
+</tr>
+
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Дошкільні заклади освіти
+
+    </td>
+    <td>
+4 194,5
+    </td>
+	<td>
+4 801,6
+    </td>
+    <td>
+         <span class="badge bg-green">114,5%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Загальноосвітні школи ( в т.ч. школа-дитячий садок, інтернат при школі, спеціалізовані школи, ліцеї, гімназії, колегіуми)
+
+    </td>
+    <td>
+3 302,7
+    </td>
+	<td>
+3 740,7
+    </td>
+    <td>
+         <span class="badge bg-green">113,3%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Позашкільні заклади освіти, заходи із позашкільної роботи з дітьми
+    </td>
+    <td>
+25,9
+    </td>
+	<td>
+75,4
+    </td>
+    <td>
+         <span class="badge bg-green">260,6%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Методична робота, інші заходи у сфері народної освіти
+
+    </td>
+    <td>
+0
+    </td>
+	<td>
+77,0
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Групи централізованого господарського обслуговування
+    </td>
+    <td>
+0
+    </td>
+	<td>
+13,5
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+381,2
+    </td>
+	<td>
+381,2
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> ВІДДІЛ КУЛЬТУРИ ВИКОНАВЧОГО КОМІТЕТУ:
+
+    </th>
+
+    <th>
+2 140,6
+    </th>
+	<th>
+2 274,1
+    </th>
+    <th>
+        <div class="badge bg-green">90,7%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Бібліотеки
+
+    </td>
+    <td>
+53,1
+    </td>
+	<td>
+76,0
+    </td>
+    <td>
+         <span class="badge bg-green">143,3%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Музеї і виставки
+
+    </td>
+    <td>
+34,0
+    </td>
+	<td>
+49,8
+    </td>
+    <td>
+         <span class="badge bg-green">146,4%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Палаци і будинки культури, клуби та інші заклади клубного типу
+
+    </td>
+    <td>
+1 361,1
+    </td>
+	<td>
+1 361,1
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Школи естетичного виховання дітей
+
+    </td>
+    <td>
+503,9
+    </td>
+	<td>
+586,2
+    </td>
+    <td>
+         <span class="badge bg-green">116,3%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші культурно - освітні заклади та заходи
+
+    </td>
+    <td>
+16,5
+    </td>
+	<td>
+29,1
+    </td>
+    <td>
+         <span class="badge bg-green">176,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+171,9
+    </td>
+	<td>
+171,9
+    </td>
+    <td>
+         <span class="badge bg-green">100,0%</span>
+    </td>
+</tr>
+    <tr class="togg-budget">
+    <th colspan="2">
+<span>+</span> УПРАВЛІННЯ ПРАЦІ ТА СОЦІАЛЬНОГО ЗАХИСТУ НАСЕЛЕННЯ:
+
+    </th>
+
+    <th>
+602,9
+    </th>
+	<th>
+955,8
+    </th>
+    <th>
+        <div class="badge bg-green">158,5%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Органи місцевого самоврядування
+
+    </td>
+    <td>
+67,6
+    </td>
+	<td>
+74,9
+    </td>
+    <td>
+         <span class="badge bg-green">110,9%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Інші видатки на соціальний захист населення
+
+    </td>
+    <td>
+50,1
+    </td>
+	<td>
+44,0
+    </td>
+    <td>
+         <span class="badge bg-green">87,9%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Територіальні центри соціального обслуговування (надання соціальних послуг)
+
+    </td>
+    <td>
+29,3
+    </td>
+	<td>
+341,2
+    </td>
+    <td>
+         <span class="badge bg-green">1164,5%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Центри соціальної реабілітації дітей-інвалідів, центри професійної реабілітації інвалідів
+
+    </td>
+    <td>
+438,1
+    </td>
+	<td>
+477,7
+    </td>
+    <td>
+         <span class="badge bg-green">109,0%</span>
+    </td>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Видатки на покриття інших заборгованостей, що виникли у попередні роки
+
+    </td>
+    <td>
+17,9
+    </td>
+	<td>
+17,9
+    </td>
+    <td>
+         <span class="badge bg-green">100%</span>
+    </td>
+</tr>
+
+    <tr class="togg-budget">
+    <th colspan="2">
+        <span>+</span> ЦЕНТР СОЦІАЛЬНИХ СЛУЖБ ДЛЯ МОЛОДІ:
+    </th>
+    <th>
+0
+    </th>
+	<th>
+6,9
+    </th>
+    <th>
+        <div class="badge bg-green">0,0%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Утримання центрів соціальних служб сім"ї дітей та молоді
+
+    </td>
+    <td>
+0
+    </td>
+	<td>
+6,9
+    </td>
+    <td>
+         <span class="badge bg-green">0,0%</span>
+    </td>
+</tr>
+
+    <tr class="togg-budget">
+
+    <th colspan="2">
+        <span>+</span> ФОНД КОМУНАЛЬНОГО МАЙНА:
+    </th>
+    <th>
+35,9
+    </th>
+	<th>
+43,5
+    </th>
+    <th>
+        <div class="badge bg-green">121,0%</div>
+    </th>
+</tr>
+    <tr>
+    <td>
+
+    </td>
+    <td>
+Органи місцевого самоврядування
+
+    </td>
+    <td>
+35,9
+    </td>
+	<td>
+43,5
+    </td>
+    <td>
+         <span class="badge bg-green">121,0%</span>
+    </td>
+</tr>
+</table>
+</div>
+
+        <div class="col-md-5">
+<h3> Візуалізація </h3>
+<div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Спеціальний фонд</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="chart-responsive">
+                    <canvas id="pieChart3" height="320" width="410" style="width: 410px;
+                    height: 320px; max-width: 100%"></canvas>
+                  </div>
+                  <!-- ./chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-12">
+                  <ul class="nav nav-pills nav-stacked">
+                <li><i class="fa fa-circle-o text-grey"></i> Податкові надходження
+                  <span class="pull-right text-red"><i class="fa fa-angle-left"></i> 0,0%</span></li>
+                 <li><i class="fa fa-circle-o text-red"></i> Неподаткові надходження
+                  <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 47,3%</span></li>
+                <li><i class="fa fa-circle-o text-green"></i>  Інші субвенції <span class="pull-right
+                text-red"><i class="fa
+                fa-angle-down"></i> 1,5%</span>
+                </li>
+                <li><i class="fa fa-circle-o text-yellow"></i> Доходи від операцій з капіталом
+                  <span class="pull-right text-green"><i class="fa fa-angle-left"></i> 0,0%</span></li>
+                  <li><i class="fa fa-circle-o text-aqua"></i> Цільові фонди
+                  <span class="pull-right text-yellow"><i class="fa fa-angle-down"></i> 42,1%</span></li>
+              </ul>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+
+            <!-- /.footer -->
+          </div>
+</div>
+            </div>
+
+
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+    <script>
+
+  //-------------
+  //- PIE CHART -
+  //-------------
+  // Get context with jQuery - using jQuery's .get() method.
+  var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+  var pieChart = new Chart(pieChartCanvas);
+  var PieData = [
+    {
+      value: 35,
+      color: "#f56954",
+      highlight: "#f56954",
+      label: "Податкові надходження: 98155,6 тис.грн."
+    },
+    {
+      value: 15,
+      color: "#00a65a",
+      highlight: "#00a65a",
+      label: "Неподаткові надходження: 1032,0 тис.грн."
+    },
+    {
+      value: 45,
+      color: "#f39c12",
+      highlight: "#f39c12",
+      label: "Офіційний трансферт: 120959,8 тис.грн."
+    },
+    {
+      value: 5,
+      color: "#00c0ef",
+      highlight: "#00c0ef",
+      label: "Доходи від операцій з капіталом: 5,5 тис.грн."
+    },
+
+  ];
+  var pieChartCanvas = $("#pieChart1").get(0).getContext("2d");
+  var pieChart1 = new Chart(pieChartCanvas);
+  var PieData1 = [
+    {
+      value: 70,
+      color: "#f56954",
+      highlight: "#f56954",
+      label: "Неподаткові надходження: 6111,6 тис.грн."
+    },
+    {
+      value: 15,
+      color: "#00a65a",
+      highlight: "#00a65a",
+      label: "Інші субвенції: 1638,0 тис.грн."
+    },
+    {
+      value: 5,
+      color: "#f39c12",
+      highlight: "#f39c12",
+      label: "Доходи від операцій з капіталом: 12,4 тис.грн."
+    },
+    {
+      value: 10,
+      color: "#00c0ef",
+      highlight: "#00c0ef",
+      label: "Цільові фонди: 26,0 тис.грн."
+    },
+
+  ];
+  //-------------
+  //- PIE CHART -
+  //-------------
+  // Get context with jQuery - using jQuery's .get() method.
+  var pieChartCanvas = $("#pieChart2").get(0).getContext("2d");
+  var pieChart2 = new Chart(pieChartCanvas);
+  var PieData2 = [
+    {
+      value: 35,
+      color: "#f56954",
+      highlight: "#f56954",
+      label: "Податкові надходження: 98155,6 тис.грн."
+    },
+    {
+      value: 15,
+      color: "#00a65a",
+      highlight: "#00a65a",
+      label: "Неподаткові надходження: 1032,0 тис.грн."
+    },
+    {
+      value: 45,
+      color: "#f39c12",
+      highlight: "#f39c12",
+      label: "Офіційний трансферт: 120959,8 тис.грн."
+    },
+    {
+      value: 5,
+      color: "#00c0ef",
+      highlight: "#00c0ef",
+      label: "Доходи від операцій з капіталом: 5,5 тис.грн."
+    },
+
+  ];
+    //-------------
+  //- PIE CHART -
+  //-------------
+  // Get context with jQuery - using jQuery's .get() method.
+  var pieChartCanvas = $("#pieChart3").get(0).getContext("2d");
+  var pieChart3 = new Chart(pieChartCanvas);
+  var PieData3 = [
+    {
+      value: 35,
+      color: "#f56954",
+      highlight: "#f56954",
+      label: "Податкові надходження: 98155,6 тис.грн."
+    },
+    {
+      value: 15,
+      color: "#00a65a",
+      highlight: "#00a65a",
+      label: "Неподаткові надходження: 1032,0 тис.грн."
+    },
+    {
+      value: 45,
+      color: "#f39c12",
+      highlight: "#f39c12",
+      label: "Офіційний трансферт: 120959,8 тис.грн."
+    },
+    {
+      value: 5,
+      color: "#00c0ef",
+      highlight: "#00c0ef",
+      label: "Доходи від операцій з капіталом: 5,5 тис.грн."
+    },
+
+  ];
+  var pieOptions = {
+    //Boolean - Whether we should show a stroke on each segment
+    segmentShowStroke: true,
+    //String - The colour of each segment stroke
+    segmentStrokeColor: "#fff",
+    //Number - The width of each segment stroke
+    segmentStrokeWidth: 1,
+    //Number - The percentage of the chart that we cut out of the middle
+    percentageInnerCutout: 50, // This is 0 for Pie charts
+    //Number - Amount of animation steps
+    animationSteps: 100,
+    //String - Animation easing effect
+    animationEasing: "easeOutBounce",
+    //Boolean - Whether we animate the rotation of the Doughnut
+    animateRotate: true,
+    //Boolean - Whether we animate scaling the Doughnut from the centre
+    animateScale: false,
+    //Boolean - whether to make the chart responsive to window resizing
+    responsive: true,
+    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+    maintainAspectRatio: false,
+    //String - A legend template
+    legendTemplate: "dfs",
+    //String - A tooltip template
+    tooltipTemplate: "<%=label%>"
+  };
+  //Create pie or douhnut chart
+  // You can switch between pie and douhnut using the method below.
+
+   pieChart.Doughnut(PieData, pieOptions);
+   pieChart1.Doughnut(PieData1, pieOptions);
+   pieChart2.Doughnut(PieData2, pieOptions);
+   pieChart3.Doughnut(PieData3, pieOptions)
+    </script>
+
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+
+{% endblock %}
+
+{% block footerjs %}
+
+
+    <script type="application/javascript">
+ $('.togg-budget').nextUntil('tr.togg-budget').toggle();
+
+$('.togg-budget').click(function(){
+   $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
+    $(this).nextUntil('tr.togg-budget').slideToggle(100, function(){
+    });
+});
+</script>
+
+ {% endblock footerjs %}

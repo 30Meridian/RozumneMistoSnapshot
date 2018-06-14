@@ -1,0 +1,93 @@
+
+   <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">{{ petition.title }}</h3>
+                </div>
+        <div class="box-body">
+     <strong>Петиція до {{ petition_to }} </strong><br/>
+    <strong>Номер петиції:</strong> {{petition_number }}<br/>
+    <strong>Дата cтворення:</strong> {{ petition.create_date|date:"d-m-Y" }}<br/>
+    <strong>Дата публікації:</strong> {{ petition.when_approve|date:"d-m-Y" }}<br/>
+    <strong>Автор:</strong> {{  owner.get_full_name_atall}}<br/>
+            {% if end_date %}
+               <strong>Дата зняття з публікації:</strong> {{ end_date|date:"d.m.Y H:i" }}<br/>
+               <strong>Статус:</strong> Збір підписів завершено. Петиція не набрала потрібну кількість голосів. <br/>
+               {% endif %}
+    <strong>Зв'язок з автором:</strong> телефонний №: {{owner.phone}}, e-mail: {{ owner.email }}<br/>
+    <strong>Підписів:</strong> {{ votes.count }}<br/>
+    <strong>Необхідно:</strong> {{ needvotes }}<br/>
+
+               <br/><br/>
+           </div>
+
+    </div>
+
+
+
+    <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Суть петиції:</h3>
+                </div>
+                <div class="box-body">
+                {{ petition.text }}
+                </div>
+    </div>
+
+
+
+
+    <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Вимога петиції:</h3>
+                </div>
+        <div class="box-body">
+                {{ petition.claim }}
+        </div>
+
+    </div>
+
+
+        {% if petition.status.id != 1 and petition.status.id != 2 and petition.status.id != 6 and petition.status.id != 8%}
+
+
+    <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Резолюція по петиції:</h3>
+                </div>
+        <div class="box-body">
+                {{ petition.resolution }}
+        </div>
+
+    </div>
+</div>
+{% endif %}
+
+
+{% if votes %}
+
+
+
+    <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Підтримали:</h3>
+                </div>
+        <div class="box-body">
+
+
+        {% for vote in votes %}
+
+            <ul>
+
+                <li>{{ forloop.counter }}. {{ vote.user.get_full_name_atall }}  ({{ vote.created|date:"d.m.Y"}})
+                    email: {{ vote.user.email }} телефон: {{ vote.user.phone }}</li>
+
+            </ul>
+
+
+        {% endfor %}
+
+
+    </div>
+      </div>
+{% endif %}
+

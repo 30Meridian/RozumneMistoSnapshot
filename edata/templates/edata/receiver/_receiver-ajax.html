@@ -1,0 +1,396 @@
+<br/>
+{% if not error %}
+
+ <div class="text-center"><h2>Платежі по: {{ receiver_name }}</h2>
+     <h4>{{ daterange }} {% if summa %}з загальною сумою витрат <strong>{{ summa }} грн.</strong>{% endif %}</h4></div>
+<br/>
+{% endif %}
+
+<div class="box">
+
+            <div class="box-body">
+{% if error %}
+
+    <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-warning"></i> Отримувач не знайдений</h4>
+                Нажаль, ми не знайшли отримувача платежу. Ви правильно вказали у посиланні код ЄДРПОУ або назву?
+              </div>
+{% else %}
+
+
+            <table id="spadding" class="table table-bordered table-striped">
+                <thead>
+                <tr role="row" >
+                    <th style="width: 100px; text-align: center" data-toggle="modal" data-target="#receipt">Сума та № </th>
+                    <th style="width: 80px; text-align: center">Дата</th>
+                    <th style="width: 200px;text-align: center">Платник</th>
+                    <th style="width: 200px;text-align: center">Отримувач платежу</th>
+                    <th style="width: 300px;text-align: center">Призначення платежу</th>
+                </tr>
+                </thead>
+                <tbody>
+{% for transaction in data %}
+                <tr>
+                  <td style="text-align: center; cursor: pointer;"
+                      role="row" data-toggle="modal" data-target="#transactionModal"
+                    data-transaction-trans_id="{{ transaction.trans_id }}"
+                    data-transaction-trans_date="{{ transaction.trans_date|date:"d-m-Y"}} р."
+                    data-transaction-recipt_bank="{{ transaction.recipt_bank }}"
+                    data-transaction-recipt_name="{{ transaction.recipt_name }}"
+                    data-transaction-amount="{{ transaction.amount }}"
+                    data-transaction-payment_details="{{ transaction.payment_details }}"
+                    data-transaction-payer_bank="{{ transaction.payer_bank }}"
+                    data-transaction-payer_edrpou="{{ transaction.payer_edrpou }}"
+                    data-transaction-recipt_edrpou="{{ transaction.recipt_edrpou }}"
+                    data-transaction-payer_name="{{ transaction.payer_name }}"
+                    data-transaction-recipt_mfo="{{ transaction.recipt_mfo }}"
+                    data-transaction-payer_mfo="{{ transaction.payer_mfo }}">
+                      <strong>{{ transaction.amount}} грн.</strong><br/><small><i class="fa fa-file-text-o text-green"></i> (№{{ transaction.trans_id }})</small>
+                  </td>
+
+                  <td style="text-align: center">{{ transaction.trans_date|slice:"10"}}</td>
+                  <td> <a href="../../edata/payer/{{transaction.payer_edrpou}}">{{transaction.payer_name}}</a></td>
+                  <td>{{ transaction.recipt_name}}</td>
+
+                    <td><i class="fa fa-calendar"></i> {{ transaction.payment_details}}</td>
+
+
+                </tr>
+{% endfor %}
+                </tbody>
+
+              </table></div></div>
+
+
+</div>
+</div>
+{% if data %}
+
+            <div class="box" >
+            <div class="box-header with-border">
+              <h3 class="box-title">Крива платежів (гривень).  {{ daterange }} по: {{ receiver_name }} </h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+
+
+              <div class="chart">
+              <canvas id="areaChart" style="height:250px"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+
+
+
+
+
+ <!-- Modal -->
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="tenderModalLabel">Інформація по платежу</h4>
+      </div>
+      <div class="modal-body">
+
+
+
+
+<div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+              <li class="active"><a href="#tab_3-1" data-toggle="tab">Загальна інформація</a></li>
+
+
+
+              <li class="pull-left header"><i class="fa fa-barcode"></i> <span id="transaction-trans_id"></span></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_3-1">
+
+                <p>
+
+
+<div class="section-to-print">
+
+          <table class="table">
+
+              <tr>
+                  <td><b>Дата платежу:</b></td>
+                  <td id="transaction-trans_date"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Сума транзакції:</b></td>
+                  <td id="transaction-amount"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Призначення платежу:</b></td>
+                  <td id="transaction-payment_details"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Платник:</b></td>
+                  <td id="transaction-payer_name"></td>
+              </tr>
+
+              <tr>
+                  <td><b>ЄРДПОУ отримувача:</b></td>
+                  <td id="transaction-recipt_edrpou"></td>
+              </tr>
+
+              <tr>
+                  <td><b>МФО банку платника:</b></td>
+                  <td id="transaction-recipt_mfo"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Банк платника:</b></td>
+                  <td id="transaction-payer_bank"></td>
+              </tr>
+
+              <tr>
+                  <td><b>ЄРДПОУ платника:</b></td>
+                  <td id="transaction-payer_edrpou"></td>
+              </tr>
+
+
+              <tr>
+                  <td><b>Отримувач платежу:</b></td>
+                  <td id="transaction-recipt_name"></td>
+              </tr>
+
+              <tr>
+                  <td><b>Банк отримувача:</b></td>
+                  <td id="transaction-recipt_bank"></td>
+              </tr>
+
+              <tr>
+                  <td><b>МФО банку отримувача:</b></td>
+                  <td id="transaction-payer_mfo"></td>
+              </tr>
+
+
+          </table>
+</div>
+
+                </p>
+              </div>
+              <!-- /.tab-pane -->
+
+              <!-- /.tab-pane -->
+
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" onclick="printPage()"><i class="fa fa-print"></i> Друк</button>
+ <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+
+      </div>
+
+    </div>
+  </div>
+
+
+{% endif %}
+</div>
+
+
+{% endif %}
+
+ <script>
+  $(function () {
+
+
+    //Datemask dd/mm/yyyy
+    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Datemask2 mm/dd/yyyy
+    $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Money Euro
+    $("[data-mask]").inputmask();
+
+    //Date range picker
+    $('#reservation').daterangepicker();
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'DD/MM/YYYY h:mm A'});
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+        {
+        "autoApply": true,
+        "locale": {
+        "format": "DD/MM/YYYY",
+        "separator": " - ",
+        "applyLabel": "Застосувати",
+        "cancelLabel": "Відмінити",
+        "fromLabel": "З",
+        "toLabel": "по",
+        "customRangeLabel": "Інший діапазон",
+        "daysOfWeek": [
+            "Нд",
+            "Пн",
+            "Вт",
+            "Ср",
+            "Чт",
+            "Пт",
+            "Сб"
+        ],
+        "monthNames": [
+            "Січень",
+            "Лютий",
+            "Березень",
+            "Квітень",
+            "Травень",
+            "Червень",
+            "Липень",
+            "Серпень",
+            "Вересень",
+            "Жовтень",
+            "Листопад",
+            "Грудень"
+        ],
+        "firstDay": 1
+    },
+          ranges: {
+            'За сьогодні': [moment(), moment()],
+            'За вчора': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'За 7 днів': [moment().subtract(6, 'days'), moment()],
+            'За 30 днів': [moment().subtract(29, 'days'), moment()],
+            'За цей місяць': [moment().startOf('month'), moment().endOf('month')],
+            'За минулий місяць': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment()
+        },
+        function (start, end) {
+
+          $('#daterange-btn').html('<i class="fa fa-calendar"></i> '+start.format('YYYY-MM-DD')+'/'+end.format('YYYY-MM-DD')+' <i class="fa fa-caret-down"></i>')
+          $('input#date_from').val(start.format('DD-MM-YYYY'));
+          $('input#date_to').val(end.format('DD-MM-YYYY'));
+
+        }
+    );
+
+  });
+  </script>
+{% if data %}
+
+    <script>
+    $( document ).ready(function() {
+        //--------------
+        //- AREA CHART -
+        //--------------
+
+        // Get context with jQuery - using jQuery's .get() method.
+        var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var areaChart = new Chart(areaChartCanvas);
+
+        var areaChartData = {
+            labels: [
+                  {% for reciever in rating %}
+                '{{ reciever.trans_date|slice:"10"}}',
+              {% endfor %}
+
+            ],
+            datasets: [
+                {
+                    label: "Платежі",
+                    fillColor: "rgba(210, 214, 222, 1)",
+                    strokeColor: "rgba(210, 214, 222, 1)",
+                    pointColor: "rgba(210, 214, 222, 1)",
+                    pointStrokeColor: "#c1c7d1",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [
+                        {% for reciever in rating %}
+                            {{ reciever.total|floatformat:"2"|safe }},
+                        {% endfor %}
+                    ]
+                },
+
+            ]
+        };
+
+        var areaChartOptions = {
+            //Boolean - If we should show the scale at all
+            showScale: true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines: false,
+            //String - Colour of the grid lines
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            //Number - Width of the grid lines
+            scaleGridLineWidth: 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines: true,
+            //Boolean - Whether the line is curved between points
+            bezierCurve: true,
+            //Number - Tension of the bezier curve between points
+            bezierCurveTension: 0.3,
+            //Boolean - Whether to show a dot for each point
+            pointDot: false,
+            //Number - Radius of each point dot in pixels
+            pointDotRadius: 4,
+            //Number - Pixel width of point dot stroke
+            pointDotStrokeWidth: 1,
+            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+            pointHitDetectionRadius: 20,
+            //Boolean - Whether to show a stroke for datasets
+            datasetStroke: true,
+            //Number - Pixel width of dataset stroke
+            datasetStrokeWidth: 2,
+            //Boolean - Whether to fill the dataset with a color
+            datasetFill: true,
+            //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio: true,
+            //Boolean - whether to make the chart responsive to window resizing
+            responsive: true
+        };
+
+    //Create the line chart
+    areaChart.Line(areaChartData, areaChartOptions);
+        });
+
+   $('#transactionModal').on('show.bs.modal', function (event) {
+            var target = $(event.relatedTarget),
+                    startDate = new Date(target.data('transaction-trans_date'));
+
+       $('#transaction-trans_id').html(target.data('transaction-trans_id'));
+       $('#transaction-recipt_bank').html(target.data('transaction-recipt_bank'));
+       $('#transaction-recipt_name').html(target.data('transaction-recipt_name'));
+       $('#transaction-amount').html(target.data('transaction-amount'));
+       $('#transaction-payment_details').html(target.data('transaction-payment_details'));
+       $('#transaction-payer_bank').html(target.data('transaction-payer_bank'));
+       $('#transaction-payer_edrpou').html(target.data('transaction-payer_edrpou'));
+       $('#transaction-recipt_edrpou').html(target.data('transaction-recipt_edrpou'));
+       $('#transaction-payer_name').html(target.data('transaction-payer_name'));
+       $('#transaction-recipt_mfo').html(target.data('transaction-recipt_mfo'));
+       $('#transaction-payer_mfo').html(target.data('transaction-payer_mfo'));
+       $('#transaction-trans_date').html(target.data('transaction-trans_date'));
+        });
+
+      </script>
+{% endif %}
+
+ <script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" src="/static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+      <script type="text/javascript">$("#spadding").DataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Ukrainian.json"
+            }
+        });
+
+      </script>

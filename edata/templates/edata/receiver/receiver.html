@@ -1,0 +1,180 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}Аналітика витрат державних коштів по {{ receiver_title }}. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block head_top %}
+    <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css'%}">
+<link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker-bs3.css'%}">
+
+{% endblock %}
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+<br/><div class="text-center"><h2><i class="fa fa-credit-card"></i><br/>Відкриті фінанси {{ request.session.town_type }} {{ request.session.town_name }}</h2>
+            <small>Профіль отримувача платежу</small><br/>
+
+            </div>
+<br/><br/>
+<div class="box">
+    <div class="box-body">
+    <div class="box-header with-border">
+          <a href="/{% if townslugheader %}{{townslugheader}}{% endif %}/edata/?norefresh" ><i class="fa fa-toggle-left"></i> перейти до списку усіх розпорядників коштів</a>
+    </div>
+
+
+
+  <form name="financeFilter" id="financeFilter" method="post" action="#">
+  <p>
+
+                  <div class="col-md-3">
+                           <div class="input-group">
+
+                                              <button type="button" class="btn btn-default" id="daterange-btn">
+                                                <i class="fa fa-calendar"></i>
+                                               {% if request.session.date_from and request.session.date_to %}{{request.session.date_from }}/{{request.session.date_to }}
+                                                   {% else %}
+                                                   Період звіту до 3 місяців
+                                                   {% endif %}
+
+                                                <i class="fa fa-caret-down"></i>
+                                              </button>
+                                    </div>
+                </div>
+                           <input type="hidden" name="date_from" id="date_from" {% if request.session.date_from %} value="{{request.session.date_from }}"{% endif %}>
+
+                         <input type="hidden" name="date_to" id="date_to" {% if request.session.date_to %} value="{{request.session.date_to }}"{% endif %}>
+
+
+                <div class="col-md-6">
+                <select class="form-control" name="payer">
+                    <option value="0">Усі розпорядники коштів</option>
+                    {% for payer in payers_dict %}
+                        {% if request.session.payer == payer.code %}
+                            <option value="{{ payer.code }}" selected>{% if payer.title %}{{ payer.title }}{% else %}{{ payer.name }}{% endif%}</option>
+                        {% else %}
+                            <option value="{{ payer.code }}">{% if payer.title %}{{ payer.title }}{% else %}{{ payer.name }}{% endif%}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+          </div>
+
+
+
+                    <div class="col-md-3 pull-right">
+                    <button class="btn btn-success btn-sm"> <i class="fa fa-search"></i> Пошук</button>
+
+                        <a href="../../edata/exportrecipient/{{ receiver}}" class="btn btn-default btn-sm" id="export"><i class="fa fa-file-excel-o"></i> Експорт</a>
+                        <a href="../../edata/clearfilter/reciever/{{ reciever }}" class="btn btn-default btn-sm"><div class="clearefilter">Скинути</div></a>
+                          </div>
+  <br/><br/>
+</p>
+                    </form>
+
+<script>
+    $('#export').click(function () {
+
+        $('#export').attr('class','btn btn-default btn-sm disabled')
+        $('#export').html('Зачекайте')
+        setTimeout(function(){
+            $('#export').attr('class','btn btn-default btn-sm')
+            $('#export').html('<i class="fa  fa-file-excel-o"></i> Експорт')
+        },3000)
+
+        console.log('Its working!')
+    })
+</script>
+
+<script type="text/javascript" src="{% static 'plugins/chartjs/Chart.min.js'%}"></script>
+
+
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="{% static 'plugins/daterangepicker/daterangepicker.js'%}"></script>
+      <!-- InputMask -->
+<script src="{% static 'plugins/input-mask/jquery.inputmask.js'%}"></script>
+<script src="{% static 'plugins/input-mask/jquery.inputmask.date.extensions.js'%}"></script>
+<script src="{% static 'plugins/input-mask/jquery.inputmask.extensions.js'%}"></script>
+
+<div id="edata_context">
+<div id="image" class="text-center"><i class="fa fa-refresh fa-spin" style="font-size: 65px; color: #00733e"></i>
+    </br> Зачекайте, будь ласка. Триває обробка даних...</div>
+
+</div>
+  </div></div>
+
+          </div>
+        </section><!-- /.content -->
+
+<script>
+     $.ajax({
+        type: "POST",
+        url: "http://"+window.location.hostname+(window.location.port.length>1?":"+window.location.port:"")+"/{% if townslugheader %}{{townslugheader}}{% endif %}/edata/recipient/{{ receiver }}",
+        data: {'csrfmiddlewaretoken': '{{ csrf_token }}'
+            {% if request.session.date_from and request.session.date_to %}, 'date_from': '{{request.session.date_from }}', 'date_to': '{{request.session.date_to }}'{% endif %}
+            {% if request.session.receiver %}, 'receiver':'{{ request.session.receiver }}'{% endif %}
+            {% if request.session.payer %}, 'payer':'{{ request.session.payer }}'{% endif %}
+                },
+
+            beforeSend: function(){
+            $('#image').show();
+        },
+            complete: function(){
+            $('#image').hide();
+        },
+            success : function(datasuccess) {
+             $('#edata_context').html(datasuccess);
+        }
+     });
+
+//---Функции обработки фильтра транзакций---///
+$( "#financeFilter" ).submit(function( event ) {
+    var values = {};
+    $.each($('#financeFilter').serializeArray(), function(i, field) {
+        values[field.name] = field.value;
+    });
+    edataFilter(values['date_from'],values['date_to'],values['payer'],values['receiver']);
+    event.preventDefault();
+});
+
+
+function edataFilter(date_from, date_to, payer, receiver){
+    $.ajax({
+        type: "POST",
+        url: "http://"+window.location.hostname+(window.location.port.length>1?":"+window.location.port:"")+"/{% if townslugheader %}{{townslugheader}}{% endif %}/edata/recipient/{{ receiver}}",
+        data: {'csrfmiddlewaretoken': '{{ csrf_token }}', 'date_from':date_from, 'date_to': date_to, 'payer': payer, 'receiver': receiver},
+        beforeSend: function(){
+            $('#edata_context').empty();
+            $('#edata_context').html('<div id="image" class="text-center"><i class="fa fa-refresh fa-spin" style="font-size: 65px; color: #00733e"></i> </br> Зачекайте, будь ласка. Триває обробка даних...</div></div>')
+        },
+        complete: function(){
+            $('#image').hide();
+        },
+        success : function(datasuccess) {
+            $('#edata_context').html(datasuccess);
+        }
+    });
+     }
+
+
+// Javascript to enable link to tab
+var url = document.location.toString();
+if (url.match('#')) {
+    $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+}
+
+
+</script>
+
+
+
+{% endblock %}
+
+{% block footerjs %}
+
+
+{% endblock %}

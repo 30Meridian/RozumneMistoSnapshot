@@ -1,0 +1,35 @@
+{% extends 'base.html'|pjax:request %}
+{% block title %}Інформація відстутня{% endblock %}
+
+{% block content %}
+  <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+                <section class="content">
+      <div class="error-page">
+        <h2 class="headline text-yellow"> 404</h2>
+
+        <div class="error-content">
+          <h3><i class="fa fa-warning text-yellow"></i> Отакої ! Сторінка не знайдена :(</h3>
+
+          <p>
+            Певно посилання за яким Ви перейшли не правильне.
+             </p> <p>Ви можете <a href="/">перейти на голову</a> і там вже спробувати вибрати населений пункт чи модуль з меню.
+            Якщо Вам потрібна допомога - знизу є чат <i class="fa fa-level-down"></i>
+          </p>
+
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+</div>
+
+        </section><!-- /.content -->
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}Вибір області та міста.  Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+              <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+    <div class="text-center">
+        <img src="{% static 'img/progress_reg_1.png' %}"style="max-width: 100%"/>
+        </div>
+
+
+    <div class="col-md-2"></div>
+    <div class="col-md-10 center-block">
+    {% include 'map.html' %}
+
+    </div>
+
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+{% endblock %}

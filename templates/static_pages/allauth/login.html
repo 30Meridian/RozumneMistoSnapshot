@@ -1,0 +1,83 @@
+{% extends "first_page.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <div class="inner">
+    <section class="content login-section">
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-body"><br/>
+                <div class="col-md-12 text-center">
+
+                    <h1><i class="fa fa-user"></i><br/> Вхід на портал "Розумне місто"</h1>
+                    <br/><br/>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-solid">
+ <div class="box-header with-border"><h3 class="box-title">Вхід через електронну пошту (<a href="{% url 'first_page:signup' %}">не зареєстровані?</a>):</h3></div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+                                <form class="login" method="POST" action="{% url 'account_login' %}" id="loginform">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    {% if redirect_field_value %}
+                                        <input type="hidden" name="{{ redirect_field_name }}"
+                                               value="{{ redirect_field_value }}"/>
+                                    {% endif %}
+
+                                    <button class="btn  btn-success btn-lg" type="submit"><i
+                                            class="fa fa-power-off"></i> {% trans "Sign In" %}</button>
+                                 <a class="btn  btn-default btn-lg"
+                                       href="{% url 'first_page:signup' %}"><i class="fa fa-user-plus"></i> Зареєструватись</a>
+                                    <a class="btn  btn-default btn-lg"
+                                       href="{% url 'first_page:password_reset' %}"><i class="fa fa-meh-o"></i> {% trans "Forgot Password?" %}</a>
+
+
+                                </form>
+
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-md-12">
+                        <div class="box box-solid">
+                            <div class="box-header with-border"><h3 class="box-title">Вхід або реєстрація через соціальні мережі:</h3></div>
+                            <div class="box-body clearfix">
+                                <blockquote class="">Для входу або реєстрації за допомогою соціальної мережі, натисніть на кнопку однієї з них: <br/><br/>
+                                    {% load socialaccount %}
+                                    <a href="{% provider_login_url "facebook" method="oauth2" %}"
+                                       class="btn btn-default btn-block btn-bitbucket">
+                                        <i class="fa fa-facebook" aria-hidden="true"> Facebook</i></a>
+                                    <a href="{% provider_login_url "google" method="oauth2" %}"
+                                       class="btn btn-default btn-block btn-google">
+                                        <i class="fa fa-google" aria-hidden="true"> Google</i></a>
+                                    <br/>
+                                    <small>*ми свідомо не використовуємо соц. мережі країни-агрессора</small>
+
+                                </blockquote>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- ./col -->
+                </div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </section><!-- /.content -->
+    </div>
+{% endblock %}
+{% block footerjs %}
+{% endblock footerjs %}

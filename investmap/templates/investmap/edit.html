@@ -1,0 +1,107 @@
+{% extends 'investmap/create.html' %}
+
+{% load static %}
+
+{% block title %}
+    Редагувати інвестиційни об'єкт. Система "Розумне місто".
+{% endblock %}
+
+{% block footerjs %}
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=drawing&amp;callback=initMap"></script>
+    <script type="text/javascript">
+        var map;
+        var type_value = 0;
+        var marker = null;
+        var polygon = null;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: new google.maps.LatLng({{gmap.lon}},{{gmap.lat}}),
+                zoom: {{ gmap.zoom }},
+                disableDoubleClickZoom: true
+            });
+
+            var drawingManager = new google.maps.drawing.DrawingManager({
+                drawingControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER,
+                    drawingModes: [
+                        google.maps.drawing.OverlayType.MARKER,
+                        google.maps.drawing.OverlayType.POLYGON
+                    ]
+                }
+            });
+            drawingManager.setMap(map);
+
+            google.maps.event.addListener(drawingManager, 'markercomplete', function (data) {
+                if (marker) marker.setMap(null);
+                if (polygon) polygon.setMap(null);
+                type_value = 0;
+                marker = data;
+                updateAddress(data)
+            });
+
+            google.maps.event.addListener(drawingManager, 'polygoncomplete', function (data) {
+                if (marker) marker.setMap(null);
+                if (polygon) polygon.setMap(null);
+                type_value = 1;
+                polygon = data;
+            });
+
+            var object_type =  $('#id_object_type');
+            var object_map =  $('#id_object_map');
+
+            type_value = object_type.val();
+            var object_map_value = JSON.parse(object_map.val());
+
+            if (type_value == 0){
+                marker = new google.maps.Marker({
+                    position: object_map_value,
+                    map: map
+                });
+            } else if (type_value == 1){
+                polygon = new google.maps.Polygon({
+                   paths: object_map_value,
+                   map: map
+                });
+            }
+
+            function updateAddress(marker){
+                $.get("https://maps.googleapis.com/maps/api/geocode/json?&key={{api_key}}&latlng="+marker.position.lat()+","+marker.position.lng()+"&language=uk&sensor=true",function(data){
+                    if(data.status=="OK" && data.results.length > 0){
+                        mainForm.address.value = data.results[0].formatted_address;
+                    }
+                });
+            }
+        }
+
+        $(function () {
+            $('#mainForm').submit(function () {
+                var object_type =  $('#id_object_type');
+                var object_map =  $('#id_object_map');
+
+                var select_option = object_type.find('option[value='+type_value+']');
+                select_option.prop('selected', true);
+
+                var object_map_value = null;
+                if (type_value == 0){
+                    if (marker) object_map_value = [marker.getPosition()];
+                } else if (type_value == 1){
+                    if (polygon) object_map_value = polygon.getPath()['b'];
+                }
+
+                if (object_map_value != null) {
+                    object_type.val(type_value);
+                    object_map.val(JSON.stringify(object_map_value));
+
+                    this.form.submit();
+                } else {
+                    $('#marker_error').text('Відсутє позначення на карті!').css({'color': 'red'});
+                    return false;
+                }
+            });
+        })
+    </script>
+
+    <script src="{% static 'ckeditor/ckeditor-init.js'%}"></script>
+    <script src="{% static 'ckeditor/ckeditor/ckeditor.js'%}"></script>
+{% endblock footerjs %}

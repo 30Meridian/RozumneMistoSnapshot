@@ -1,0 +1,40 @@
+{% extends 'base.html'|pjax:request %}
+{% load static %}
+{% block title %}Наші друзі та партнери. Інформаційна система "Розумне місто".{% endblock %}
+
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+<h2 class="text-center">Друзі та партнери</h2>
+                <h2 class="text-center"><i class="fa fa-heart-o text-red"></i></h2>
+                <h3 class="text-center">Неймовірні люди роблять неймовірні інструменти заради нашого спільного майбутнього</h3>
+       <div class="box">
+
+            <div class="box-body">
+                <table>
+                    <tr>
+                        <td><a href="http://donor.ua/" title="Пошук донорів і реципієнтів" target="_blank"><img src=" {% static 'img/logo-donor.png'%}" width="160px" style="margin: 15px"/></a> </td>
+                        <td><a href="http://spending.gov.ua/" target="_blank" title="Портал публічних фінансів"> <img src="{% static 'img/logo_edata.png'%}" width="160px" style="margin: 15px"></a></td>
+                        <td><a href="http://ukryama.com/" title="Укряма. Яму мені запиляй!"  target="_blank" ><img src="http://ukryama.com/images/logo.png" width="160px" style="margin: 15px"/></a> </td>
+                        <td><a href="http://eidos.org.ua/" target="_blank" title="Центр політичних студій та аналітики «Ейдос»"> <img src="http://eidos.org.ua/wp-content/uploads/2016/03/logo.jpg" width="160px" style="margin: 15px"></a></td>
+                        <td><a href="http://igov.org.ua/" target="_blank" title="Електронні послуги он-лайн"> <img src="{% static 'img/igov.jpg'%}" width="160px" style="margin: 15px"></a></td>
+                    </tr>
+                </table>
+            </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+            </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+{% endblock %}

@@ -1,0 +1,16 @@
+django==1.8.13
+#django-debug-toolbar==1.4
+django-cors-headers==1.1.0
+#ipymysql
+django-allauth
+django-ipware
+django-pure-pagination
+django-activeurl
+django-stdimage
+django-ckeditor
+django-resized
+pillow
+django-easy-pjax
+XlsxWriter
+iso8601
+django-nested-admin==3.0.10

@@ -1,0 +1,464 @@
+{% extends 'base.html' %}
+
+{% block title %}Петиція №{{ petition.id }}. {{ petition.title }}. Інформаційна система "Розумне місто".{% endblock %}
+
+
+{% block content %}
+<section class="content-header">
+      <h1>Петиція № {{petition_number }} . Статус - {{ petition.status.title }}</h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+        <li><a href="../petitions/">Список петицій</a></li>
+        <li class="active">Картка петиції</li>
+      </ol>
+    </section>
+     <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+    {% if allowed %}
+
+<div class="col-md-12">
+
+
+        <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Інструменти модератора:</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+    <div class="col-md-4">
+    {% if petition.status.id == 1 %}
+           <a href="../petitions/approve/{{ petition.id }}"><button type="button" class="btn btn-block btn-success"><i class="fa fa-ban"></i> Опублікувати петицію</button></a>
+    {# elif petition.status.id == 2 or petition.status.id == 3 or petition.status.id == 7  #}
+           <!--<a href="/petitions/tomoderate/{{ petition.id }}"><button type="button" class="btn btn-block btn-warning "><i class="fa fa-ban"></i> Повернути петицію на модерацію</button></a>-->
+    {% elif petition.status.id == 8  %}
+           <a href="../petitions/onconsideration/{{ petition.id }}"><button type="button" class="btn btn-block btn-success "><i class="fa fa-ban"></i> Відправити петицію на розгляд</button></a>
+
+    {% endif %}
+    </div>
+
+            {% if petition.status.id == 8 %}
+                <div class="col-md-4">
+                {% if needvotes > votes_count %}
+           <a href="#"><button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#modal_return"><i class="fa fa-mail-reply"></i> Повернути петицію на збір підписів</button></a>
+                {% endif %}
+
+                    <div class="modal fade" tabindex="-1" role="dialog" id="modal_return">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Повернути петицію на збір підписів?</h4>
+                      </div>
+                        <form action="../petitions/returntoactive" method="post" class="changestatus">
+                          <div class="modal-body">
+                                {% csrf_token %}
+                                {{ form_chagestatus.as_p }}
+                              <input type="hidden" name="petition_id" value="{{ petition.id }}"/>
+
+                          </div>
+                          <div class="modal-footer">
+
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                                <button type="submit" class="btn btn-success">Повернути петицію на збір підписів</button>
+                          </div>
+                        </form>
+
+
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+</div>
+            {% endif %}
+
+
+    {% if petition.status.id != 3 and petition.status.id != 4 and petition.status.id != 8 and petition.status.id != 7 %}
+            <div class="col-md-2">
+        <a href="#"><button type="button" data-toggle="modal" data-target="#modal_disaprove" class="btn btn-block btn-danger btn-sm"><i class="fa fa-ban"></i> Відхилити петицію</button></a>
+
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_disaprove">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Відхилити петицію? Вкажіть причину:</h4>
+                      </div>
+                        <form action="../petitions/disapprove/" method="post" class="changestatus">
+                          <div class="modal-body">
+
+                                {% csrf_token %}
+                                {{ form_chagestatus.as_p }}
+                              <input type="hidden" name="petition_id" value="{{ petition.id }}"/>
+
+                          </div>
+                          <div class="modal-footer">
+                                {{ file_upload }}
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                                <button type="submit" class="btn btn-danger">Відхилити петицію</button>
+                          </div>
+                        </form>
+
+
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            </div>
+
+    {% endif %}
+
+
+
+    {% if petition.status.id != 4 and petition.status.id != 3 and petition.status.id != 8 and petition.status.id != 7%}
+
+                    <div class="col-md-2">
+                    <a href="#"><button type="button" data-toggle="modal" data-target="#modal_done" class="btn btn-block btn-info btn-sm"><i class="fa fa-check-square-o"></i> Петиція розглянута</button></a>
+
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_done">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Петицію розглянуто? Напишіть резолюцію/проведені роботи:</h4>
+                      </div>
+                        <form action="../petitions/done/" method="post" class="changestatus">
+                          <div class="modal-body">
+
+                                {% csrf_token %}
+                                {{ form_chagestatus.as_p }}
+                              <input type="hidden" name="petition_id" value="{{ petition.id }}"/>
+
+                          </div>
+                          <div class="modal-footer">
+                                {{ file_upload }}
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                                <button type="submit" class="btn btn-success">Петицію роглянуто</button>
+                          </div>
+                        </form>
+
+
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            </div>
+
+    {% endif %}
+
+
+    {% if petition.status.id != 7 and petition.status.id != 8 %}
+            <div class="col-md-2">
+        <a href="#"><button type="button"  data-toggle="modal" data-target="#modal_hidepetition" class="btn btn-block btn-primary btn-sm"><i class="fa fa-lock"></i> Приховати петицію</button></a>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal_hidepetition">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Відхилити і приховати петицію? Вкажіть причину:</h4>
+                      </div>
+                        <form action="../petitions/hidepetition/" method="post" class="changestatus">
+
+                          <div class="modal-body">
+                                {% csrf_token %}
+                                {{ form_chagestatus.as_p }}
+                              <input type="hidden" name="petition_id" value="{{ petition.id }}"/>
+
+                          </div>
+                          <div class="modal-footer">
+                                  {{ petition.resolution_file }}
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                                  <button type="submit" class="btn btn-danger">Відхилити і приховати петицію</button>
+                          </div>
+
+                        </form>
+
+
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            </div>
+        {% endif %}
+
+
+
+
+        <div class="col-md-2">
+        <a href="../petitions/print/{{ petition.id }}" target="_blank"> <button type="button" class="btn btn-block btn-default btn-sm"><i class="fa fa-print"></i> Друкувати петицію</button></a>
+
+        </div>
+
+
+
+            <!-- /.box-body -->
+
+</div>
+</div>
+    {% endif %}
+
+        <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">{{ petition.title }} </h3>
+                    <div class="pull-right">
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f23dc3c4265dc08"></script>
+<div class="addthis_sharing_toolbox"></div>
+                    </div>
+                </div>
+        <div class="box-body">
+           <div class="col-md-7">
+           <div class="col-md-7">
+    <strong>Петиція до {{ petition_to }} </strong><br/>
+    <strong>Номер петиції:</strong> {{petition_number }}<br/>
+    <strong>Дата cтворення:</strong> {{ petition.create_date|date:"d.m.Y H:i" }}<br/>
+    <strong>Дата публікації:</strong> {{ petition.when_approve|date:"d.m.Y H:i" }}<br/>
+               {% if end_date %}
+               <strong>Дата зняття з публікації:</strong> {{ end_date|date:"d.m.Y H:i" }}<br/>
+               <strong>Статус:</strong> Збір підписів завершено.  <br/>
+               {% endif %}
+    <strong>Місто:</strong> <a href="/{{petition.town.slug}}"> {{ petition.town.name }}</a><br/>
+    <strong>Автор:</strong> {{ fullname}} </a>
+               <br/><br/>
+           </div>
+           <div class="col-md-5">
+               <br/>
+            {% if petition.status.id == 2 %}
+                 {% if request.user.is_authenticated and request.user.is_active %}
+                     {% if can_vote  %}
+                       {% if getusersign %}
+                            <a href="../petitions/disvote/{{ petition.id }}">  <button type="button" class="btn btn-block btn-danger btn-lg">Пiдписана. Відхилити?</button></a>
+                       {% else %}
+                            <a href="../petitions/vote/{{ petition.id }}"> <button type="button" class="btn btn-block btn-success btn-lg">Пiдписати &nbsp;&nbsp;<i class="fa fa-thumbs-o-up"></i> </button></a>
+                       {% endif %}
+                     {% else %}
+                         Нажаль ви не можете підписати петицію цього міста.
+                     {% endif %}
+
+                {% else %}
+                 Бажаете підписати?<br/>
+                 <a href="/accounts/login/"> Увійти/зареєструватись</a><br/>
+                {% endif %}
+            {% endif %}
+           </div>
+
+{% if petition.status.id == 2 %}
+    <div class="col-md-6">
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa  fa-list-ul"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">ПІДПИСІВ</span>
+              <span class="info-box-number">{{ votes_count }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: {% widthratio petition.petitionsvoices_set.count petition.town.votes 100 %}%"></div>
+              </div>
+                  <span class="progress-description">
+                    з {{ needvotes }} необхідних
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+    </div>
+
+
+        <div class="col-md-6">
+          <div class="info-box {% if days_left < 20 %} bg-red{% else %} bg-yellow{% endif %}">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Залишилось</span>
+          <span class="info-box-number"> {{ days_left }} днів</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: {% widthratio days_left pet_days 100 %}%"></div>
+              </div>
+                  <span class="progress-description">
+                    поріг - {{ pet_days }} днів
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+{% endif %}
+
+    </div>
+
+
+    <div class="col-md-5">
+    {% if petition.image.large %}
+      <a href="{{ petition.image.large.url }}" data-lightbox="image-1" data-title="{{ petition.title|truncatewords:25 }}"> <div class="petbox"> <img src="{{ petition.image.large.url }}" width="100%"></div></a>
+    {% else %}
+    <div class="petbox"> <img src="{{ MEDIA_URL}}/petitions/empty.gif" width="100%"></div>
+    {% endif %}
+
+    </div>
+
+
+<div class="col-md-12">
+
+    <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Суть петиції:</h3>
+                </div>
+                <div class="box-body">
+                {{ petition.text }}
+                </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="col-md-12">
+
+    <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Вимога петиції:</h3>
+                </div>
+        <div class="box-body">
+                {{ petition.claim }}
+        </div>
+
+    </div>
+</div>
+
+        {% if petition.status.id != 1 and petition.status.id != 2 and petition.status.id != 6 and petition.status.id != 5%}
+<div class="col-md-12">
+
+    <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Резолюція по петиції:</h3>
+                </div>
+        <div class="box-body">
+                {{ petition.resolution }}
+        </div>
+
+    </div>
+</div>
+{% endif %}
+
+
+{% if votes.object_list %}
+  {% if petition.status.id == 2 or petition.status.id == 4 or petition.status.id == 6 or petition.status.id == 8  %}
+<div class="col-md-12">
+
+    <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Підтримали:</h3>
+                </div>
+        <div class="box-body">
+    {% if allowed %}
+
+        {% for vote in votes.object_list %}
+            <div class="col-md-4">
+                 <div class="small-box bg-gray">
+                     <div class="inner">
+                         <h3><a href="/profile/{{ vote.user.id }}">
+                             {% if vote.user.get_full_name|length > 35 %}
+                                {{ vote.user.get_full_name|slice:"0:25" }}...
+                             {% else %}
+                                {{ vote.user.get_full_name_atall}}
+                             {% endif %}
+                         </a></h3>
+                         <p>#{{ vote.id }} ({{ vote.created|date:"d.m.Y"}}),  IP - {{ vote.ip}}</p>
+                    </div>
+                          <a href="../petitions/ban/{{ vote.user.id }}/{{ petition.id }}/{{ vote.id }}" class="small-box-footer"> Забанити <i class="fa fa-meh-o"></i></a>
+
+                    <div class="icon">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+     {% else %}
+        {% for vote in votes.object_list %}
+            <div class="col-md-4">
+                 <div class="small-box bg-gray">
+                     <div class="inner">
+                         <h3><a href="/profile/{{ vote.user.id }}">
+                             {% if vote.user.get_full_name|length > 35 %}
+                                {{ vote.user.get_full_name|slice:"0:35" }}...
+                             {% else %}
+                                {{ vote.user.get_full_name_atall}}
+                             {% endif %}
+                         </a></h3>
+                         <p>#{{ vote.id }} ({{ vote.created|date:"d.m.Y"}})</p>
+                    </div>
+
+                    <div class="icon">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+     {% endif %}
+
+</div>
+
+      {% endif %}
+</div>
+    </div>
+
+    {% if votes.paginator.count > 9 %}
+ <div class="col-md-12">
+
+  <div class="text-center"> {{ votes.render }}</div>
+    </div>
+        {% endif %}
+{% endif %}
+
+    {% if allowed %}
+    <div class="col-md-12">
+        {% if activities %}
+
+    <div class="box">
+        <div class="box-header with-border"><h3 class="box-title">Активність по петиції:</h3></div>
+                <div class="box-body">
+                  <table class="table table-bordered table-hover">
+                    <tbody><tr bgcolor="#f4f4f4">
+                      <th  style="width: 120px">Час</th>
+                      <th>Тип активності</th>
+                      <th>Користувач</th>
+                      <th style="width: 125px">IP-адреса</th>
+                    </tr>
+
+                    {% for activiti in activities %}
+
+                <tr>
+
+                  <td class="vert-align">{{ activiti.datatime|date:'d-m-Y, H:i'}}</td>
+                  <td class="valign">{{ activiti.activity}}</td>
+                    <td class="valign">{{ activiti.user.get_full_name}}</td>
+                  <td class="valign">{{ activiti.ip}}</td>
+
+                </tr>
+            {% endfor %}
+              </tbody></table>
+            </div>
+    </div>
+    {% endif %}
+  {% endif %}
+
+  </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+
+
+{% endblock %}

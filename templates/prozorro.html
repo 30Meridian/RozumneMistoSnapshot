@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Електронні закупівлі від "Prozorro".  Інформаційна система "Розумне місто".{% endblock %}
+
+{% block head_top %}
+    <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css'%}">
+{% endblock %}
+{% block content %}
+              <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+ <br/><div class="text-center"><a href="http://prozorro.gov.ua/" target="_blank"> <img src="{%  static 'img/logo-prozorro.png' %}" style="max-width:100%"></a></div> <br />
+
+
+            <div class="box">
+
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+              <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+              <li class=""><a href="#tab_2-2" data-toggle="tab" aria-expanded="false">Як продавати державі? (відео)</a></li>
+              <li class="active"><a href="#tab_3-2" data-toggle="tab" aria-expanded="true">Про проект</a></li>
+              <li class="pull-left header"><i class="fa fa-legal"></i>Електронні аукціони "Прозорро"</li>
+            </ul>
+            <div class="tab-content">
+
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2-2">
+              <iframe width="930" height="515" src="https://www.youtube.com/embed/skcfKPXJqvA" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane active" id="tab_3-2">
+                <p><strong><a href="http://prozorro.gov.ua">ProZorro</a> </strong> – пілотний проект електронної системи публічних закупівель, що дозволяє онлайн продавати Державі.</p>
+<p> <strong>Хочете продавати свої товари чи послуги місцевим організаціям? <a href="http://prozorro.gov.ua/ua/pochati-robotu/">Реєструйтесь!</a></strong></p>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- nav-tabs-custom -->
+            
+            {% if error %}
+<div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-warning"></i> Увага! Помилка.</h4>
+                {{ error }}
+              </div>
+            {% endif %}
+{% if data %}
+              <table id="prozorro" class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr role="row">
+                    <th>Сума закупівлі (грн.)</th>
+                    <th>Закупівельна організація</th>
+                    <th>Предмет закупівлі</th>
+                    <th>Дата публікації</th>
+                    <th>Статус</th>
+                </tr>
+                </thead>
+                <tbody>
+{% for tender in data.result.tender %}
+                <tr role="row" data-toggle="modal" data-target="#tenderModal" style="cursor: pointer;"
+                    data-tender-start-date="{{ tender.tenderStartDate }}"
+                    data-tender-end-date="{{ tender.tenderEndDate }}"
+                    data-tender-status="{{ tender.status }}"
+                    data-tender-value="{{ tender.tenderValue }}"
+                    data-tender-organization-name="{{ tender.organizationName }}"
+                    data-tender-title="{{ tender.title }}"
+                    data-tender-description="{{ tender.description }}"
+                    data-tender-procurement-method="{{ tender.procurementMethod }}"
+                    data-tender-procurement-method-type="{{ tender.procurementMethodType }}"
+                    data-tender-date-modified="{{ tender.dateModified }}"
+                >
+                  <td class="sorting_1"> ₴ {{ tender.tenderValue|slice:"-3" }}</td>
+                  <td> {{ tender.organizationName }}</td>
+                  <td><strong>{{ tender.title }}</strong><br/>{{ tender.description }}</td>
+                  <td><i class="fa fa-calendar-plus-o"></i> {{ tender.tenderEndDate|slice:"10"}}</td>
+                  <td>
+                       {% if tender.status == "active.tendering" %}
+                           <span class="label label-warning">Подання пропозицій</span>
+                        {% elif tender.status == "active.auction" %}
+                           <span class="label label-warning">Аукціон</span>
+                        {% elif tender.status == "active.qualification" %}
+                           <span class="label label-warning">Кваліфікація переможця</span>
+                        {% elif tender.status == "active.awarded" %}
+                           <span class="label label-warning">Пропозиції розглянуті</span>
+                        {% elif tender.status == "unsuccessful" %}
+                           <span class="label label-danger">Торги відмінено</span>
+                        {% elif tender.status == "cancelled" %}
+                           <span class="label label-danger">Відмінена</span>
+                        {% elif tender.status == "active.enquiries" %}
+                           <span class="label label-warning">Період уточнень</span>
+                        {% elif tender.status == "complete" %}
+                           <span class="label label-success">Завершена</span>
+                        {% endif %}
+                  </td>
+                </tr>
+{% endfor %}
+                </tbody>
+
+              </table>
+
+    <!-- Modal -->
+<div class="modal fade" id="tenderModal" tabindex="-1" role="dialog" aria-labelledby="tenderModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="tenderModalLabel">Інформація про тендер</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table">
+              <tr>
+                  <td><b>Предмет закупівлі</b></td>
+                  <td id="tenderTitle"></td>
+              </tr>
+               <tr>
+                  <td><b>Опис</b></td>
+                  <td id="tenderDescription"></td>
+              </tr>
+              <tr>
+                  <td><b>Найменування замовника</b></td>
+                  <td id="tenderOrganizationName"></td>
+              </tr>
+              <tr>
+                  <td><b>Сума закупівлі</b></td>
+                  <td id="tenderValue"></td>
+              </tr>
+              <tr>
+                  <td><b>Дата останніх змін</b></td>
+                  <td id="tenderDateModified"></td>
+              </tr>
+              <tr>
+                  <td><b>Початок аукціону</b></td>
+                  <td id="tenderStartDate"></td>
+              </tr>
+              <tr>
+                  <td><b>Завершення аукціону</b></td>
+                  <td id="tenderEndDate"></td>
+              </tr>
+              <tr>
+                  <td><b>Статус</b></td>
+                  <td id="tenderStatus"></td>
+              </tr>
+              <tr>
+                  <td><b>Тип</b></td>
+                  <td id="tenderProcurementMethodType"></td>
+              </tr>
+              <tr>
+                  <td><b>Вид тендеру</b></td>
+                  <td id="tenderProcurementMethod"></td>
+              </tr>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+            </div></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+
+    <br/><br/>
+
+
+        </section><!-- /.content -->
+
+{% endblock %}
+  {% block footerjs %}
+       <script type="text/javascript" src="{% static 'plugins/datatables/jquery.dataTables.min.js'%}"></script>
+      <script type="text/javascript" src="{% static 'plugins/datatables/dataTables.bootstrap.min.js'%}"></script>
+      <script type="text/javascript">
+          $("#prozorro").DataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Ukrainian.json"
+            }
+        });
+        $('#tenderModal').on('show.bs.modal', function (event) {
+            var target = $(event.relatedTarget),
+                    status = '',
+                    startDate = new Date(target.data('tender-start-date')),
+                    endDate = new Date(target.data('tender-end-date')),
+                    type = (target.data('tender-procurementMethodType') == 'belowThreshold') ?
+                            'Допорогові закупівлі': 'Надпорогові закупівлі',
+                    method = (target.data('tender-procurementMethod') == 'open') ?
+                            'Відкриті торги': 'Закриті торги',
+                    description = (target.data('tender-description') == 'None') ?
+                            '': target.data('tender-description');
+
+            switch (target.data('tender-status')){
+                case "active.tendering":
+                    status = "Подання пропозицій";
+                    break;
+                case "active.auction":
+                    status = "Аукціон";
+                    break;
+                case "active.awarded":
+                    status = "Пропозиції розглянуті";
+                    break;
+                case "unsuccessful":
+                    status = "Торги відмінено";
+                    break;
+                case "cancelled":
+                    status = "Відмінена";
+                    break;
+                case "active.enquiries":
+                    status = "Період уточнень";
+                    break;
+                case "complete":
+                    status = "Завершена";
+                    break;
+            }
+            $('#tenderTitle').html(target.data('tender-title'));
+            $('#tenderDescription').html(description);
+            $('#tenderOrganizationName').html(target.data('tender-organization-name'));
+            $('#tenderValue').html(target.data('tender-value'));
+            $('#tenderDateModified').html(target.data('tender-date-modified'));
+            $('#tenderStartDate').html(('0' + startDate.getDate()).slice(-2) + '.'
+                    + ('0' + (startDate.getMonth() + 1)).slice(-2) + '.'  + startDate.getFullYear());
+            $('#tenderEndDate').html(('0' + endDate.getDate()).slice(-2) + '.'
+                    + ('0' + (endDate.getMonth() + 1)).slice(-2) + '.'  + endDate.getFullYear());
+            $('#tenderStatus').html(status);
+            $('#tenderProcurementMethodType').html(type);
+            $('#tenderProcurementMethod').html(method);
+        });
+      </script>
+
+    {% endblock footerjs %}

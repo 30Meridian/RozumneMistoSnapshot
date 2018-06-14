@@ -1,0 +1,179 @@
+{% extends 'base.html'|pjax:request %}
+{% load static %}
+{% block title %}Панель модератора. Інформаційна система "Розумне місто".{% endblock %}
+{% block head_top %}
+    <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css'%}">
+      <!-- daterange picker -->
+  <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker-bs3.css'%}">
+{% endblock %}
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+            <h2 class="text-center"><i class="fa fa-shield"></i></h2>
+            <h2 class="text-center">Панель модератора </h2>
+            <div class="text-center"> <a href="/moderator/zvit" class="btn btn-default btn-sm">Звіти</a></div>
+            <br/>
+
+
+
+
+               <div class="box">
+
+            <div class="box-body">
+            <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Користувачів</span>
+              <span class="info-box-number">{{ users.count }}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-wrench"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Дефектів</span>
+              <span class="info-box-number">{{ issues}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-check-square"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Петицій</span>
+              <span class="info-box-number">{{ petitions.count }}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-newspaper-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Новин</span>
+              <span class="info-box-number">{{ news.count }}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+
+
+       </div>
+
+        </div>
+
+
+{% if users %}
+          <!-- Default box -->
+          <div class="box box-primary">
+          <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-user"></i> Користувачі по вашому населеному пункту</h3>
+            </div>
+
+            <div class="box-body">
+
+
+
+
+             <table id="users" class="table table-bordered table-striped">
+                <thead>
+                <tr role="row">
+                    <th>ID</th>
+                    <th>ПІБ</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Дата реєстрації</th>
+                    <th>Статус</th>
+                    <th>Підтвердження email</th>
+                    <th>Перевірений</th>
+                </tr>
+                </thead>
+                <tbody>
+ {% for user in users %}
+                <tr role="row">
+                  <td class="vert-align">{{ user.id }}</td>
+                  <td> <a href="/profile/{{ user.id }}">{{ user.last_name}} {{ user.first_name}} {{ user.middle_name}}</a></td>
+                    <td>{{ user.email }}</td>
+                  <td>{{ user.phone }}</td>
+                  <td class="vert-align">{{ user.date_joined|date:"d-m-Y о H:i" }}</td>
+                  <td class="vert-align">{% if user.is_active %}<span class="label label-success">Активний</span>{% else %}<span class="label label-danger">Заблоковано</span>{% endif %}</td>
+                 <td class="vert-align">{% if user.emailaddress_set.first.verified %}<span class="label label-success">Підтвердженно</span>{% else %}<span class="label label-danger">Не підтверджено</span>{% endif %}</td>
+                 <td class="vert-align">
+                     <div class="checkbox">
+                        <input class="is_checked" type="checkbox" id="{{ user.id }}" {% if user.is_checked %}checked{% endif %}>
+                    </div>
+                 </td>
+                </tr>
+{% endfor %}
+                </tbody>
+
+              </table>
+
+
+
+
+      </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+   {% endif %}
+
+
+      </div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+    
+{% endblock %}
+
+
+      {% block footerjs %}
+
+       <script type="text/javascript" src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" src="/static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+      <script type="text/javascript">$("#users").DataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Ukrainian.json"
+            }
+        });</script>
+        <script>
+
+            $(".is_checked").click( function() {
+                var id_user = $(this).attr("id");
+                var checked = ($(this).is(':checked'))
+                $.ajax({
+                    type: "POST",
+                    url : "{% url 'check_user' %}",
+                    data : {
+                        'user_id' : id_user,
+                        'checked' : checked,
+                    },
+                });
+            });
+
+        </script>
+    {% endblock footerjs %}

@@ -1,0 +1,90 @@
+{% extends 'base.html'|pjax:request %}
+
+{% block title %}{{ article.title }}. Інформаційна система "Розумне місто".{% endblock %}
+
+
+{% block content %}
+<section class="content-header">
+      <h1>Новини. {{ article.town.town_type.title }} {{ article.town.name }}</h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i> Головна</a></li>
+        <li><a href="../news/">Список новин</a></li>
+        <li class="active">Новина</li>
+      </ol>
+    </section>
+ <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+
+            <div class="box-body">
+
+
+    {% if allowed %}
+
+    <div class="col-md-12">
+
+        <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Інструменти модератора:</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+            <div class="col-md-4">
+                <a href="../news/edit/{{ article.id }}"><button type="button" class="btn btn-block btn-primary">Редагувати новину</button></a>
+            </div>
+
+
+            <div class="col-md-4">
+                <a href="../news/delete/{{ article.id }}"><button type="button"  data-toggle="modal" data-target="#modal_hidearticle" class="btn btn-block btn-danger">Видалити новину</button></a>
+
+            </div>
+                <div class="col-md-4">
+                {% if article.publish %}
+
+                <a href="../news/unpublish/{{ article.id }}" class="btn btn-block btn-primary">Зняти з публікації</a>
+                {% else %}
+                    <a href="../news/publish/{{ article.id }}" class="btn btn-block btn-success">Опублікувати</a>
+                {% endif %}
+            </div>
+
+        </div>
+   </div>
+
+    {% endif %}
+
+<div class="text-center"> <h3 class="box-title">{{ article.title }}</h3></div>
+        <div class="box">
+                <div class="box-header with-border">
+                    {% if article.publish == 1 %}
+                    <span class="label label-success">Опублікована ({{ article.datetime_publish|date:"d.m.Y H:i" }})</span>
+
+                    {% else %}
+                    <span class="label label-warning">Не опублікована (Створена: {{ article.datetime|date:"d.m.Y H:i" }})</span>
+
+                    {% endif %}
+
+                    <div class="pull-right">
+                       <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f23dc3c4265dc08"></script>
+<div class="addthis_sharing_toolbox"></div>
+                    </div>
+
+
+                </div>
+        <div class="box-body">
+                {% autoescape off %}
+                {{ article.text }}
+               {% endautoescape %}
+
+        </div>
+
+</div><!-- /.box-body -->
+
+          </div><!-- /.box -->
+
+        </section><!-- /.content -->
+{% endblock %}
+
