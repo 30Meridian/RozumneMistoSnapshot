@@ -1,3 +1,9 @@
+### Description
+
+eGovernment platform “Rozumne Misto” is an all-Ukrainian online platform of e-dem, e-gov and e-services for citizens, local governments, business and NGOs.
+Effective tool for development partnership between state governance, citizens and business. 
+
+
 ### Document reference for modules used
 
 ##Design  
